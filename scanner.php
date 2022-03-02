@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'bd.php';
+//Надо отсканировать aplication/json что бы вписать данные
 function repairUnqotedJsonValues(string $json) : string {
     $json = str_replace(": ", ":", $json);
     $json = str_replace("{ ", "{", $json);
