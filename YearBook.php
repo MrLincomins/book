@@ -49,4 +49,3 @@ if (isset($_REQUEST['doGo'])) {
     </form>
 </body>
 </html>
-<title>Поиск книги по автору</title>
