@@ -8,10 +8,12 @@ if (isset($_REQUEST['doGo'])) {
 
     {
         $Author = $_REQUEST['Author'];
-        if ($result = mysqli_query($db, "SELECT * FROM books WHERE Author LIKE '$Author%'")) {
-            while($row = mysqli_fetch_assoc($result)) {
+        if ($result = $dbO->query("SELECT Name, Author, Year, ISBN FROM books WHERE Author LIKE '$Author%'")){
+          foreach ($result as $row){
+          $isbn = $row['ISBN'];
               printf ("Название книги: " . $row['Name'] . "; Автор книги:" . $row['Author'] . "; Год написания книги:" . $row['Year'] . "; ISBN:" . $row['ISBN'] . "<br>");
-             }
+              echo "<p><img src='http://covers.openlibrary.org/b/isbn/$isbn-M.jpg' width=100 height=110></p>";
+          }
         }
    }
 }
@@ -33,3 +35,4 @@ if (isset($_REQUEST['doGo'])) {
     </form>
 </body>
 </html>
+
