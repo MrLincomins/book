@@ -4,22 +4,6 @@ require_once 'bd.php';
 
 if (isset($_REQUEST['doGo'])) {
 
-    if (!$_REQUEST['Name']) {
-    }
-
-    if (!$_REQUEST['Author']) {
-    }
-
-    if (!$_REQUEST['Year']) {
-    }
-
-    if (!$_REQUEST['ISBN']) {
-    }
-
-
-
-
-
    {
 
         $Name = $_REQUEST['Name'];
@@ -27,7 +11,7 @@ if (isset($_REQUEST['doGo'])) {
         $Year = $_REQUEST['Year'];
         $ISBN = $_REQUEST['ISBN'];
 
-        mysqli_query($db, "INSERT INTO `books` (`Name`, `Author`, `Year`, `ISBN`) VALUES ('" . $Name . "','" . $Author . "','" . $Year . "','" . $ISBN . "')");
+        $dbO->query("INSERT INTO `books` (`Name`, `Author`, `Year`, `ISBN`) VALUES ('" . $Name . "','" . $Author . "','" . $Year . "','" . $ISBN . "')");
         echo 'Данные были успешно записаны';
 }
 }
@@ -54,3 +38,4 @@ if (isset($_SESSION['digit'])) {
 </body>
 </html>
 <title>Добавление книг в базу данных</title>
+
