@@ -118,7 +118,7 @@ $Name = $nick;
 $Author = $author;
 $Year = $year;
 $ISBN = $isbn;
-mysqli_query($db, "INSERT INTO `books` (`Name`, `Author`, `Year`, `ISBN`) VALUES ('" . $Name . "','" . $Author . "','" . $Year . "','" . $ISBN . "')");
+$dbO->query("INSERT INTO `books` (`Name`, `Author`, `Year`, `ISBN`) VALUES ('" . $Name . "','" . $Author . "','" . $Year . "','" . $ISBN . "')");
 echo 'Данные были успешно записаны';
 $log = "ISBN: $isbn, Имя автора: $author, Название книги: $nick, Год: $year были успешно записаны";
 file_put_contents(__DIR__ . '/log.txt', $log . PHP_EOL, FILE_APPEND);
