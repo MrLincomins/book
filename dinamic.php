@@ -8,14 +8,14 @@ if (isset($_REQUEST['doGo'])) {
 
     {
         $Author = $_REQUEST['Author'];
-        if ($result = mysqli_query($db, "SELECT COUNT(*) / COUNT(DISTINCT Year, Author) books_count FROM books GROUP BY Author")) {
-            while($row = mysqli_fetch_assoc($result)){
-             $num = round($row['books_count']);
-             $json_string = '{"Автор":"' . $Author . '","Книг в год":"' . $num . '"}';
-             json_encode($json_string, JSON_FORCE_OBJECT );
-             $file_name = 'gg.json';
-             if(file_put_contents($file_name, $json_string )){
-               header ('Location: gg.json');
+        if ($result = $dbO->query("SELECT COUNT(*) / COUNT(DISTINCT Year, Author) books_count, Author FROM books WHERE Author = '$Author' GROUP BY Author ")) {
+          foreach ($result as $row){
+            $num = round($row['books_count']);
+            $json_string = '{"Автор":"' . $Author . '","Книг в год":"' . $num . '"}';
+            json_encode($json_string, JSON_FORCE_OBJECT );
+            $file_name = 'gg.json';
+            if(file_put_contents($file_name, $json_string )){
+              header ('Location: gg.json');
              }
 
            }
