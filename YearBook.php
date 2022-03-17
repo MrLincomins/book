@@ -17,7 +17,7 @@ if (isset($_REQUEST['doGo'])) {
     }
 
 
-    if ($result = mysqli_query($db, "SELECT * FROM `books` WHERE `Year` >= $Year1 AND `Year` <= $Year2")) {
+    if ($result = $dbO->query("SELECT * FROM `books` WHERE `Year` >= $Year1 AND `Year` <= $Year2")) {
       echo "<table><tr><th>Имя</th><th>Автор</th><th>Год</th><th>ISBN</th></tr>";
       foreach($result as $row){
         echo "<tr>";
