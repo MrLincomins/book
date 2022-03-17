@@ -49,9 +49,19 @@ $isbn = $user->{'isbn'};
 $author = $user->{'полное имя автора'};
 $nick = $user->{'название'};
 $year = $user->{'год'};
+$chr_ru_en = "A-Za-zА-Яа-яЁё0-9\s`~!@#$%^&*()_+-={}|:;<>?,.\/\"\'\\\[\]";
+function emptysearch($UK) {
+  if (empty($UK) == true){
+    $log = "ISBN: $isbn, Имя автора: $author, Название книги: $nick, Год: $year не было допущено из-за: Данные были пропущены сканером";
+    file_put_contents(__DIR__ . '/log.txt', $log . PHP_EOL, FILE_APPEND);
+    exit('Число было пропущено сканером');
+  }
+}
 
-$chr_ru_en = "A-Za-zА-Яа-яЁё0-9\s`~!@#$%^&*()_+-={}|:;<>?,.\/\"\'\\\[\]";
-$chr_ru_en = "A-Za-zА-Яа-яЁё0-9\s`~!@#$%^&*()_+-={}|:;<>?,.\/\"\'\\\[\]";
+emptysearch($year);
+emptysearch($isbn);
+emptysearch($author);
+emptysearch($nick);
 
 if (preg_match("/^[$chr_ru_en]+$/u", $author)) {
 } else {
@@ -65,24 +75,7 @@ if (preg_match("/^[$chr_ru_en]+$/u", $nick)) {
   file_put_contents(__DIR__ . '/log.txt', $log . PHP_EOL, FILE_APPEND);
   exit ('Неизвестные символы в имени книги');
 }
-if (empty($year) == true){
-  $log = "ISBN: $isbn, Имя автора: $author, Название книги: $nick, Год: $year не было допущено из-за: Число было пропущено сканером";
-  file_put_contents(__DIR__ . '/log.txt', $log . PHP_EOL, FILE_APPEND);
-  exit('Число было пропущено сканером');
-}
-if (empty($isbn) == true){
-  $log = "ISBN: $isbn, Имя автора: $author, Название книги: $nick, Год: $year не было допущено из-за: isbn был пропущен сканером";
-  file_put_contents(__DIR__ . '/log.txt', $log . PHP_EOL, FILE_APPEND);
-  exit('isbn был пропущен сканером');
-}
-if (empty($author) == true){
-  exit('Имя автора было пропущено сканером');
-}
-if (empty($nick) == true){
-  $log = "ISBN: $isbn, Имя автора: $author, Название книги: $nick, Год: $year не было допущено из-за: Название книги было пропущено сканером";
-  file_put_contents(__DIR__ . '/log.txt', $log . PHP_EOL, FILE_APPEND);
-  exit('Название книги было пропущено сканером');
-}
+
 $numb = strlen($isbn);
 $ukraine = $numb != 13;
 if ($ukraine == true){
