@@ -1,15 +1,14 @@
 <?php
+
 $server = 'localhost';
 $user = 'root';
 $password = 'misterpika20';
 $db = 'books_bd';
-
-$db = mysqli_connect($server, $user, $password, $db);
 $charset = "utf8";
-if(!mysqli_set_charset($db, $charset)){
-  print("Ошибка кодировки");
+
+try {
+  $dbO = new PDO('mysql:host='. $server .';dbname='. $db .';charset='. $charset .'', $user, $password);
 }
-if (!$db) {
-    echo "Не удалось подключиться к серверу!";
-    exit;
+catch (PDOException $e) {
+  die('Проблема с подключением к бд');
 }
