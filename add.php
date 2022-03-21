@@ -5,7 +5,6 @@ use App\bd\bd;
 $dbO = new BD();
 session_start();
 
-
 if (isset($_REQUEST['doGo'])) {
 
    {
