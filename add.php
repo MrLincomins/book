@@ -1,24 +1,12 @@
 <?php
+namespace App;
+require_once __DIR__ . '/vendor/autoload.php';
+use App\bd\bd;
+$dbO = new BD();
 session_start();
-require_once 'bd.php';
+
 
 if (isset($_REQUEST['doGo'])) {
-
-    if (!$_REQUEST['Name']) {
-    }
-
-    if (!$_REQUEST['Author']) {
-    }
-
-    if (!$_REQUEST['Year']) {
-    }
-
-    if (!$_REQUEST['ISBN']) {
-    }
-
-
-
-
 
    {
 
@@ -27,7 +15,7 @@ if (isset($_REQUEST['doGo'])) {
         $Year = $_REQUEST['Year'];
         $ISBN = $_REQUEST['ISBN'];
 
-        mysqli_query($db, "INSERT INTO `books` (`Name`, `Author`, `Year`, `ISBN`) VALUES ('" . $Name . "','" . $Author . "','" . $Year . "','" . $ISBN . "')");
+        $dbO->query("INSERT INTO `books` (`Name`, `Author`, `Year`, `ISBN`) VALUES ('" . $Name . "','" . $Author . "','" . $Year . "','" . $ISBN . "')");
         echo 'Данные были успешно записаны';
 }
 }

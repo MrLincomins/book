@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="assets/main.css">
 <nav>
   <ul>
     <li><a href="scanner.php">Добавление книг по сканнеру</a></li>
