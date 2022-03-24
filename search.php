@@ -2,25 +2,26 @@
 namespace App;
 require_once __DIR__ . '/vendor/autoload.php';
 use App\bd\bd;
+use App\entities\book;
 $dbO = new BD();
 session_start();
 if (isset($_REQUEST['doGo'])) {
     if (!$_REQUEST['Author']) {
-        print "Вы ввели пустое имя автора";
     }
 
     {
         $Author = $_REQUEST['Author'];
-        if ($result = $dbO->query("SELECT Name, Author, Year, ISBN FROM books WHERE Author LIKE '$Author%'")){
-          foreach ($result as $row){
+        $mysql = "SELECT Name, Author, Year, ISBN FROM books WHERE Author LIKE '$Author'";
+        $result = (new book($dbO, $mysql))->getAllFoos();
+        foreach ($result as $row){
           $isbn = $row['ISBN'];
-              printf ("Название книги: " . $row['Name'] . "; Автор книги:" . $row['Author'] . "; Год написания книги:" . $row['Year'] . "; ISBN:" . $row['ISBN'] . "<br>");
-              echo "<p><img src='http://covers.openlibrary.org/b/isbn/$isbn-M.jpg' width=100 height=110></p>";
-          }
+          printf ("Название книги: " . $row['Name'] . "; Автор книги:" . $row['Author'] . "; Год написания книги:" . $row['Year'] . "; ISBN:" . $row['ISBN'] . "<br>");
+          echo "<p><img src='http://covers.openlibrary.org/b/isbn/$isbn-M.jpg' width=100 height=110></p>";
+
         }
    }
 }
-
+$Table
 ?>
 
 <!DOCTYPE html>
@@ -38,4 +39,3 @@ if (isset($_REQUEST['doGo'])) {
     </form>
 </body>
 </html>
-
