@@ -7,11 +7,12 @@ $dbO = new BD();
 session_start();
 if (isset($_REQUEST['doGo'])) {
     if (!$_REQUEST['Author']) {
+        print "Вы ввели пустое имя автора";
     }
 
     {
         $Author = $_REQUEST['Author'];
-        $mysql = "SELECT Name, Author, Year, ISBN FROM books WHERE Author LIKE '$Author'";
+        $mysql = "SELECT Name, Author, Year, ISBN FROM books WHERE Author LIKE '%".$Author."%'";
         $result = (new book($dbO, $mysql))->getAllFoos();
         foreach ($result as $row){
           $isbn = $row['ISBN'];

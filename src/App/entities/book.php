@@ -10,10 +10,6 @@ class book extends PDO{
     }
 
     public function getAllFoos() {
-        if (empty($this->mysql)) {
-          return $this->dbO->query("SELECT * FROM books");
-        }else{
-          return $this->dbO->query("$this->mysql");
-        }
+          return $this->dbO->query($this->mysql);
     }
 }
