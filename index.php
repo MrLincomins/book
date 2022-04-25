@@ -1,12 +1,32 @@
-<link rel="stylesheet" href="assets/main.css">
-<nav>
-  <ul>
-    <li><a href="scanner.php">Добавление книг по сканнеру</a></li>
-    <li><a href="search.php">Поиск книг по автору</a></li>
-    <li><a href="top100.php">Топ 100 авторов</a></li>
-    <li><a href="YearBook.php">Поиск книг по году</a></li>
-    <li><a href="dinamic.php">Среднее количество книг автором за год</a></li>
-    <li><a href="add.php">Добавление книг</a></li>
-  </ul>
-</nav>
-<title>Главная</title>
+<?php
+require_once './vendor/autoload.php';
+use App\Core\Router\Router;
+use App\Controllers\BookController;
+use App\Controllers\AuthorController;
+$route = new Router();
+$route->route('/', function () {
+  $list = (new BookController())->list();
+});
+$route->route('/add', function () {
+$list = (new BookController())->scan();
+});
+
+$route->route('/authors/top', function () {
+$list = (new AuthorController())->getTop100();
+});
+
+$route->route('/authors', function () {
+$list = (new AuthorController())->list();
+});
+
+$route->route('/books/{id}/edit?', function ($id) {
+$list = (new BookController())->edit($id);
+});
+
+$route->route('/books/{id}', function ($id) {
+$list = (new BookController())->delete($id);
+});
+
+
+$action = $_SERVER['REQUEST_URI'];
+$route->dispatch($action);
