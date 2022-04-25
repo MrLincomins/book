@@ -19,10 +19,10 @@ $route->route('/authors', function () {
 $list = (new AuthorController())->list();
 });
 
-$route->route('/books/{id}/edit?', function ($id) {
+/*$route->route('/books/{id}/edit?', function ($id) {
 $list = (new BookController())->edit($id);
 });
-
+*/
 $route->route('/books/{id}', function ($id) {
 $list = (new BookController())->delete($id);
 });
