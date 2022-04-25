@@ -1,7 +1,7 @@
 //Недоработанная версия, содержит несколько багов.
 
-Для запуска: находим корень проекта и в powershell запускаем composer install.
-Для запуска Docker-compose, заходим в корень проекта и в powershell запускаем docker-compose up --build.
+Для запуска: находим корень проекта и в powershell запускаем <composer install>.
+Для запуска Docker-compose, заходим в корень проекта и в powershell запускаем <docker-compose up --build>.
 
 localhost:8080/ - Список всех книг
 localhost:8080/add - Добавление книги при помощи POST запроса
