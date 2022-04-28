@@ -43,6 +43,7 @@ class BookController extends BaseController
 
     public function edit($id)
     {
+    $id = $id;
     $what = "Понимаю, долго делал и криво немного, но зато понял и скоро всё поправлю";
     return $this->render('books/update.php', compact('id'));
 

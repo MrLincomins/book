@@ -9,8 +9,12 @@ if (isset($_REQUEST['doGo'])) {
         $Year = $_REQUEST['Year'];
         $ISBN = $_REQUEST['ISBN'];
         $edit = (new Book())->edit($id, $Name, $Author, $Year, $ISBN);
-        echo 'Данные были успешно записаны';
-}
+        echo 'Данные были успешно записаны они были изменены на: ';
+        echo "<br/> Название книги: ", $Name;
+        echo "<br/> Автор: ", $Author;
+        echo "<br/> Год написания: ", $Year;
+        echo "<br/> ISBN: ", $ISBN;
+   }
 }
 ?>
 
@@ -23,7 +27,7 @@ if (isset($_REQUEST['doGo'])) {
     <title>Редактирование книги</title>
 </head>
 <body>
-    <form>
+    <form action="http://localhost:8080/books/<?php echo $id; ?>/edit" method="post">
         <p>Название книги: <input type="text" name="Name" size="15" maxlength="150" id=""><samp style="color:red">*</samp></p>
         <p>Автор: <input type="text" name="Author" size="15" maxlength="150" id=""><samp style="color:red">*</samp></p>
         <p>Год: <input type="text" name="Year" size="15" maxlength="20" id=""><samp style="color:red"></samp></p>

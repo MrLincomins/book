@@ -5,6 +5,7 @@
             <table>
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Название</th>
                         <th>ISBN</th>
                         <th>Автор</th>
@@ -14,6 +15,7 @@
                 <?php /** @var array $books */
                     foreach ($books as $book):?>
                     <tr>
+                        <td><?php echo $book["newid"]?></td>
                         <td><?php echo $book["Name"]?></td>
                         <td><?php echo $book["ISBN"]?></td>
                         <td><?php echo $book["Author"]?></td>

@@ -43,7 +43,7 @@ class Book extends Model
 
     public function add($Name, $Author, $Year, $ISBN): array
     {
-         $sql = "INSERT INTO books (Name, Author, Year, ISBN) VALUES ( :Name, :Author, :Year, :ISBN)";
+         $sql = "INSERT INTO books (Name, Author, Year, ISBN) VALUES (:Name, :Author, :Year, :ISBN)";
          $stmt = $this->connection->prepare($sql);
          $stmt->execute(['Name' => $Name, 'Author' => $Author, 'Year' => $Year, 'ISBN' => $ISBN]);
 
@@ -62,13 +62,14 @@ class Book extends Model
 
     public function edit($id, $Name, $Author, $Year, $ISBN): array
     {
+      $sql1 = "SELECT * FROM books where newid = :id";
       $sql = "UPDATE books SET Name = :Name, Author = :Author, Year = :Year, ISBN = :ISBN WHERE newid = :id";
-      $sql0 = "SELECT * FROM books where newid = :id";
+      $stmt1 = $this->connection->prepare($sql1);
       $stmt = $this->connection->prepare($sql);
-      $stmt0 = $this->connection->prepare($sql0);
+      $stmt1->execute(['id' => $id]);
       $stmt->execute(['Name' => $Name, 'Author' => $Author, 'Year' => $Year, 'ISBN' => $ISBN, 'id' => $id]);
-      $stmt0->execute(['id' => $id]);
-      return $stmt0->fetchAll();
+      return $stmt1->fetchAll();
+
     }
 
 
