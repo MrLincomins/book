@@ -1,14 +1,6 @@
 ### Описание
-Простая реализация MVC фреймворка на php.
-Это автоматизированная библиотека, хранящая книги и диски. 
-Поиск осуществляется с помощью сканера, который позволяет посылать POST запрос:
-```
-POST /scan
-Content-Type: application/json
-Accept: application/json
-{"isbn": <int>, "author_full_name": <string>, "title": <string>,
-"year": <int>}
-```
+Посмотрите файл web.php там описал проблему
+
 
 
 ### Роутинг
@@ -16,20 +8,13 @@ Accept: application/json
 POST /scan - добавление новой позиции в библиотеку путем сканирования
 
 // книги
-GET /books - вывод всех книг
-GET /books/search - поиск книг (?author_name=по автору, ?name=по названию.)
+GET /book - вывод всех книг
+GET /books/{id} - удаление или редактирование книги по выбору
+GET /add - Добавление книг  
+GET /top100 - топ 100 авторов
+GET /year - Поиск по году (от, до)
 
-// авторы
-GET /authors/all
-GET /authors/top
 
-// диски
-GET /disks - вывод всех дисков
-GET /disks/search - поиск дисков (?author_name=по автору, ?name=по названию.)
-
-// категории
-GET /categories - вывод всех категорий
-GET /categories/statitstics - вывод списка категорий и количества книг в каждой из них
 ```
 
 
