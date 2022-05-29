@@ -1,0 +1,5 @@
+vendor
+.idea
+Storage/dumps/*
+Storage/logs/*
+.docker/mysql/data/

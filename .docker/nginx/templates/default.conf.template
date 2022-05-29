@@ -3,7 +3,7 @@ server {
     server_name book.local;
     index index.php index.html;
     root /var/www;
-    charset utf8;
+
     location / {
         try_files $uri /index.php?$args;
     }

@@ -18,14 +18,13 @@ services:
 
   book-mysql:
     image: mysql:8
-    container_name: book-mysql
+    container_name: book-db
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: 'books'
+      MYSQL_DATABASE: 'book'
       MYSQL_ROOT_PASSWORD: 'root'
       MYSQL_USER: 'Author'
       MYSQL_PASSWORD: 'password'
-
     ports:
     - '3306:3306'
     volumes:

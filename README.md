@@ -1,17 +1,46 @@
-# Недоработанная версия, содержит несколько багов. #
+### Описание
+Простая реализация MVC фреймворка на php.
+Это автоматизированная библиотека, хранящая книги и диски. 
+Поиск осуществляется с помощью сканера, который позволяет посылать POST запрос:
+```
+POST /scan
+Content-Type: application/json
+Accept: application/json
+{"isbn": <int>, "author_full_name": <string>, "title": <string>,
+"year": <int>}
+```
 
-Для запуска: находим корень проекта и в powershell запускаем `composer install`.
 
-Для запуска `Docker-compose`, заходим в корень проекта и в powershell запускаем `docker-compose up --build` .
+### Роутинг
+```
+POST /scan - добавление новой позиции в библиотеку путем сканирования
 
-`localhost:8080/` - Список всех книг.
+// книги
+GET /books - вывод всех книг
+GET /books/search - поиск книг (?author_name=по автору, ?name=по названию.)
 
-`localhost:8080/add` - Добавление книги при помощи POST запроса.
+// авторы
+GET /authors/all
+GET /authors/top
 
-`localhost:8080/authors` - Список всех авторов и количество книг.
+// диски
+GET /disks - вывод всех дисков
+GET /disks/search - поиск дисков (?author_name=по автору, ?name=по названию.)
 
-`localhost:8080/authors/top` - Топ 100 авторов по количеству книг.
+// категории
+GET /categories - вывод всех категорий
+GET /categories/statitstics - вывод списка категорий и количества книг в каждой из них
+```
 
-`localhost:8080/books/{id}` - Удаление книги по айдишнику.
 
-`localhost:8080/books/{id}/edit` - Изменение книги по айдишнику.
+
+### Окружение
+
+Используем простую сборку докера. 
+
+
+- Запустить в консоли из корневой папке ```docker-compose up -d```
+- Настроить подключение к бд _(host: 127.0.0.1, db_name: book, login: book_login, password: book_password)_
+- Залить дамп готовой базы
+
+Для доступа к консоли приложения выполняем ```docker-compose exec book-php bash```

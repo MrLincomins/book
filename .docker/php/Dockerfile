@@ -31,13 +31,13 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh \
     && apt-get install -qq nodejs
 
 # Copy existing application directory permissions
-COPY --chown=www-data:www-data . /var/www
+#COPY --chown=www-data:www-data . /var/www
 
 # Set permissions
 RUN chmod -R 777 /var/www/
 
 # Change current user to www
-USER www-data
+#USER www-data
 
 # Set working directory
-WORKDIR C:\wamp64\www\book
+WORKDIR /var/www

@@ -1,37 +1,66 @@
 <?php
+
+declare(strict_types=1);
+
+use Infrastructure\Core\Container\Container;
+use Infrastructure\Core\Http\HtmlResponseFactory;
+use Infrastructure\Core\Router\Router;
+use Infrastructure\Core\View\View;
+
+/**
+ * Это входная точка приложения, какой бы относительный путь не выбрал, все равно попадем сюда.
+ * Так настроен nginx
+ */
+
+// включаем автозагрузку классов. Нам не нужно указывать require в классах
 require_once './vendor/autoload.php';
-use App\Core\Router\Router;
-use App\Controllers\BookController;
-use App\Controllers\AuthorController;
 
-$route = new Router();
-$route->route('/', function () {
-$list = (new BookController())->list();
-});
+/**
+ * Мы создали небольшой роутер, который будет маршрутизировать все запросы на нужные контроллеры.
+ *  - Для книг адрес books.local/books
+ *  - Для авторов адрес books.local/authors
+ *  - Для создания нового роута: добавляем в роутере новый роут и создаем для него контроллер и экшен.
+ */
 
-$route->route('/books', function () {
-$list = (new BookController())->list();
-});
+try {
+    $container = new Container();
+    $container->register(Router::class);
+    $container->register(View::class);
+    $container->register(HtmlResponseFactory::class);
 
-$route->route('/add', function () {
-$list = (new BookController())->scan();
-});
 
-$route->route('/authors/top', function () {
-$list = (new AuthorController())->getTop100();
-});
 
-$route->route('/authors', function () {
-$list = (new AuthorController())->list();
-});
+// Step 0:  Создаем роутер
+    $response = $container->get(Router::class)
+        ->withRoutes(include 'Application/Config/routes/web.php')
+        ->route($container);
 
-$route->route('/books/{id}/edit', function ($id) {
-$list = (new BookController())->edit($id);
-});
 
-$route->route('/books/{id}', function ($id) {
-$list = (new BookController())->delete($id);
-});
+// Step 1: Генерируем строку статуса.
+    $statusLine = sprintf('HTTP/%s %s %s',
+        $response->getProtocolVersion(),
+        $response->getStatusCode(),
+        $response->getReasonPhrase(),
+    );
 
-$action = $_SERVER['REQUEST_URI'];
-$route->dispatch($action);
+// Step 2: переопределяем хеадер, даже если он был.
+    header($statusLine, TRUE);
+
+
+// Step 3: Устанавливаем кастомные хедеры
+    if ($response->getHeaders()) {
+        foreach ($response->getHeaders() as $name => $values) {
+            header(
+                sprintf('%s: %s',
+                    $name,
+                    $response->getHeaderLine($name)
+                ),
+                FALSE
+            );
+        }
+    }
+// Step 4: Возвращаем ответ
+    echo $response->getBody();
+} catch (Exception) {}
+exit();
+
