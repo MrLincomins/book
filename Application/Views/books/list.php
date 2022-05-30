@@ -20,6 +20,8 @@
                         <td><?php echo $book["ISBN"]?></td>
                         <td><?php echo $book["Author"]?></td>
                         <td><?php echo $book["Year"]?></td>
+                        <td>| |</td>
+                        <td><button onclick="document.location='books/<?echo $book["newid"]?>'">Изменить/Удалить</button></td>
                     </tr>
                     <?php endforeach;?>
             </table>

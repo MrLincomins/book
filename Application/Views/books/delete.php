@@ -63,13 +63,24 @@ if (isset($_REQUEST['doGo2'])) {
 </head>
 <body>
   <?php foreach ($books as $book):?>
+  <table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Название</th>
+            <th>ISBN</th>
+            <th>Автор</th>
+            <th>Год</th>
+        </tr>
+    </thead>
   <tr>
-      <td><?php echo $book["newid"]?></td>
-      <td><?php echo $book["Name"]?></td>
-      <td><?php echo $book["ISBN"]?></td>
-      <td><?php echo $book["Author"]?></td>
-      <td><?php echo $book["Year"]?></td>
+      <td><?php echo $book["newid"]?> </td>
+      <td> <?php echo $book["Name"]?> </td>
+      <td> <?php echo $book["ISBN"]?> </td>
+      <td> <?php echo $book["Author"]?> </td>
+      <td> <?php echo $book["Year"]?> </td>
   </tr>
+</table>
   <?php endforeach;?>
 
   <form>
