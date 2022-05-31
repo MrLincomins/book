@@ -7,11 +7,11 @@ use Infrastructure\Core\Router\Route;
 
 return [
     new Route("GET", "/knigi", "BookController@show"),
-    new Route("POST", "/scan", "BookController@scan"),
     new Route("GET", "/add", "BookController@add"),
     new Route("GET", "/year", "BookController@ToYear"),
     new Route("GET", "/top100", "BookController@Top100"),
     new Route("GET", "/books/{id}", "BookController@delete"),
+    new Route("POST", "/add", "BookController@scan"),
 
 
 ];
