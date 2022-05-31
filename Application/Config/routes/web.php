@@ -11,7 +11,8 @@ return [
     new Route("GET", "/add", "BookController@add"),
     new Route("GET", "/year", "BookController@ToYear"),
     new Route("GET", "/top100", "BookController@Top100"),
-    new Route("GET", "/books/{id}", "BookController@delete")
+    new Route("GET", "/books/{id}", "BookController@delete"),
+
 
 ];
 //Я что-то неправильно делаю или здесь ошибка?

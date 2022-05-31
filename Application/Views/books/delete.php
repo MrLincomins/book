@@ -3,7 +3,29 @@ use Application\Models\Book;
 foreach ($books as $book):
   $id = $book["newid"];
 endforeach;
+
+
 if (isset($_REQUEST['doGo'])) {
+  {
+   ?>
+    <html lang="ru">
+    <body>
+      <form>
+        Вы точно хотите удалить книгу?
+        <p><input type="submit" value="Да" name="doGo3"></p>
+        ___________________________________________________________________
+      </from>
+     </body>
+    </html>
+
+    <?php
+  }
+
+}
+
+
+
+if (isset($_REQUEST['doGo3'])) {
    {
      $books = (new Book())->delete($id);
      echo 'Данные были успешно удалены';
