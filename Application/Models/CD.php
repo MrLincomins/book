@@ -10,4 +10,20 @@ class CD extends Model
 {
     private $table = "disks";
 
+    public function all(): array
+    {
+        $sql = "SELECT * FROM dicks";
+
+        $stmt = $this->connection->query($sql);
+
+        return $stmt->fetchAll();
+    }
+
+    public function add($Name, $Author, $Code, $Description): array
+    {
+        $sql = "INSERT INTO {$this->table} (Name, Author, Code, Description) VALUES (:Name, :Author, :Code, :Description)";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute(['Name' => $Name, 'Author' => $Author, 'Code' => $Code, 'Description' => $Description]);
+        return $stmt->fetchAll();
+    }
 }
