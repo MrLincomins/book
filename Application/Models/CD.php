@@ -12,7 +12,7 @@ class CD extends Model
 
     public function all(): array
     {
-        $sql = "SELECT * FROM dicks";
+        $sql = "SELECT * FROM disks";
 
         $stmt = $this->connection->query($sql);
 

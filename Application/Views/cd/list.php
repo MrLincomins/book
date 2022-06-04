@@ -5,10 +5,11 @@
          <table>
              <thead>
                  <tr>
-                     <th>ID</th>
+                      <th>ID</th>
                      <th>Название</th>
                      <th>Код</th>
                      <th>Автор</th>
+                     <th>| |</th>
                      <th>Описание</th>
                  </tr>
              </thead>

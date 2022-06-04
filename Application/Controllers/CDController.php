@@ -30,7 +30,7 @@ class CDController extends BaseController
 
   public function show(Request $request): Response
   {
-      $books = (new CD())->all();
+      $cd = (new CD())->all();
 
       $render = (new View())
           ->withName("cd/list")

@@ -13,6 +13,8 @@ return [
     new Route("GET", "/books/{id}", "BookController@delete"),
     new Route("POST", "/add", "BookController@scan"),
     new Route("GET", "/disk_add", "CDController@add"),
+    new Route("GET", "/disk", "CDController@show")
+
 
 
 ];
