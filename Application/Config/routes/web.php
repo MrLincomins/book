@@ -8,12 +8,15 @@ use Infrastructure\Core\Router\Route;
 return [
     new Route("GET", "/knigi", "BookController@show"),
     new Route("GET", "/add", "BookController@add"),
+    new Route("POST", "/add", "BookController@scan"),
     new Route("GET", "/year", "BookController@ToYear"),
     new Route("GET", "/top100", "BookController@Top100"),
     new Route("GET", "/books/{id}", "BookController@delete"),
-    new Route("POST", "/add", "BookController@scan"),
     new Route("GET", "/disk_add", "CDController@add"),
-    new Route("GET", "/disk", "CDController@show")
+    new Route("GET", "/disk", "CDController@show"),
+    new Route("GET", "/user", "UserController@register"),
+    new Route("GET", "/show", "UserController@show"),
+    new Route("GET", "/login", "UserController@login")    
 
 
 
