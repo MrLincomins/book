@@ -68,6 +68,32 @@ class UserController extends BaseController
         ->withContent($render);
     }
 
+    public function main(): Response
+    {
+      $main = '123';
+      $render = $this->view
+         ->withName("layout/header")
+         ->withData(['main' => $main]);
+
+      return $this->htmlResponseFactory
+         ->createResponse(200)
+         ->withContent($render);
+    }
+
+
+    public function logout(): Response
+    {
+      $user = '123';
+      $render = $this->view
+         ->withName("users/logout")
+         ->withData(['user' => $user]);
+
+      return $this->htmlResponseFactory
+         ->createResponse(200)
+         ->withContent($render);
+
+    }
+
 
 
 

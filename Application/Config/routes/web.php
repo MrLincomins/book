@@ -14,9 +14,12 @@ return [
     new Route("GET", "/books/{id}", "BookController@delete"),
     new Route("GET", "/disk_add", "CDController@add"),
     new Route("GET", "/disk", "CDController@show"),
-    new Route("GET", "/user", "UserController@register"),
+    new Route("GET", "/register", "UserController@register"),
     new Route("GET", "/show", "UserController@show"),
-    new Route("GET", "/login", "UserController@login")    
+    new Route("GET", "/login", "UserController@login"),
+    new Route("GET", "/main", "UserController@main"),
+    new Route("GET", "/logout", "UserController@logout")
+
 
 
 

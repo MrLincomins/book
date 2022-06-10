@@ -27,13 +27,14 @@ if (isset($_REQUEST['doGo'])) {
        exit('Пароль был пропущен');
      }
 
-     $register = (new User())->CheckAuth($user, $Name, $Surname, $Patronymic, $Class, $Password);
+     $register = (new User())->CheckAuth($Name, $Surname, $Patronymic, $Class, $Password);
      if($register === true){
        setcookie('Name', $Name, time()+86400 * 30);
        setcookie('Surname', $Surname, time()+86400 * 30);
        setcookie('Patronymic', $Patronymic, time()+86400 * 30);
        setcookie('Class', $Class, time()+86400 * 30);
-       print "Добро пожаловать!";
+       setcookie('Password', $Password, time()+86400 * 30);
+       header('Location: /main');
      }
      if($register === false){
        echo('Пароль или логин не верен');
@@ -42,13 +43,8 @@ if (isset($_REQUEST['doGo'])) {
 
      //echo "Урааа, я умнее чем компьютер";
 
+   }
 }
-}
-
-
-
-
-
 
 
 

@@ -1,7 +1,6 @@
 <?php
 
 namespace Application\Models;
-
 /**
  * Класс автора.
  * Все данные об авторах из базы берем через этот класс
@@ -29,21 +28,36 @@ class User extends Model
     }
 
 
-    public function CheckAuth($user, $Name, $Surname, $Patronymic, $Class, $Password): bool
+    public function CheckAuth($Name, $Surname, $Patronymic, $Class, $Password): bool
     {
+      $user = (new User())->all();
       foreach ($user as $user1){
         if ($user1['Name'] === $Name
          && $user1['Password'] === $Password
          && $user1['Surname'] === $Surname
          && $user1['Patronymic'] === $Patronymic
          && $user1['Class'] === $Class
-
        )
        {
          return true;
        }
      }
      return false;
+    }
+
+    public function CheckLogin(): ?string
+    {
+      $Name = @$_COOKIE['Name'];
+      $Surname = @$_COOKIE['Surname'];
+      $Patronymic = @$_COOKIE['Patronymic'];
+      $Class = @$_COOKIE['Class'];
+      $Password = @$_COOKIE['Password'];
+
+      if((new User())->CheckAuth($Name, $Surname, $Patronymic, $Class, $Password))
+      {
+        return $Name;
+      }
+      return null;
     }
 
 }
