@@ -1,5 +1,11 @@
 <?php
 use Application\Models\Book;
+use Application\Models\User;
+$Status = (new User())->CheckLogin();
+If($Status !== 'Админ'){
+  header('Location: /login');
+  die;
+}
 foreach ($books as $book):
   $id = $book["newid"];
 endforeach;

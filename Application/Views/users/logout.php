@@ -6,6 +6,7 @@ if (isset($_REQUEST['doGo'])) {
      setcookie('Patronymic', '');
      setcookie('Class', '');
      setcookie('Password', '');
+     setcookie('Status', '');     
      header('Location: /main');
    }
 }

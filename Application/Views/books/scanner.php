@@ -1,6 +1,11 @@
 <?php
 use Application\Models\Book;
-
+use Application\Models\User;
+$Status = (new User())->CheckLogin();
+If($Status !== 'Админ'){
+  header('Location: /login');
+  die;
+}
 //Надо отсканировать aplication/json что бы вписать данные
 function repairUnqotedJsonValues(string $json) : string {
     $json = str_replace(": ", ":", $json);

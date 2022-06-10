@@ -1,3 +1,11 @@
+<?php
+use Application\Models\User;
+$Status = (new User())->CheckLogin();
+If($Status !== 'Админ'){
+  header('Location: /login');
+  die;
+}
+?>
 <html lang="ru_RU">
  <body>
      <h1>Пользователи</h1>

@@ -1,5 +1,10 @@
 <?php
 use Application\Models\User;
+$Status = (new User())->CheckLogin();
+If($Status !== 'Админ'){
+  header('Location: /login');
+  die;
+}
 if (isset($_REQUEST['doGo'])) {
 
    {
@@ -46,10 +51,8 @@ if (isset($_REQUEST['doGo'])) {
         <p>Имя: <input type="text" name="Name" size="15" maxlength="30" id=""><samp style="color:red">*</samp></p>
         <p>Фамилия: <input type="text" name="Surname" size="15" maxlength="30" id=""><samp style="color:red">*</samp></p>
         <p>Отчество: <input type="text" name="Patronymic" size="15" maxlength="30" id=""><samp style="color:red"></samp></p>
-        <p>Статус:<select name="Status" size="4" multiple>
+        <p>Статус:<select name="Status" size="2" multiple>
         <option selected value="Ученик">Ученик</option>
-        <option value="Помощник библиотекаря">Помощник библиотекаря</option>
-        <option value="Библиотекарь">Библиотекарь</option>
         <option value="Админ">Админ</option>
         </select></p>
         <p>Класс: <input type="text" name="Class" size="15" maxlength="3" id=""><samp style="color:red">*</samp></p>

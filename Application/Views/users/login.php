@@ -27,22 +27,22 @@ if (isset($_REQUEST['doGo'])) {
        exit('Пароль был пропущен');
      }
 
-     $register = (new User())->CheckAuth($Name, $Surname, $Patronymic, $Class, $Password);
+    $Status = $_REQUEST['Status'];
+
+     $register = (new User())->CheckAuth($Name, $Surname, $Patronymic, $Class, $Password, $Status);
      if($register === true){
        setcookie('Name', $Name, time()+86400 * 30);
        setcookie('Surname', $Surname, time()+86400 * 30);
        setcookie('Patronymic', $Patronymic, time()+86400 * 30);
        setcookie('Class', $Class, time()+86400 * 30);
        setcookie('Password', $Password, time()+86400 * 30);
+       setcookie('Status', $Status, time()+86400 * 30);
        header('Location: /main');
      }
      if($register === false){
        echo('Пароль или логин не верен');
      }
-
-
      //echo "Урааа, я умнее чем компьютер";
-
    }
 }
 
@@ -66,6 +66,10 @@ if (isset($_REQUEST['doGo'])) {
          <p>Отчество: <input type="text" name="Patronymic" size="15" maxlength="30" id=""><samp style="color:red"></samp></p>
          <p>Класс: <input type="text" name="Class" size="15" maxlength="3" id=""><samp style="color:red">*</samp></p>
          <p>Пароль: <input type="password" name="Password" size="15" maxlength="30" id=""><samp style="color:red">*</samp></p>
+         <p>Статус:<select name="Status" size="2" multiple>
+         <option selected value="Ученик">Ученик</option>
+         <option value="Админ">Админ</option>
+         </select></p>
          <p><input type="submit" value="Войти" name="doGo"></p>
      </form>
  </body>

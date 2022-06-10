@@ -1,5 +1,11 @@
 <?php
 use Application\Models\Book;
+use Application\Models\User;
+$Status = (new User())->CheckLogin();
+If($Status !== 'Админ'){
+  header('Location: /login');
+  die;
+}
 if (isset($_REQUEST['doGo2'])) {
    {
        $Name = $_REQUEST['Name'];

@@ -91,7 +91,18 @@ class UserController extends BaseController
       return $this->htmlResponseFactory
          ->createResponse(200)
          ->withContent($render);
+    }
 
+    public function account(): Response
+    {
+      $user = '123';
+      $render = $this->view
+         ->withName("users/account")
+         ->withData(['user' => $user]);
+
+      return $this->htmlResponseFactory
+         ->createResponse(200)
+         ->withContent($render);
     }
 
 

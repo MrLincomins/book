@@ -28,7 +28,7 @@ class User extends Model
     }
 
 
-    public function CheckAuth($Name, $Surname, $Patronymic, $Class, $Password): bool
+    public function CheckAuth($Name, $Surname, $Patronymic, $Class, $Password, $Status): bool
     {
       $user = (new User())->all();
       foreach ($user as $user1){
@@ -37,6 +37,7 @@ class User extends Model
          && $user1['Surname'] === $Surname
          && $user1['Patronymic'] === $Patronymic
          && $user1['Class'] === $Class
+         && $user1['Status'] === $Status
        )
        {
          return true;
@@ -52,10 +53,11 @@ class User extends Model
       $Patronymic = @$_COOKIE['Patronymic'];
       $Class = @$_COOKIE['Class'];
       $Password = @$_COOKIE['Password'];
+      $Status = @$_COOKIE['Status'];
 
-      if((new User())->CheckAuth($Name, $Surname, $Patronymic, $Class, $Password))
+      if((new User())->CheckAuth($Name, $Surname, $Patronymic, $Class, $Password, $Status))
       {
-        return $Name;
+        return $Status;
       }
       return null;
     }
