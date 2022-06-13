@@ -10,6 +10,7 @@
                         <th>ISBN</th>
                         <th>Автор</th>
                         <th>Год</th>
+                        <th>Кол-во на складе</th>                    
                     </tr>
                 </thead>
                 <?php /** @var array $books */
@@ -20,6 +21,8 @@
                         <td><?php echo $book["ISBN"]?></td>
                         <td><?php echo $book["Author"]?></td>
                         <td><?php echo $book["Year"]?></td>
+                        <td><?php echo $book["count"]?></td>
+
                         <td>| |</td>
                         <td><button onclick="document.location='books/<?echo $book["newid"]?>'">Изменить/Удалить</button></td>
                     </tr>

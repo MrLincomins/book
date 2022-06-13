@@ -1,12 +1,12 @@
 <?php
 if (isset($_REQUEST['doGo'])) {
    {
-     setcookie('Name', '');
+     setcookie('Nick', '');
      setcookie('Surname', '');
      setcookie('Patronymic', '');
      setcookie('Class', '');
      setcookie('Password', '');
-     setcookie('Status', '');     
+     setcookie('Status', '');
      header('Location: /main');
    }
 }

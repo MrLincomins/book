@@ -55,6 +55,7 @@ if (isset($_REQUEST['doGo1'])) {
              <p>Автор: <input type="text" name="Author" size="15" maxlength="150" id="" placeholder="<?php echo $book["Author"]?> "><samp style="color:red">*</samp></p>
              <p>Год: <input type="text" name="Year" size="15" maxlength="20" id="" placeholder="<?php echo $book["Year"]?> "><samp style="color:red"></samp></p>
              <p>Международный стандартный книжный номер(ISBN): <input type="text" name="ISBN" size="15" maxlength="150" id="" placeholder="<?php echo $book["ISBN"]?> "><samp style="color:red">*</samp></p>
+             <p>Количество: <input type="text" name="count" size="15" maxlength="150" id="" placeholder="<?php echo $book["count"]?> "><samp style="color:red">*</samp></p>
              <p><input type="submit" value="Изменить" name="doGo2"></p>
            ___________________________________________________________________
          </form>
@@ -70,11 +71,12 @@ if (isset($_REQUEST['doGo2'])) {
        $Author = $_REQUEST['Author'];
        $Year = $_REQUEST['Year'];
        $ISBN = $_REQUEST['ISBN'];
+       $count = $_REQUEST['count'];
        foreach ($books as $book):
        $id = $book["newid"];
        endforeach;
-       echo "ID= ",$id, "ISBN = ", $ISBN, "NAME = ", $Name, "AUTHOR = ", $Author, "YEAR = ", $Year;
-       $books = (new Book())->edit($Name, $Author, $Year, $ISBN, $id);
+       echo "ID= ",$id, "ISBN = ", $ISBN, "NAME = ", $Name, "AUTHOR = ", $Author, "YEAR = ", $Year, "Count = ", $count;
+       $books = (new Book())->edit($Name, $Author, $Year, $ISBN, $id, $count);
    }
 }
 
@@ -99,6 +101,7 @@ if (isset($_REQUEST['doGo2'])) {
             <th>ISBN</th>
             <th>Автор</th>
             <th>Год</th>
+            <th>Кол-во</th>
         </tr>
     </thead>
   <tr>
@@ -107,6 +110,7 @@ if (isset($_REQUEST['doGo2'])) {
       <td> <?php echo $book["ISBN"]?> </td>
       <td> <?php echo $book["Author"]?> </td>
       <td> <?php echo $book["Year"]?> </td>
+      <td> <?php echo $book["count"]?> </td>
   </tr>
 </table>
   <?php endforeach;?>

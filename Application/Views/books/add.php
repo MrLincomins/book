@@ -14,7 +14,8 @@ if (isset($_REQUEST['doGo'])) {
         $Author = $_REQUEST['Author'];
         $Year = $_REQUEST['Year'];
         $ISBN = $_REQUEST['ISBN'];
-        $add = (new Book())->add($Name, $Author, $Year, $ISBN);
+        $count = $_REQUEST['count'];
+        $add = (new Book())->add($Name, $Author, $Year, $ISBN, $count);
         echo 'Данные были успешно записаны';
 }
 }
@@ -34,6 +35,7 @@ if (isset($_REQUEST['doGo'])) {
         <p>Автор: <input type="text" name="Author" size="15" maxlength="150" id=""><samp style="color:red">*</samp></p>
         <p>Год: <input type="text" name="Year" size="15" maxlength="20" id=""><samp style="color:red"></samp></p>
         <p>Международный стандартный книжный номер(ISBN): <input type="text" name="ISBN" size="15" maxlength="150" id=""><samp style="color:red">*</samp></p>
+        <p>Количество: <input type="text" name="count" size="15" value="1" maxlength="100" id=""><samp style="color:red">*</samp></p>
         <p><input type="submit" value="Добавить" name="doGo"></p>
     </form>
 </body>

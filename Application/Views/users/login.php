@@ -31,7 +31,7 @@ if (isset($_REQUEST['doGo'])) {
 
      $register = (new User())->CheckAuth($Name, $Surname, $Patronymic, $Class, $Password, $Status);
      if($register === true){
-       setcookie('Name', $Name, time()+86400 * 30);
+       setcookie('Nick', $Name, time()+86400 * 30);
        setcookie('Surname', $Surname, time()+86400 * 30);
        setcookie('Patronymic', $Patronymic, time()+86400 * 30);
        setcookie('Class', $Class, time()+86400 * 30);

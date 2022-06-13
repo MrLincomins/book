@@ -20,6 +20,7 @@
                      <td><?php echo $cd["Name"]?></td>
                      <td><?php echo $cd["Code"]?></td>
                      <td><?php echo $cd["Author"]?></td>
+                     <td>| |</td>
                      <td><?php echo $cd["Description"]?></td>
                  </tr>
                  <?php endforeach;?>

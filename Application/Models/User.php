@@ -48,7 +48,7 @@ class User extends Model
 
     public function CheckLogin(): ?string
     {
-      $Name = @$_COOKIE['Name'];
+      $Name = @$_COOKIE['Nick'];
       $Surname = @$_COOKIE['Surname'];
       $Patronymic = @$_COOKIE['Patronymic'];
       $Class = @$_COOKIE['Class'];

@@ -16,13 +16,14 @@ if (isset($_REQUEST['doGo'])) {
               $Year2 = 9999;
     }
     if ($result = $Year =(new Book())->byYear($Year1, $Year2)) {
-      echo "<table><tr><th>Имя</th><th>Автор</th><th>Год</th><th>ISBN</th></tr>";
+      echo "<table><tr><th>Имя</th><th>Автор</th><th>Год</th><th>ISBN</th>><th>Кол-во</th></tr>";
       foreach($result as $row){
         echo "<tr>";
         echo "<td>" . $row["Name"] . "</td>";
         echo "<td>" . $row["Author"] . "</td>";
         echo "<td>" . $row["Year"] . "</td>";
         echo "<td>" . $row["ISBN"] . "</td>";
+        echo "<td>" . $row["count"] . "</td>";
         echo "</tr>";
       }
     echo "</table>";

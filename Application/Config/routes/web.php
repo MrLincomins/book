@@ -19,7 +19,7 @@ return [
     new Route("GET", "/login", "UserController@login"),
     new Route("GET", "/main", "UserController@main"),
     new Route("GET", "/logout", "UserController@logout"),
-    new Route("GET", "/account", "UserController@account"),    
+    new Route("GET", "/account", "UserController@account"),
 
 ];
 //Я что-то неправильно делаю или здесь ошибка?

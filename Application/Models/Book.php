@@ -39,13 +39,26 @@ class Book extends Model
         return $stmt->fetchAll();
     }
 
-    public function add($Name, $Author, $Year, $ISBN): array
+    public function add($Name, $Author, $Year, $ISBN, $count): array
     {
-        $sql = "INSERT INTO {$this->table} (Name, Author, Year, ISBN) VALUES (:Name, :Author, :Year, :ISBN)";
+      $books = (new Book())->all();
+      foreach ($books as $book){
+        if($ISBN === $book["ISBN"]){
+          $sql = "UPDATE {$this->table} SET count = count + :count WHERE ISBN = :ISBN";
+          $stmt = $this->connection->prepare($sql);
+          $stmt->execute(['count' => $count, 'ISBN' => $ISBN]);
+          return $stmt->fetchAll();
+      }
+      else{
+        $sql = "INSERT INTO {$this->table} (Name, Author, Year, ISBN, count) VALUES (:Name, :Author, :Year, :ISBN, :count)";
         $stmt = $this->connection->prepare($sql);
-        $stmt->execute(['Name' => $Name, 'Author' => $Author, 'Year' => $Year, 'ISBN' => $ISBN]);
+        $stmt->execute(['Name' => $Name, 'Author' => $Author, 'Year' => $Year, 'ISBN' => $ISBN, 'count' => $count]);
         return $stmt->fetchAll();
+      }
     }
+   }
+
+
 
 
     public function Top100(): array
@@ -73,15 +86,14 @@ class Book extends Model
       return $stmt->fetchAll();
     }
 
-    public function edit($Name, $Author, $Year, $ISBN, $newid): array
+    public function edit($Name, $Author, $Year, $ISBN, $newid, $count): array
     {
-      $sql = "UPDATE books SET Name = :Name, Author = :Author, ISBN = :ISBN, Year = :Year WHERE newid = :newid";
+      $sql = "UPDATE books SET Name = :Name, Author = :Author, ISBN = :ISBN, Year = :Year, count = :count WHERE newid = :newid";
       $stmt = $this->connection->prepare($sql);
-      $stmt->execute(['Name' => $Name, 'Author' => $Author, 'ISBN' => $ISBN, 'Year' => $Year, 'newid' => $newid]);
+      $stmt->execute(['Name' => $Name, 'Author' => $Author, 'ISBN' => $ISBN, 'Year' => $Year, 'count' => $count, 'newid' => $newid ]);
       return $stmt->fetchAll();
-
-
     }
+
 
 
 

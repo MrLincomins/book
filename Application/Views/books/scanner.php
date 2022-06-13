@@ -1,11 +1,5 @@
 <?php
 use Application\Models\Book;
-use Application\Models\User;
-$Status = (new User())->CheckLogin();
-If($Status !== 'Админ'){
-  header('Location: /login');
-  die;
-}
 //Надо отсканировать aplication/json что бы вписать данные
 function repairUnqotedJsonValues(string $json) : string {
     $json = str_replace(": ", ":", $json);
@@ -115,6 +109,6 @@ if ($belarus == true){
 echo 'Данные были успешно записаны';
 $log = "ISBN: $isbn, Имя автора: $author, Название книги: $nick, Год: $year были успешно записаны";
 
-$add = (new Book())->add($nick, $author, $year, $isbn);
+$add = (new Book())->add($nick, $author, $year, $isbn, '1');
 //file_put_contents(__DIR__ . '/log.txt', $log . PHP_EOL, FILE_APPEND);
 ?>
