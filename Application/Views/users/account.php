@@ -5,7 +5,7 @@ If($Status === null){
   header('Location: /login');
   die;
 }
-$iduser = $_COOKIE['iduser'];
+$iduser = $_COOKIE['idus'];
 $Name = $_COOKIE['Nick'];
 $Surname = $_COOKIE['Surname'];
 $Patronymic = $_COOKIE['Patronymic'];
@@ -20,6 +20,7 @@ else {
 
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">

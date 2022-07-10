@@ -95,8 +95,11 @@ class Book extends Model
       return $stmt->fetchAll();
     }
 
-
-
-
-
+    public function count($newid): array
+    {
+        $sql = "SELECT count FROM books WHERE newid = :newid";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute(['newid' => $newid]);
+        return $stmt->fetchAll();
+    }
 }

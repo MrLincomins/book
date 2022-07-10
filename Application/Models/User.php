@@ -98,6 +98,14 @@ class User extends Model
         $stmt->execute(['newid' => $idbook]);
         return $stmt->fetchAll();
     }
+
+    public function checkuser($iduser): array
+    {
+        $sql = "SELECT * FROM User WHERE id = :id";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute(['id' => $iduser]);
+        return $stmt->fetchAll();
+    }
 }
 
 

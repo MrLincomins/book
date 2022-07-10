@@ -1,7 +1,7 @@
 <?php
 if (isset($_REQUEST['doGo'])) {
    {
-     setcookie('iduser', '');
+     setcookie('idus', '');
      setcookie('Nick', '');
      setcookie('Surname', '');
      setcookie('Patronymic', '');

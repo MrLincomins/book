@@ -1,5 +1,6 @@
 <?php
 use Application\Models\User;
+use Application\Models\Book;
 if (isset($_REQUEST['doGo'])) {
    {
      $idbook = $_REQUEST['idbook'];
@@ -12,15 +13,36 @@ if (isset($_REQUEST['doGo'])) {
        exit('ID Ученика был пропущен');
      }
 
-     $check = (new User())->checkforbook($iduser);
-     if(empty($check)){}
+
+     $check_user = (new User())->checkforbook($iduser);
+     if(empty($check_user)){}
      else{
          exit("У ученика уже есть книга");
      }
-     
 
-       $DATE = date('Y-m-d');
+     $check_user2 = (new User())->checkuser($iduser);
+     if(empty($check_user)){
+         exit("Ученика не существует");
+       }
+
+     $check_book = (new Book())->count($idbook);
+     foreach($check_book as $count){
+         if($count['count'] === 0){
+             exit("Данной книги нету в библиотеке");
+       }
+   }
+
+     $check_book2 = (new Book())->searchid($idbook);
+     if(empty($check_book2)){
+         exit("Книги не существует");
+     }
+
+
+       $DATE0  = mktime(0, 0, 0, date("m")  , date("d")+7, date("Y"));
+       $DATE =  strftime("%Y-%m-%d", $DATE0);
        echo "Date: ", $DATE, "Idbook: ", $idbook, "Iduser: ", $iduser;
+
+
 
      $givebook = (new User())->give($idbook, $iduser, $DATE);
      echo "Книга отдана ученику";

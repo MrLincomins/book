@@ -36,7 +36,7 @@ if (isset($_REQUEST['doGo'])) {
 
        foreach($id as $ids){
          $ids['id'];
-         setcookie('iduser', $ids['id'], time()+86400 * 30);
+         setcookie('idus', $ids['id'], time()+86400 * 30);
        }
 
        setcookie('Nick', $Name, time()+86400 * 30);
