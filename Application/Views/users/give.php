@@ -21,7 +21,8 @@ if (isset($_REQUEST['doGo'])) {
      }
 
      $check_user2 = (new User())->checkuser($iduser);
-     if(empty($check_user)){
+
+     if(empty($check_user2)){
          exit("Ученика не существует");
        }
 
