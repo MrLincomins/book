@@ -23,8 +23,9 @@ var_dump($_COOKIE);
     <li><a href="/register">Регистрация пользователя</a></li>
     <li><a href="/show">Показать всех пользователей</a></li>
 <?php endif; ?>
-
+<?php if($Status !== null): ?>
     <a href="/logout">Выход</a>
+<?php endif; ?>
   </ul>
 </nav>
 <title>Главная</title>

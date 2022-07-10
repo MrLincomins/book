@@ -34,6 +34,7 @@ if (isset($_REQUEST['doGo'])) {
 if (isset($_REQUEST['doGo3'])) {
    {
      $books = (new Book())->delete($id);
+     echo '<meta http-equiv="refresh" content="1; url=http://localhost:8080/knigi">';
      echo 'Данные были успешно удалены';
    }
 }

@@ -22,51 +22,43 @@ class Book extends Model
     public function search($name): array
     {
         $sql = "SELECT * FROM {$this->table} WHERE name like %:name%";
-
         $stmt = $this->connection->prepare($sql);
         $stmt->execute(['name' => $name]);
-
         return $stmt->fetchAll();
     }
 
     public function byYear($from, $to): array
     {
         $sql = "SELECT * FROM {$this->table} WHERE year >= :from and year <= :to";
-
         $stmt = $this->connection->prepare($sql);
         $stmt->execute(['from' => $from, 'to' => $to]);
-
         return $stmt->fetchAll();
     }
 
-  //  public function add1($Name, $Author, $Year, $ISBN, $count): array
-  //  {
-   //   $books = (new Book())->all();
-   //   foreach ($books as $book){
-   //     if($ISBN === $book["ISBN"]){
-   //       $sql = "UPDATE {$this->table} SET count = count + :count WHERE ISBN = :ISBN";
-   //       $stmt = $this->connection->prepare($sql);
-   //       $stmt->execute(['count' => $count, 'ISBN' => $ISBN]);
-   //       return $stmt->fetchAll();
-   //   }
- //     else{
- //       $sql = "INSERT INTO {$this->table} (Name, Author, Year, ISBN, count) VALUES (:Name, :Author, :Year, :ISBN, :count)";
- //       $stmt = $this->connection->prepare($sql);
- //       $stmt->execute(['Name' => $Name, 'Author' => $Author, 'Year' => $Year, 'ISBN' => $ISBN, 'count' => $count]);
-  //      return $stmt->fetchAll();
- //     }
- //   }
- //  }
-
-   public function add($Name, $Author, $Year, $ISBN, $count): array
+    public function search_ISBN($ISBN): array
     {
-
-                $sql = "INSERT INTO {$this->table} (Name, Author, Year, ISBN, count) VALUES (:Name, :Author, :Year, :ISBN, :count)";
-                $stmt = $this->connection->prepare($sql);
-                $stmt->execute(['Name' => $Name, 'Author' => $Author, 'Year' => $Year, 'ISBN' => $ISBN, 'count' => $count]);
-                return $stmt->fetchAll();
+        $sql = "SELECT * FROM {$this->table} WHERE ISBN = :ISBN";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute(['ISBN' => $ISBN]);
+        return $stmt->fetchAll();
     }
 
+    public function add($Name, $Author, $Year, $ISBN, $count): array
+    {
+        $book = (new Book())->search_ISBN($ISBN);
+        if(empty($book)){
+            $sql1 = "INSERT INTO {$this->table} (Name, Author, Year, ISBN, count) VALUES (:Name, :Author, :Year, :ISBN, :count)";
+            $stmt1 = $this->connection->prepare($sql1);
+            $stmt1->execute(['Name' => $Name, 'Author' => $Author, 'Year' => $Year, 'ISBN' => $ISBN, 'count' => $count]);
+            return $stmt1->fetchAll();
+        }
+        else{
+            $sql = "UPDATE {$this->table} SET count = count + :count WHERE ISBN = :ISBN";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute(['count' => $count, 'ISBN' => $ISBN]);
+            return $stmt->fetchAll();
+        }
+    }
 
 
 

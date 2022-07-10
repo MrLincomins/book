@@ -47,6 +47,14 @@ class User extends Model
      return false;
     }
 
+    public function search_id($Name, $Surname, $Patronymic, $Class, $Password, $Status): array
+    {
+        $sql = "SELECT id FROM User WHERE Name = :Name AND Surname = :Surname AND Patronymic = :Patronymic AND Status = :Status AND Class = :Class AND Password = :Password";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute(['Name' => $Name, 'Surname' => $Surname, 'Patronymic' => $Patronymic, 'Status' => $Status, 'Class' => $Class, 'Password' => $Password]);
+        return $stmt->fetchAll();
+    }
+
     public function CheckLogin(): ?string
     {
       $Name = @$_COOKIE['Nick'];
@@ -74,5 +82,22 @@ class User extends Model
         return $stmt->fetchAll();
         return $stmt1->fetchAll();
     }
+
+    public function checkforbook($iduser): array
+    {
+        $sql = "SELECT * FROM BGTS WHERE iduser = :iduser";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute(['iduser' => $iduser]);
+        return $stmt->fetchAll();
+    }
+
+    public function checkbook($idbook): array
+    {
+        $sql = "SELECT * FROM books WHERE newid = :newid";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute(['newid' => $idbook]);
+        return $stmt->fetchAll();
+    }
 }
+
 

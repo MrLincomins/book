@@ -7,8 +7,8 @@
                     <tr>
                         <th>ID</th>
                         <th>Название</th>
-                        <th>ISBN</th>
                         <th>Автор</th>
+                        <th>ISBN</th>
                         <th>Год</th>
                         <th>Кол-во на складе</th>                    
                     </tr>
@@ -18,8 +18,8 @@
                     <tr>
                         <td><?php echo $book["newid"]?></td>
                         <td><?php echo $book["Name"]?></td>
-                        <td><?php echo $book["ISBN"]?></td>
                         <td><?php echo $book["Author"]?></td>
+                        <td><?php echo $book["ISBN"]?></td>
                         <td><?php echo $book["Year"]?></td>
                         <td><?php echo $book["count"]?></td>
 

@@ -15,8 +15,8 @@ if (isset($_REQUEST['doGo'])) {
         $Code = $_REQUEST['Code'];
         $Description = $_REQUEST['Description'];
         $add = (new CD())->add($Name, $Author, $Code, $Description);
-        echo "Струячим, струячим";
-
+        echo "Диск был успешно добавлен";
+        echo mysql_error();
 }
 }
 ?>
