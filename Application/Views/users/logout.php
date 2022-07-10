@@ -17,8 +17,9 @@ if (isset($_REQUEST['doGo1'])) {
    }
 }
  ?>
-
- <html lang="ru">
+<!DOCTYPE html>
+<html lang="ru">
+<head>
  <body>
    <form>
      Вы точно хотите выйти?
@@ -26,4 +27,5 @@ if (isset($_REQUEST['doGo1'])) {
      <p><input type="submit" value="Нет" name="doGo1"></p>
    </from>
   </body>
+</head>
  </html>
