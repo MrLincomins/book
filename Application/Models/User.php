@@ -106,6 +106,18 @@ class User extends Model
         $stmt->execute(['id' => $iduser]);
         return $stmt->fetchAll();
     }
+
+    public function return_book($iduser, $idbook):array
+    {
+        $sql = "DELETE FROM BGTS WHERE iduser = :iduser";
+        $sql1 = "UPDATE books SET count = count + 1 WHERE newid = :idbook";
+        $stmt = $this->connection->prepare($sql);
+        $stmt1 = $this->connection->prepare($sql1);
+        $stmt->execute(['iduser' => $iduser]);
+        $stmt1->execute(['idbook' => $idbook]);
+        return $stmt->fetchAll();
+        return $stmt1->fetchAll();
+    }
 }
 
 

@@ -21,7 +21,7 @@ return [
     new Route("GET", "/logout", "UserController@logout"),
     new Route("GET", "/account", "UserController@account"),
     new Route("GET", "/booksgive", "UserController@give"),
-
+    new Route("GET", "/booksreturn", "UserController@return"),
 ];
 //Я что-то неправильно делаю или здесь ошибка?
 //Если существует uri /books то я не могу создать /books/{id}
