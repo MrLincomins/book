@@ -2,4 +2,4 @@ vendor
 .idea
 Storage/dumps/*
 Storage/logs/*
-.docker/mysql/data/
+.docker/mysql/data/*

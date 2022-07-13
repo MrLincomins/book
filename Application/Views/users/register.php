@@ -27,7 +27,9 @@ if (isset($_REQUEST['doGo'])) {
           exit('Пароль был пропущен');
         }
 
-        $register = (new User())->register($Name, $Surname, $Patronymic, $Status, $Class, $Password);
+        $Hash = crypt($Password, '$6$MVP$1000=DOLLALOVMrlincomDunGeon$');
+
+        $register = (new User())->register($Name, $Surname, $Patronymic, $Status, $Class, $Hash);
         echo 'Данные были успешно записаны';
 
     }

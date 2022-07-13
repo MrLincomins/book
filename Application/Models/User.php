@@ -34,7 +34,7 @@ class User extends Model
       $user = (new User())->all();
       foreach ($user as $user1){
         if ($user1['Name'] === $Name
-         && $user1['Password'] === $Password
+         && password_verify($Password, $user1['Password']) === true
          && $user1['Surname'] === $Surname
          && $user1['Patronymic'] === $Patronymic
          && $user1['Class'] === $Class
