@@ -19,7 +19,7 @@ class CD extends Model
         return $stmt->fetchAll();
     }
 
-    public function add($Name, $Author, $Code, $Description): array
+    public function add(string $Name,string $Author,int $Code,string     $Description): array
     {
         $sql = "INSERT INTO {$this->table} (Name, Author, Code, Description) VALUES (:Name, :Author, :Code, :Description)";
         $stmt = $this->connection->prepare($sql);

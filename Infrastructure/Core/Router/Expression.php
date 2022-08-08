@@ -10,8 +10,8 @@ class Expression
     public function build(string $uri): string
     {
         $placeholder = str_replace("/", "\/", $uri);
-        $placeholder = preg_replace("/\{(\w+)\}/", "(\d+|\w+)", $placeholder);
-
+        $placeholder = preg_replace("/\{(\w+)\}/", "(\d+)", $placeholder);
         return "/" . $placeholder . ".*$/";
+
     }
 }

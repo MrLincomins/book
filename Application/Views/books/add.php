@@ -16,7 +16,11 @@ if (isset($_REQUEST['doGo'])) {
         $ISBN = $_REQUEST['ISBN'];
         $count = $_REQUEST['count'];
         $add = (new Book())->add($Name, $Author, $Year, $ISBN, $count);
-        echo 'Данные были успешно записаны';
+       echo '<script type="text/javascript">
+       window.onload = function () { alert("Книга успешно добавлена"); } 
+</script>';
+       echo '<meta http-equiv="refresh" content="0; url=http://localhost:8080/add">';
+       die();
 }
 }
 ?>

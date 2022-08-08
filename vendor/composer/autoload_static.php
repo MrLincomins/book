@@ -20,6 +20,10 @@ class ComposerStaticInit506d048316f8e8843b0c0a6d76cc0d03
         array (
             'Infrastructure\\' => 15,
         ),
+        'F' => 
+        array (
+            'Fpdf\\' => 5,
+        ),
         'A' => 
         array (
             'Application\\' => 12,
@@ -39,6 +43,10 @@ class ComposerStaticInit506d048316f8e8843b0c0a6d76cc0d03
         'Infrastructure\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Infrastructure',
+        ),
+        'Fpdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fpdf/fpdf/src/Fpdf',
         ),
         'Application\\' => 
         array (

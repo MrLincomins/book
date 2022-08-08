@@ -55,7 +55,7 @@ else {
 <?php if(empty($should)){
 }
 else{ ?>
-    <h2>________________________________п_</h2>
+    <h2>_________________________________</h2>
     <h3>Книга взятая из библиотеки</h3>
   <div>
     <table>
@@ -70,14 +70,12 @@ else{ ?>
         </thead>
         <?php foreach($books as $book):?>
         <?php foreach($should as $Date):?>
-        <tr>
             <td><?php echo $book["Name"]?></td>
             <td><?php echo $book["Author"]?></td>
             <td><?php echo $book["ISBN"]?></td>
             <td><?php echo $book["Year"]?></td>
             <td><?php echo $Date['DATE']?></td>
 
-        </tr>
         <?php endforeach; ?>
         <?php endforeach; ?>
     </table>

@@ -12,6 +12,7 @@
     "ext-pdo": "*",
     "psr/http-message": "^1.0",
     "psr/container": "^2.0",
-    "psr/http-factory": "^1.0"
+    "psr/http-factory": "^1.0",
+    "fpdf/fpdf": "^1.84"
   }
 }

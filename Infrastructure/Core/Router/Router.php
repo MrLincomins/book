@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Infrastructure\Core\Router;
 
+use Application\Controllers\BookController;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Infrastructure\Core\Http\{Request, RequestFactory};
@@ -15,7 +16,9 @@ final class Router
     /** @var Route[] */
     private array $routes = [];
     public function withRoutes(array $routes): self
+
     {
+
         $this->routes = $routes;
 
         return $this;
@@ -54,7 +57,6 @@ final class Router
         // ищем по регуляке нужный роут из списка
         // /books/{id} = /books/12
         $route = $this->getRoute($request);
-
         if (is_null($route)) {
             $this->abort(404);
         }

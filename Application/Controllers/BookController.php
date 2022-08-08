@@ -109,11 +109,10 @@ class BookController extends BaseController
     }
 
 
-    public function delete(): Response
+    public function delete(Request $request): Response
     {
-     $uri = $_SERVER["REQUEST_URI"];
-     $id = preg_replace('/\\/books\\//u', '', $uri, -1);
-     $books = (new Book())->searchid($id);
+     $attributes = $request->getAttributes();
+     $books = (new Book())->searchid($attributes['id']);
      $render = $this->view
        ->withName("books/delete")
        ->withData(['books' => $books]);

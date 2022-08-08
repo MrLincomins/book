@@ -7,32 +7,56 @@ if (isset($_REQUEST['doGo'])) {
        //Name, Surname, Patronymic, Status, Class
         $Name = $_REQUEST['1Name'];
         if (empty($Name) == true){
-          exit('Имя было пропущено ');
+            echo '<script type="text/javascript">
+       window.onload = function () { alert("Имя пропущено"); } 
+</script>';
+            echo '<meta http-equiv="refresh" content="0; url=http://localhost:8080/register">';
+            die();
+        }
         }
 
         $Surname = $_REQUEST['1Surname'];
         if (empty($Surname) == true){
-          exit('Фамилия была пропущена');
+            echo '<script type="text/javascript">
+       window.onload = function () { alert("Фамилия пропущена"); } 
+</script>';
+            echo '<meta http-equiv="refresh" content="0; url=http://localhost:8080/register">';
+            die();
         }
 
         $Patronymic = $_REQUEST['1Patronymic'];
         $Status = $_REQUEST['1Status'];
         $Class = $_REQUEST['1Class'];
         if (empty($Class) == true){
-          exit('Класс был пропущен');
+            echo '<script type="text/javascript">
+       window.onload = function () { alert("Класс пропущена"); } 
+</script>';
+            echo '<meta http-equiv="refresh" content="0; url=http://localhost:8080/register">';
+            die();
         }
+
 
         $Password = $_REQUEST['1Password'];
         if (empty($Password) == true){
-          exit('Пароль был пропущен');
+            echo '<script type="text/javascript">
+       window.onload = function () { alert("Пароль пропущена"); } 
+</script>';
+            echo '<meta http-equiv="refresh" content="0; url=http://localhost:8080/register">';
+            die();
         }
+
 
         $Hash = crypt($Password, '$6$MVP$1000=DOLLALOVMrlincomDunGeon$');
 
         $register = (new User())->register($Name, $Surname, $Patronymic, $Status, $Class, $Hash);
-        echo 'Данные были успешно записаны';
+echo '<script type="text/javascript">
+       window.onload = function () { alert("Данные были успешно записаны"); } 
+</script>';
+echo '<meta http-equiv="refresh" content="0; url=http://localhost:8080/register">';
+die();
 
-    }
+
+
 }
 ?>
 

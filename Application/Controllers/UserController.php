@@ -129,5 +129,17 @@ class UserController extends BaseController
             ->withContent($render);
     }
 
+    public function allbooks(): Response
+    {
+        $user = (new User())->allbooks();
+        $render = $this->view
+            ->withName("users/allbooks")
+            ->withData(['user' => $user]);
+
+        return $this->htmlResponseFactory
+            ->createResponse(200)
+            ->withContent($render);
+    }
+
 
 }

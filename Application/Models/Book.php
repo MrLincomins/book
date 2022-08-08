@@ -19,7 +19,7 @@ class Book extends Model
         return $stmt->fetchAll();
     }
 
-    public function search($name): array
+    public function search(string $name): array
     {
         $sql = "SELECT * FROM {$this->table} WHERE name like %:name%";
         $stmt = $this->connection->prepare($sql);
@@ -27,7 +27,7 @@ class Book extends Model
         return $stmt->fetchAll();
     }
 
-    public function byYear($from, $to): array
+    public function byYear(int $from,int $to): array
     {
         $sql = "SELECT * FROM {$this->table} WHERE year >= :from and year <= :to";
         $stmt = $this->connection->prepare($sql);
@@ -35,7 +35,7 @@ class Book extends Model
         return $stmt->fetchAll();
     }
 
-    public function search_ISBN($ISBN): array
+    public function search_ISBN(int $ISBN): array
     {
         $sql = "SELECT * FROM {$this->table} WHERE ISBN = :ISBN";
         $stmt = $this->connection->prepare($sql);
@@ -43,8 +43,9 @@ class Book extends Model
         return $stmt->fetchAll();
     }
 
-    public function add($Name, $Author, $Year, $ISBN, $count): array
+    public function add(string $Name,string $Author,int $Year,int $ISBN,int $count): array
     {
+
         $book = (new Book())->search_ISBN($ISBN);
         if(empty($book)){
             $sql1 = "INSERT INTO {$this->table} (Name, Author, Year, ISBN, count) VALUES (:Name, :Author, :Year, :ISBN, :count)";
@@ -61,22 +62,19 @@ class Book extends Model
     }
 
 
-
     public function Top100(): array
     {
         $sql = "SELECT Author, count(*) books_count FROM books GROUP BY Author ORDER BY books_count DESC LIMIT 100";
-        $stmt = $this->connection->query($sql);;
+        $stmt = $this->connection->query($sql);
         return $stmt->fetchAll();
-
     }
 
-    public function searchid($id): array
+    public function searchid(string $id): array
     {
       $sql = "SELECT * FROM books where newid = :id";
       $stmt = $this->connection->prepare($sql);
       $stmt->execute(['id' => $id]);
       return $stmt->fetchAll();
-
     }
 
     public function delete($id): array
@@ -87,7 +85,7 @@ class Book extends Model
       return $stmt->fetchAll();
     }
 
-    public function edit($Name, $Author, $Year, $ISBN, $newid, $count): array
+    public function edit(string $Name,string $Author,int $Year,int $ISBN,int $newid,int $count): array
     {
       $sql = "UPDATE books SET Name = :Name, Author = :Author, ISBN = :ISBN, Year = :Year, count = :count WHERE newid = :newid";
       $stmt = $this->connection->prepare($sql);
@@ -95,11 +93,19 @@ class Book extends Model
       return $stmt->fetchAll();
     }
 
-    public function count($newid): array
+    public function count(int $newid): array
     {
         $sql = "SELECT count FROM books WHERE newid = :newid";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute(['newid' => $newid]);
+        return $stmt->fetchAll();
+    }
+
+    public function searchid1(string $ids): array
+    {
+        $sql = "SELECT * FROM books where newid IN(:ids)";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute(['ids' => $ids]);
         return $stmt->fetchAll();
     }
 }

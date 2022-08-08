@@ -4,8 +4,54 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f1ed76132317d30436b4234a56b5b685",
+    "content-hash": "b17279898d734fe9eba00c0cc219076f",
     "packages": [
+        {
+            "name": "fpdf/fpdf",
+            "version": "1.84.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/coreydoughty/Fpdf.git",
+                "reference": "4d6fe08d3d200ccdb259dba84cfb363ed68230bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/coreydoughty/Fpdf/zipball/4d6fe08d3d200ccdb259dba84cfb363ed68230bc",
+                "reference": "4d6fe08d3d200ccdb259dba84cfb363ed68230bc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Fpdf\\": "src/Fpdf"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Corey Doughty",
+                    "email": "corey@doughty.ca"
+                }
+            ],
+            "description": "FPDF Composer Wrapper",
+            "homepage": "https://github.com/coreydoughty/Fpdf",
+            "keywords": [
+                "fpdf",
+                "pdf",
+                "wrapper"
+            ],
+            "support": {
+                "issues": "https://github.com/coreydoughty/Fpdf/issues",
+                "source": "https://github.com/coreydoughty/Fpdf/tree/1.84.0"
+            },
+            "time": "2022-04-07T18:18:05+00:00"
+        },
         {
             "name": "psr/container",
             "version": "2.0.2",

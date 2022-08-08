@@ -5,33 +5,58 @@ if (isset($_REQUEST['doGo'])) {
     {
         $idbook = $_REQUEST['idbook'];
         if (empty($idbook) == true){
-            exit('ID Книги было пропущено ');
+            echo '<script type="text/javascript">
+       window.onload = function () { alert("ID книги было пропущено"); } 
+</script>';
+            echo '<meta http-equiv="refresh" content="0; url=http://localhost:8080/booksreturn">';
+            die();
         }
 
         $iduser = $_REQUEST['iduser'];
         if (empty($iduser) == true){
-            exit('ID Ученика был пропущен');
+            echo '<script type="text/javascript">
+       window.onload = function () { alert("ID ученика пропущен"); } 
+</script>';
+            echo '<meta http-equiv="refresh" content="0; url=http://localhost:8080/booksreturn">';
+            die();
         }
+
 
 
         $check_user = (new User())->checkforbook($iduser);
         if(empty($check_user)){
-            exit("У ученика нету книги");
+            echo '<script type="text/javascript">
+       window.onload = function () { alert("У ученика нету книги"); } 
+</script>';
+            echo '<meta http-equiv="refresh" content="0; url=http://localhost:8080/booksreturn">';
+            die();
         }
 
         $check_user2 = (new User())->checkuser($iduser);
         if(empty($check_user2)){
-            exit("Ученика не существует");
+            echo '<script type="text/javascript">
+       window.onload = function () { alert("Ученика не существует"); } 
+</script>';
+            echo '<meta http-equiv="refresh" content="0; url=http://localhost:8080/booksreturn">';
+            die();
         }
 
 
         $check_book2 = (new Book())->searchid($idbook);
         if(empty($check_book2)){
-            exit("Книги не существует");
+            echo '<script type="text/javascript">
+       window.onload = function () { alert("Книги не существует"); } 
+</script>';
+            echo '<meta http-equiv="refresh" content="0; url=http://localhost:8080/booksreturn">';
+            die();
         }
 
         $returnbook = (new User())->return_book($iduser, $idbook);
-        echo "Книга возвращена в библиотеку";
+        echo '<script type="text/javascript">
+       window.onload = function () { alert("Книга возвращена в библиотеку"); } 
+</script>';
+        echo '<meta http-equiv="refresh" content="0; url=http://localhost:8080/booksreturn">';
+        die();
 
     }
 }

@@ -1,3 +1,12 @@
+<?php
+use Application\Models\User;
+use Fpdf\Fpdf;
+
+$pdf = new Fpdf();
+
+
+$Status = (new User())->CheckLogin();
+?>
 <html lang="ru_RU">
     <body>
         <h1>Книги</h1>
@@ -23,7 +32,9 @@
                         <td><?php echo $book["ISBN"]?></td>
                         <td><?php echo $book["Year"]?></td>
                         <td><?php echo $book["count"]?></td>
-                        <td><button onclick="document.location='books/<?echo $book["newid"]?>'">Изменить/Удалить</button></td>
+                        <?php If($Status === 'Админ'){ ?>
+                        <td><button onclick="document.location='books/<?php echo $book["newid"]?>'">Изменить/Удалить</button></td>
+                        <?php } ?>
                     </tr>
                     <?php endforeach;?>
             </table>

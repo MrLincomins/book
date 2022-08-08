@@ -28,8 +28,6 @@ try {
     $container->register(View::class);
     $container->register(HtmlResponseFactory::class);
 
-
-
 // Step 0:  Создаем роутер
     $response = $container->get(Router::class)
         ->withRoutes(include 'Application/Config/routes/web.php')

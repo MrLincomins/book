@@ -11,7 +11,7 @@ use Psr\Http\Message\UriInterface;
 
 class Request implements RequestInterface, ServerRequestInterface
 {
-    private array $attributes = [];
+    public array $attributes = [];
 
     public function __construct(
         public string $method,

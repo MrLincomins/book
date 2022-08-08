@@ -22,6 +22,8 @@ var_dump($_COOKIE);
     <li><a href="/disk_add">Добавить диск</a></li>
     <li><a href="/register">Регистрация пользователя</a></li>
     <li><a href="/show">Показать всех пользователей</a></li>
+    <li><a href="/booksgive">Дать книгу пользователю</a></li>
+    <li><a href="/booksreturn">Вернуть книгу от пользователя в библиотеку</a></li>
 <?php endif; ?>
 <?php if($Status !== null): ?>
     <a href="/logout">Выход</a>
