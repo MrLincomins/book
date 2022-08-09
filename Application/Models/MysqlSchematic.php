@@ -72,10 +72,24 @@ class MysqlSchematic extends Model
             CHARACTER SET = utf8 , COLLATE = utf8_general_ci 
             ";
 
+       $sql4 =
+           "
+        CREATE TABLE toobook
+    (
+        idbook INT NOT NULL,
+				iduser INT NOT NULL,
+                DATE DATE
+            ) ENGINE=innodb;
+            
+            ALTER TABLE `books`.`books`
+            CHARACTER SET = utf8 , COLLATE = utf8_general_ci;
+            ";
+
         $stmt = $this->connection->prepare($sql);
         $stmt1 = $this->connection->prepare($sql1);
         $stmt2 = $this->connection->prepare($sql2);
         $stmt3 = $this->connection->prepare($sql3);
+
         return $stmt->fetchAll();
         return $stmt1->fetchAll();
         return $stmt2->fetchAll();

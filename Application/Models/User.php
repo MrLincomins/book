@@ -107,7 +107,7 @@ class User extends Model
         return $stmt->fetchAll();
     }
 
-    public function return_book(int $iduser,int $idbook):array
+    public function return_book(int $iduser, int $idbook): array
     {
         $sql = "DELETE FROM BGTS WHERE iduser = :iduser";
         $sql1 = "UPDATE books SET count = count + 1 WHERE newid = :idbook";
@@ -132,5 +132,17 @@ class User extends Model
         $stmt = $this->connection->prepare($sql);
         $stmt->execute(['id' => $iduser]);
         return $stmt->fetchAll();
+    }
+
+    public function toobook(int $idbook,int $iduser, string $DATE): array
+    {
+        $sql = "INSERT INTO toobook (idbook, iduser, DATE) VALUES (:idbook, :iduser, :DATE)";
+        $sql1 = "UPDATE books SET count = count - 1 WHERE newid = :idbook";
+        $stmt = $this->connection->prepare($sql);
+        $stmt1 = $this->connection->prepare($sql1);
+        $stmt->execute(['idbook' => $idbook, 'iduser' => $iduser, 'DATE' => $DATE]);
+        $stmt1->execute(['idbook' => $idbook]);
+        return $stmt->fetchAll();
+        return $stmt1->fetchAll();
     }
 }

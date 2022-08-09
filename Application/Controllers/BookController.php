@@ -122,6 +122,15 @@ class BookController extends BaseController
            ->withContent($render);
     }
 
+    public function searchbook(): Response
+    {
+        $books = 78;
+        $render = $this->view
+            ->withName("books/search")
+            ->withData(['books' => $books]);
 
-
+        return $this->htmlResponseFactory
+            ->createResponse(200)
+            ->withContent($render);
+    }
 }

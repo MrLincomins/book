@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Application\Controllers;
 
 use Application\Models\User;
+use Application\Models\Book;
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\{
@@ -141,5 +142,29 @@ class UserController extends BaseController
             ->withContent($render);
     }
 
+    public function toobook(): Response
+    {
+        $books = (new Book())->all();
+        $render = $this->view
+            ->withName("users/toobook")
+            ->withData(['books' => $books]);
+
+        return $this->htmlResponseFactory
+            ->createResponse(200)
+            ->withContent($render);
+    }
+
+    public function tobook(Request $request): Response
+    {
+        $attributes = $request->getAttributes();
+        $books = (new Book())->searchid($attributes['id']);
+        $render = $this->view
+            ->withName("users/tobook")
+            ->withData(['books' => $books]);
+
+        return $this->htmlResponseFactory
+            ->createResponse(200)
+            ->withContent($render);
+    }
 
 }
