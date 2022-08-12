@@ -21,9 +21,9 @@ class Book extends Model
 
     public function search(string $name): array
     {
-        $sql = "SELECT * FROM {$this->table} WHERE name like %:name%";
+        $sql = "SELECT * FROM {$this->table} WHERE name LIKE :name";
         $stmt = $this->connection->prepare($sql);
-        $stmt->execute(['name' => $name]);
+       // $stmt->execute(['name' => $name]);
         return $stmt->fetchAll();
     }
 

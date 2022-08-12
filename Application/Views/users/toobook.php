@@ -5,7 +5,28 @@ $Status = (new User())->CheckLogin();
 if(empty($Status)) {
     header('Location: /login');
     die;
+
 }
+$iduser = $_REQUEST["idus"];
+$bgts = (new User())->checkforbook($iduser);
+if(empty($bgts)){}
+else{
+    echo '<script type="text/javascript">
+       window.onload = function () { alert("У вас уже есть книга на руках, пожалуйста сдайте её в библиотеку"); } 
+</script>';
+    echo '<meta http-equiv="refresh" content="0; url=http://localhost:8080/main">';
+    die();
+}
+$toobook = (new User())->checktoobook($iduser);
+if(empty($toobook)){}
+else {
+    echo '<script type="text/javascript">
+       window.onload = function () { alert("У вас уже есть забронированая книга"); } 
+</script>';
+    echo '<meta http-equiv="refresh" content="0; url=http://localhost:8080/main">';
+    die();
+}
+
 
 ?>
 <html lang="ru_RU">

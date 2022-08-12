@@ -145,4 +145,20 @@ class User extends Model
         return $stmt->fetchAll();
         return $stmt1->fetchAll();
     }
+
+    public function alltoobook(): array
+    {
+        $sql = "SELECT * FROM toobook";
+        $stmt = $this->connection->query($sql);
+        return $stmt->fetchAll();
+    }
+
+    public function checktoobook(int $iduser): array
+    {
+        $sql = "SELECT * FROM toobook WHERE iduser = :iduser";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute(['iduser' => $iduser]);
+        return $stmt->fetchAll();
+    }
+
 }

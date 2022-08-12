@@ -13,6 +13,8 @@ foreach ($user as $user1) {
     $iduser = (new User())->checkuser1($user1["iduser"]);
 }
 
+
+
 ?>
 <html lang="ru_RU">
  <body>

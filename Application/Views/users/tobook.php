@@ -7,6 +7,27 @@ if(empty($Status)) {
     die;
 }
 
+$iduser = $_REQUEST["idus"];
+$bgts = (new User())->checkforbook($iduser);
+if(empty($bgts)){}
+else{
+    echo '<script type="text/javascript">
+       window.onload = function () { alert("У вас уже есть книга на руках, пожалуйста сдайте её в библиотеку"); } 
+</script>';
+    echo '<meta http-equiv="refresh" content="0; url=http://localhost:8080/main">';
+    die();
+}
+$toobook = (new User())->checktoobook($iduser);
+if(empty($toobook)){}
+else {
+    echo '<script type="text/javascript">
+       window.onload = function () { alert("У вас уже есть забронированая книга"); } 
+</script>';
+    echo '<meta http-equiv="refresh" content="0; url=http://localhost:8080/main">';
+    die();
+}
+
+
 foreach ($books as $book):
     $idbook = $book["newid"];
 endforeach;
@@ -20,10 +41,11 @@ if (isset($_REQUEST['doGo'])) {
         <html lang="ru">
         <body>
         <form>
-            Вы точно хотите забронировать книгу
+
+            Вы точно хотите забронировать книгу>?
             <p><input type="submit" value="Да" name="doGo2"></p>
             ___________________________________________________________________
-            </from>
+        </from>
         </body>
         </html>
 
@@ -64,6 +86,7 @@ if (isset($_REQUEST['doGo1'])) {
 </head>
 <body>
 <?php foreach ($books as $book):?>
+
     <table border="1">
         <thead>
         <tr>
@@ -85,7 +108,7 @@ if (isset($_REQUEST['doGo1'])) {
         </tr>
     </table>
 <?php endforeach;?>
-
+ Забронировать книгу?
 <form>
     <p><input type="submit" value="Да" name="doGo"></p>
     <p><input type="submit" value="Нет" name="doGo1"></p>

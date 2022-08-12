@@ -124,7 +124,7 @@ class BookController extends BaseController
 
     public function searchbook(): Response
     {
-        $books = 78;
+        $books = (new Book())->all();
         $render = $this->view
             ->withName("books/search")
             ->withData(['books' => $books]);

@@ -20,6 +20,14 @@ else {
 
     }
 }
+$toobook = (new User())->checktoobook($iduser);
+if(empty($toobook)){}
+else {
+    foreach ($toobook as $id1) {
+        $books1 = (new User())->checkbook($id1['idbook']);
+    }
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -33,7 +41,7 @@ else {
 <body>
 <h1>Личный кабинет</h1>
 <div>
-    <table>
+    <table border="1">
         <thead>
             <tr>
                 <th>Имя</th>
@@ -58,7 +66,7 @@ else{ ?>
     <h2>_________________________________</h2>
     <h3>Книга взятая из библиотеки</h3>
   <div>
-    <table>
+    <table border="1">
         <thead>
         <tr>
             <th>Название</th>
@@ -82,5 +90,34 @@ else{ ?>
   </div>
 
 <?php }?>
+
+<?php if(empty($toobook)){}
+else{ ?>
+<h2>_________________________________</h2>
+<h3>Забронированая книга</h3>
+<div>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Автор</th>
+            <th>ISBN</th>
+            <th>Год</th>
+            <th>Дата данная пользователю, чтобы забрать книгу</th>
+        </tr>
+        </thead>
+        <?php foreach($books1 as $book1):?>
+            <?php foreach($toobook as $DATA):?>
+                <td><?php echo $book1["Name"]?></td>
+                <td><?php echo $book1["Author"]?></td>
+                <td><?php echo $book1["ISBN"]?></td>
+                <td><?php echo $book1["Year"]?></td>
+                <td><?php echo $DATA['DATE']?></td>
+
+            <?php endforeach; ?>
+        <?php endforeach; ?>
+    </table>
+</div>
+<?php } ?>
 </body>
 </html>

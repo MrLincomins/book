@@ -15,7 +15,7 @@ var_dump($_COOKIE);
     <li><a href="/disk">Показать все диски</a></li>
     <li><a href="/account">Личный кабинет</a></li>
 <?php if($Status === null): ?>
-    <li><a href="/login">Вход</a></li>
+    <a href="/login">Вход</a>
 <?php endif; ?>
 <?php if($Status === 'Админ'): ?>
     <li><a href="/add">Добавление книг</a></li>
@@ -23,9 +23,11 @@ var_dump($_COOKIE);
     <li><a href="/register">Регистрация пользователя</a></li>
     <li><a href="/show">Показать всех пользователей</a></li>
     <li><a href="/booksgive">Дать книгу пользователю</a></li>
+    <li><a href="/alltoobook">Все забронированные книги</a></li>
     <li><a href="/booksreturn">Вернуть книгу от пользователя в библиотеку</a></li>
 <?php endif; ?>
 <?php if($Status !== null): ?>
+    <li><a href="/toobook">Бронирование книг</a></li>
     <a href="/logout">Выход</a>
 <?php endif; ?>
   </ul>

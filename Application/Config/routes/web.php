@@ -23,9 +23,10 @@ return [
     new Route("GET", "/booksgive", "UserController@give"),
     new Route("GET", "/booksreturn", "UserController@return"),
     new Route("GET", "/allbooks", "UserController@allbooks"),
-    new Route("GET", "/searchbook", "UserController@searchbook"),
+    new Route("GET", "/searchbook", "BookController@searchbook"),
     new Route("GET", "/toobook", "UserController@toobook"),
-    new Route("GET", "/tobook/{id}", "UserController@tobook")
+    new Route("GET", "/tobook/{id}", "UserController@tobook"),
+    new Route("GET", "/alltoobook", "UserController@alltoobook")
 ];
 
 //"/books/{id}" == \/books\/(\d+)
