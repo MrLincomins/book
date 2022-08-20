@@ -17,8 +17,6 @@ if (isset($_REQUEST['doGo2'])) {
        endforeach;
        echo "ID= ",$id, "ISBN = ", $ISBN, "NAME = ", $Name, "AUTHOR = ", $Author, "YEAR = ", $Year;
        $books = (new Book())->edit($Name, $Author, $Year, $ISBN, $id);
-
-
    }
 }
 

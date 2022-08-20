@@ -34,7 +34,7 @@ class BookController extends BaseController
      */
     public function show(Request $request): Response
     {
-        $books = (new Book())->all();
+        $books = '--';
 
         $render = (new View())
             ->withName("books/list")
@@ -48,17 +48,7 @@ class BookController extends BaseController
     /**
      * @throws \Exception
      */
-    public function list(): Response
-    {
-        $books = (new Book())->all();
-        $render = $this->view
-            ->withName("books/list")
-            ->withData(['books' => $books]);
 
-        return $this->htmlResponseFactory
-            ->createResponse(200)
-            ->withContent($render);
-    }
 
     public function add(): Response
     {

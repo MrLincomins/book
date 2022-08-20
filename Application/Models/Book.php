@@ -13,9 +13,15 @@ class Book extends Model
     public function all(): array
     {
         $sql = "SELECT * FROM {$this->table}";
-
         $stmt = $this->connection->query($sql);
+        return $stmt->fetchAll();
+    }
 
+    public function all1($offset, $size_page): array
+    {
+        $sql = "SELECT * FROM {$this->table} LIMIT :offset, :size_page";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute(['offset' => $offset, 'size_page' => $size_page]);
         return $stmt->fetchAll();
     }
 
@@ -23,7 +29,7 @@ class Book extends Model
     {
         $sql = "SELECT * FROM {$this->table} WHERE name LIKE :name";
         $stmt = $this->connection->prepare($sql);
-       // $stmt->execute(['name' => $name]);
+        $stmt->execute(['name' => $name]);
         return $stmt->fetchAll();
     }
 
@@ -106,6 +112,13 @@ class Book extends Model
         $sql = "SELECT * FROM books where newid IN(:ids)";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute(['ids' => $ids]);
+        return $stmt->fetchAll();
+    }
+
+    public function bookscount(): array
+    {
+        $sql = "SELECT COUNT(*) FROM books";
+        $stmt = $this->connection->query($sql);
         return $stmt->fetchAll();
     }
 }

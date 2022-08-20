@@ -1,11 +1,11 @@
-  <?php
+<?php
 use Application\Models\User;
 $Status = (new User())->CheckLogin();
 var_dump($_COOKIE);
-
 ?>
 
-<link rel="stylesheet" href="assets/main.css">
+
+<link rel="stylesheet" type="text/css" href="../assets/main.css">
 <nav>
   <ul>
     Главная
