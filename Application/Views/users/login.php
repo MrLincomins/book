@@ -38,7 +38,7 @@ if (isset($_REQUEST['doGo'])) {
                 $ids['id'];
                 setcookie('idus', $ids['id'], time()+86400 * 30);
             }
-
+            setcookie("justnow", true, time()+(60));
             setcookie('Nick', $Name, time()+86400 * 30);
             setcookie('Surname', $Surname, time()+86400 * 30);
             setcookie('Patronymic', $Patronymic, time()+86400 * 30);

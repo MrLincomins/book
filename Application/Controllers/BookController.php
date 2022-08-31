@@ -34,7 +34,7 @@ class BookController extends BaseController
      */
     public function show(Request $request): Response
     {
-        $books = '--';
+        $books = "o";
 
         $render = (new View())
             ->withName("books/list")

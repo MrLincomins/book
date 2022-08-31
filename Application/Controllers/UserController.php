@@ -71,7 +71,7 @@ class UserController extends BaseController
 
     public function main(): Response
     {
-      $main = '123';
+      $main = (new Book())->five_books();
       $render = $this->view
          ->withName("layout/header")
          ->withData(['main' => $main]);
@@ -93,6 +93,7 @@ class UserController extends BaseController
          ->createResponse(200)
          ->withContent($render);
     }
+
 
     public function account(): Response
     {

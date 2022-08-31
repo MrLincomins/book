@@ -1,6 +1,7 @@
 <?php
 
 namespace Application\Models;
+use Application\Models\User;
 
 /**
  * Класс книги.
@@ -12,6 +13,7 @@ class Book extends Model
 
     public function all(): array
     {
+
         $sql = "SELECT * FROM {$this->table}";
         $stmt = $this->connection->query($sql);
         return $stmt->fetchAll();
@@ -19,7 +21,13 @@ class Book extends Model
 
     public function all1($offset, $size_page): array
     {
-        $sql = "SELECT * FROM {$this->table} LIMIT :offset, :size_page";
+        $Status = (new User())->CheckLogin();
+        If($Status !== 'Админ'){
+            $sql = "SELECT * FROM {$this->table} WHERE count != 0 LIMIT :offset, :size_page";
+        }
+        else {
+            $sql = "SELECT * FROM {$this->table} LIMIT :offset, :size_page";
+        }
         $stmt = $this->connection->prepare($sql);
         $stmt->execute(['offset' => $offset, 'size_page' => $size_page]);
         return $stmt->fetchAll();
@@ -118,6 +126,13 @@ class Book extends Model
     public function bookscount(): array
     {
         $sql = "SELECT COUNT(*) FROM books";
+        $stmt = $this->connection->query($sql);
+        return $stmt->fetchAll();
+    }
+
+    public function five_books(): array
+    {
+        $sql = "SELECT * FROM books WHERE count <= 5 AND count != 0 LIMIT 0, 5";
         $stmt = $this->connection->query($sql);
         return $stmt->fetchAll();
     }

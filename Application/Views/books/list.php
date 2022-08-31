@@ -9,7 +9,7 @@ if(isset($_GET['page'])) {
     $page = 1;
 }
 //Максимальное количество данных в таблице
-$size_page = 2;
+$size_page = 4;
 
 $offset = ($page-1) * $size_page;
 $count = (new Book())->bookscount();
@@ -64,6 +64,6 @@ $books = (new Book())->all1($offset, $size_page);
             <br><b>Номер страницы: <?php echo $page; ?></b>
 
         </div>
-
     </body>
 </html>
+
