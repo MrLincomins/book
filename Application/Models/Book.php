@@ -130,9 +130,9 @@ class Book extends Model
         return $stmt->fetchAll();
     }
 
-    public function five_books(): array
+    public function one_books(): array
     {
-        $sql = "SELECT * FROM books WHERE count <= 5 AND count != 0 LIMIT 0, 5";
+        $sql = "SELECT * FROM books WHERE count <= 2 AND count != 0 LIMIT 0, 1";
         $stmt = $this->connection->query($sql);
         return $stmt->fetchAll();
     }

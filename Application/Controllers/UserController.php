@@ -71,10 +71,10 @@ class UserController extends BaseController
 
     public function main(): Response
     {
-      $main = (new Book())->five_books();
+      $onebook = (new Book())->one_books();
       $render = $this->view
          ->withName("layout/header")
-         ->withData(['main' => $main]);
+         ->withData(['onebook' => $onebook]);
 
       return $this->htmlResponseFactory
          ->createResponse(200)
