@@ -38,7 +38,6 @@ $books = (new Book())->all1($offset, $size_page);
                 <?php /** @var array $books */
                     foreach ($books as $book):?>
                     <tr>
-
                         <td><?php echo $book["newid"]?></td>
                         <td><?php echo $book["Name"]?></td>
                         <td><?php echo $book["Author"]?></td>

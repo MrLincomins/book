@@ -2,7 +2,7 @@
 use Application\Models\User;
 if (isset($_REQUEST['doGo'])) {
 
-    {
+
         $Name = $_REQUEST['Name'];
         if (empty($Name) == true){
             exit('Имя было пропущено ');
@@ -14,7 +14,6 @@ if (isset($_REQUEST['doGo'])) {
         }
 
         $Patronymic = $_REQUEST['Patronymic'];
-
 
         $Class = $_REQUEST['Class'];
 
@@ -47,6 +46,7 @@ if (isset($_REQUEST['doGo'])) {
             setcookie('Status', $Status, time()+86400 * 30);
             header('Location: /main');
         }
+
         if($register === false){
             echo '<script type="text/javascript">
        window.onload = function () { alert("Пароль или логин не верен"); } 
@@ -54,12 +54,7 @@ if (isset($_REQUEST['doGo'])) {
             echo '<meta http-equiv="refresh" content="0; url=http://localhost:8080/login">';
             die();
         }
-    }
 }
-
-
-
-
 ?>
 
 <!DOCTYPE html>

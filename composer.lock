@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "fpdf/fpdf",
-            "version": "1.84.0",
+            "version": "1.84.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/coreydoughty/Fpdf.git",
-                "reference": "4d6fe08d3d200ccdb259dba84cfb363ed68230bc"
+                "reference": "cfafa307947f7c646b87045d0decc67bdc423209"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/coreydoughty/Fpdf/zipball/4d6fe08d3d200ccdb259dba84cfb363ed68230bc",
-                "reference": "4d6fe08d3d200ccdb259dba84cfb363ed68230bc",
+                "url": "https://api.github.com/repos/coreydoughty/Fpdf/zipball/cfafa307947f7c646b87045d0decc67bdc423209",
+                "reference": "cfafa307947f7c646b87045d0decc67bdc423209",
                 "shasum": ""
             },
             "require": {
@@ -48,9 +48,9 @@
             ],
             "support": {
                 "issues": "https://github.com/coreydoughty/Fpdf/issues",
-                "source": "https://github.com/coreydoughty/Fpdf/tree/1.84.0"
+                "source": "https://github.com/coreydoughty/Fpdf/tree/1.84.1"
             },
-            "time": "2022-04-07T18:18:05+00:00"
+            "time": "2022-09-02T14:13:29+00:00"
         },
         {
             "name": "psr/container",

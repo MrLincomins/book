@@ -60,7 +60,6 @@ class BookController extends BaseController
         return $this->htmlResponseFactory
             ->createResponse(200)
             ->withContent($render);
-
     }
     public function scan(): Response
     {
