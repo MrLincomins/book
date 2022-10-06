@@ -2,7 +2,7 @@
 
 namespace Application\Controllers;
 
-use Application\Models\CD;
+use Application\Entities\CD;
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\{
@@ -31,7 +31,6 @@ class CDController extends BaseController
   public function show(Request $request): Response
   {
       $cd = (new CD())->all();
-
       $render = (new View())
           ->withName("cd/list")
           ->withData(['cd' => $cd]);

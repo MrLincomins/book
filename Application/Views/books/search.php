@@ -1,5 +1,5 @@
 <?php
-use Application\Models\Book;
+use Application\Entities\Book;
 session_start();
 if(isset($_REQUEST['doGo'])) {
     {

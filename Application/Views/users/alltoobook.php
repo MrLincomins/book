@@ -1,16 +1,21 @@
 <?php
-use Application\Models\User;
-use Application\Models\Book;
-$Status = (new User())->CheckLogin();
+use Application\Entities\User;
+use Application\Entities\UserMapper;
+use Application\Entities\Book;
+$Status = (new UserMapper())->CheckLogin();
 If($Status !== 'Админ'){
     header('Location: /login');
     die;
 }
-
+$book = new Book;
+$user0 = new User;
 foreach ($user as $user1) {
-    $books = (new Book())->searchid1($user1["idbook"]);
-    $iduser = (new User())->checkuser1($user1["iduser"]);
+    $book->id = $user1["idbook"];
+    $user0->id = $user1["iduser"];
+    $books = (new Book())->searchid($book->id);
+    $iduser = (new User())->checkuser($user0->id);
 }
+
 ?>
 <html lang="ru_RU">
 <body>

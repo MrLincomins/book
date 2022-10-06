@@ -1,6 +1,9 @@
 <?php
-use Application\Models\User;
-use Application\Models\Book;
+use Application\Entities\User;
+use Application\Entities\Book;
+use Application\Entities\BookRepository;
+$us = new User;
+$bk = new Book;
 if (isset($_REQUEST['doGo'])) {
    {
      $idbook = $_REQUEST['idbook'];
@@ -22,8 +25,9 @@ if (isset($_REQUEST['doGo'])) {
          die();
      }
 
+       $us->id = $iduser;
 
-     $check_user = (new User())->checkforbook($iduser);
+     $check_user = (new User())->checkforbook($us->id);
      if(empty($check_user)){}
      else{
          echo '<script type="text/javascript">
@@ -33,7 +37,7 @@ if (isset($_REQUEST['doGo'])) {
          die();
      }
 
-     $check_user2 = (new User())->checkuser($iduser);
+     $check_user2 = (new User())->checkuser($us->id);
 
      if(empty($check_user2)){
          echo '<script type="text/javascript">
@@ -43,7 +47,9 @@ if (isset($_REQUEST['doGo'])) {
          die();
        }
 
-     $check_book = (new Book())->count($idbook);
+     $bk->id = $idbook;
+
+     $check_book = (new Book())->count($bk->id);
      foreach($check_book as $count){
          if($count['count'] === 0){
              echo '<script type="text/javascript">
@@ -54,7 +60,7 @@ if (isset($_REQUEST['doGo'])) {
        }
    }
 
-     $check_book2 = (new Book())->searchid($idbook);
+     $check_book2 = (new Book())->searchId($bk->id);
      if(empty($check_book2)){
          echo '<script type="text/javascript">
        window.onload = function () { alert("Книги не существует"); } 

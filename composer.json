@@ -14,5 +14,8 @@
     "psr/container": "^2.0",
     "psr/http-factory": "^1.0",
     "fpdf/fpdf": "^1.84"
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^6.0"
   }
 }

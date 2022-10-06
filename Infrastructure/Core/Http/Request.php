@@ -158,7 +158,7 @@ class Request implements RequestInterface, ServerRequestInterface
 
     public function getAttribute($name, $default = null)
     {
-        // TODO: Implement getAttribute() method.
+        return $this->attributes[$name] ?? null;
     }
 
     public function withAttribute($name, $value)

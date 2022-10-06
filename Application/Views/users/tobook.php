@@ -1,14 +1,14 @@
 <?php
-use Application\Models\User;
-use Application\Models\Book;
-$Status = (new User())->CheckLogin();
+use Application\Entities\UserMapper;
+use Application\Entities\BookRepository;
+$Status = (new UserMapper())->CheckLogin();
 if(empty($Status)) {
     header('Location: /login');
     die;
 }
 
 $iduser = $_REQUEST["idus"];
-$bgts = (new User())->checkforbook($iduser);
+$bgts = (new UserMapper())->checkforbook($iduser);
 if(empty($bgts)){}
 else{
     echo '<script type="text/javascript">
@@ -17,7 +17,7 @@ else{
     echo '<meta http-equiv="refresh" content="0; url=http://localhost:8080/main">';
     die();
 }
-$toobook = (new User())->checktoobook($iduser);
+$toobook = (new UserMapper())->checktoobook($iduser);
 if(empty($toobook)){}
 else {
     echo '<script type="text/javascript">
@@ -56,7 +56,7 @@ if (isset($_REQUEST['doGo'])) {
 
 if (isset($_REQUEST['doGo2'])) {
     {
-        $books = (new User())->toobook($idbook, $iduser, $DATE);
+        $books = (new UserMapper())->toobook($idbook, $iduser, $DATE);
         echo '<script type="text/javascript">
        window.onload = function () { alert("Данная книга успешно забронирована"); } 
 </script>';

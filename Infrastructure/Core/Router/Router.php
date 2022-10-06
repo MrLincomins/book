@@ -47,15 +47,16 @@ final class Router
 
     public function route(ContainerInterface $container): ResponseInterface
     {
-        $requestFactory = new RequestFactory();
 
+        $requestFactory = new RequestFactory();
         $request = $requestFactory->createRequest(
             $_SERVER["REQUEST_METHOD"],
             $_SERVER["REQUEST_URI"],
         );
 
+
         // ищем по регуляке нужный роут из списка
-        // /books/{id} = /books/12
+        // /authors/{id} = /authors/12
         $route = $this->getRoute($request);
         if (is_null($route)) {
             $this->abort(404);
@@ -72,8 +73,19 @@ final class Router
 
     private function getRoute(Request $request)
     {
+
+/*        $routeWithOutExpression = current(array_filter($this->routes, function (Route $route) use ($request) {
+            return $request->method === $route->method && $request->uri == $route->pattern;
+        }));
+
+        if ($routeWithOutExpression) {
+            return $routeWithOutExpression;
+        }*/
+
+
         $route = current(array_filter($this->routes, function (Route $route) use ($request) {
             $expression = (new Expression())->build($route->pattern);
+
 
             return $request->method === $route->method && preg_match($expression, $request->uri);
         }));

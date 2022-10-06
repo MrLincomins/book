@@ -1,14 +1,14 @@
 <?php
-use Application\Models\User;
+use Application\Entities\UserMapper;
 
-$Status = (new User())->CheckLogin();
+$Status = (new UserMapper())->CheckLogin();
 if(empty($Status)) {
     header('Location: /login');
     die;
 
 }
 $iduser = $_REQUEST["idus"];
-$bgts = (new User())->checkforbook($iduser);
+$bgts = (new UserMapper())->checkforbook($iduser);
 if(empty($bgts)){}
 else{
     echo '<script type="text/javascript">
@@ -17,7 +17,7 @@ else{
     echo '<meta http-equiv="refresh" content="0; url=http://localhost:8080/main">';
     die();
 }
-$toobook = (new User())->checktoobook($iduser);
+$toobook = (new UserMapper())->checktoobook($iduser);
 if(empty($toobook)){}
 else {
     echo '<script type="text/javascript">

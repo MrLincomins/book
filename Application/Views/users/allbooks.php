@@ -1,6 +1,6 @@
 <?php
-use Application\Models\User;
-use Application\Models\Book;
+use Application\Entities\User;
+use Application\Entities\Book;
 $Status = (new User())->CheckLogin();
 If($Status !== 'Админ'){
   header('Location: /login');

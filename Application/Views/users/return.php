@@ -1,6 +1,6 @@
 <?php
-use Application\Models\User;
-use Application\Models\Book;
+use Application\Entities\UserMapper;
+use Application\Entities\BookRepository;
 if (isset($_REQUEST['doGo'])) {
     {
         $idbook = $_REQUEST['idbook'];
@@ -23,7 +23,7 @@ if (isset($_REQUEST['doGo'])) {
 
 
 
-        $check_user = (new User())->checkforbook($iduser);
+        $check_user = (new UserMapper())->checkforbook($iduser);
         if(empty($check_user)){
             echo '<script type="text/javascript">
        window.onload = function () { alert("У ученика нету книги"); } 
@@ -32,7 +32,7 @@ if (isset($_REQUEST['doGo'])) {
             die();
         }
 
-        $check_user2 = (new User())->checkuser($iduser);
+        $check_user2 = (new UserMapper())->checkuser($iduser);
         if(empty($check_user2)){
             echo '<script type="text/javascript">
        window.onload = function () { alert("Ученика не существует"); } 
@@ -42,7 +42,7 @@ if (isset($_REQUEST['doGo'])) {
         }
 
 
-        $check_book2 = (new Book())->searchid($idbook);
+        $check_book2 = (new BookRepository())->searchid($idbook);
         if(empty($check_book2)){
             echo '<script type="text/javascript">
        window.onload = function () { alert("Книги не существует"); } 
@@ -51,7 +51,7 @@ if (isset($_REQUEST['doGo'])) {
             die();
         }
 
-        $returnbook = (new User())->return_book($iduser, $idbook);
+        $returnbook = (new UserMapper())->return_book($iduser, $idbook);
         echo '<script type="text/javascript">
        window.onload = function () { alert("Книга возвращена в библиотеку"); } 
 </script>';

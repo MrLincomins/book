@@ -1,7 +1,8 @@
 <?php
-use Application\Models\CD;
-use Application\Models\User;
-$Status = (new User())->CheckLogin();
+use Application\Entities\CD;
+use Application\Entities\UserMapper;
+$Status = (new UserMapper())->CheckLogin();
+$disks = new CD;
 If($Status !== 'Админ'){
   header('Location: /login');
   die;
@@ -10,11 +11,11 @@ if (isset($_REQUEST['doGo'])) {
 
    {
 
-        $Name = $_REQUEST['Name'];
-        $Author = $_REQUEST['Author'];
-        $Code = $_REQUEST['Code'];
-        $Description = $_REQUEST['Description'];
-        $add = (new CD())->add($Name, $Author, $Code, $Description);
+        $disks->name = $_REQUEST['Name'];
+        $disks->author = $_REQUEST['Author'];
+        $disks->code = $_REQUEST['Code'];
+        $disks->description = $_REQUEST['Description'];
+        $add = (new CD())->add($disks);
         echo "Диск был успешно добавлен";
 }
 }

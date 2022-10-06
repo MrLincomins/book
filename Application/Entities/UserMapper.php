@@ -1,15 +1,16 @@
 <?php
 
-namespace Application\Models;
+namespace Application\Entities;
+use Infrastructure\Core\Repository\Repository;
+
 /**
  * Класс автора.
  * Все данные об авторах из базы берем через этот класс
  */
-class User extends Model
+class UserMapper extends Repository
 {
-
     private $table = "User";
-    ///BGTS = Book Give To Student;
+
 
     public function register($Name, $Surname, $Patronymic, $Status, $Class, $Password)
     {
@@ -29,25 +30,24 @@ class User extends Model
     }
 
 
-    public function CheckAuth( $Name, $Surname, $Patronymic, $Class, $Password, $Status): bool
+    public function CheckAuth($Name, $Surname, $Patronymic, $Class, $Password, $Status): bool
     {
-        $user = (new User())->all();
-        foreach ($user as $user1){
+        $user = (new UserMapper())->all();
+        foreach ($user as $user1) {
             if ($user1['Name'] === $Name
                 && password_verify($Password, $user1['Password']) === true
                 && $user1['Surname'] === $Surname
                 && $user1['Patronymic'] === $Patronymic
                 && $user1['Class'] === $Class
                 && $user1['Status'] === $Status
-            )
-            {
+            ) {
                 return true;
             }
         }
         return false;
     }
 
-    public function search_id(string $Name,string $Surname,string $Patronymic,string $Class,string $Password,string $Status): array
+    public function search_id(string $Name, string $Surname, string $Patronymic, string $Class, string $Password, string $Status): array
     {
         $sql = "SELECT id FROM User WHERE Name = :Name AND Surname = :Surname AND Patronymic = :Patronymic AND Status = :Status AND Class = :Class";
         $stmt = $this->connection->prepare($sql);
@@ -64,14 +64,13 @@ class User extends Model
         $Password = @$_COOKIE['Password'];
         $Status = @$_COOKIE['Status'];
 
-        if((new User())->CheckAuth($Name, $Surname, $Patronymic, $Class, $Password, $Status))
-        {
+        if ((new UserMapper())->CheckAuth($Name, $Surname, $Patronymic, $Class, $Password, $Status)) {
             return $Status;
         }
         return null;
     }
 
-    public function give(int $idbook,int $iduser, $DATE): array
+    public function give(int $idbook, int $iduser, $DATE): array
     {
         $sql = "INSERT INTO BGTS (idbook, iduser, DATE) VALUES (:idbook, :iduser, :DATE)";
         $sql1 = "UPDATE books SET count = count - 1 WHERE newid = :idbook";
@@ -134,7 +133,7 @@ class User extends Model
         return $stmt->fetchAll();
     }
 
-    public function toobook(int $idbook,int $iduser, string $DATE): array
+    public function toobook(int $idbook, int $iduser, string $DATE): array
     {
         $sql = "INSERT INTO toobook (idbook, iduser, DATE) VALUES (:idbook, :iduser, :DATE)";
         $sql1 = "UPDATE books SET count = count - 1 WHERE newid = :idbook";
@@ -160,5 +159,4 @@ class User extends Model
         $stmt->execute(['iduser' => $iduser]);
         return $stmt->fetchAll();
     }
-
 }

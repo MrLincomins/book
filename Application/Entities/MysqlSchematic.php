@@ -1,8 +1,10 @@
 <?php
 
-namespace Application\Models;
+namespace Application\Entities;
 
-class MysqlSchematic extends Model
+use Infrastructure\Core\Repository\Repository;
+
+class MysqlSchematic extends Repository
 {
     public function AllSchemas(): array
     {

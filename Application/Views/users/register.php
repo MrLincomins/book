@@ -1,5 +1,5 @@
 <?php
-use Application\Models\User;
+use Application\Entities\UserMapper;
 
 if (isset($_REQUEST['doGo'])) {
 
@@ -48,7 +48,7 @@ if (isset($_REQUEST['doGo'])) {
 
         $Hash = crypt($Password, '$6$MVP$1000=DOLLALOVMrlincomDunGeon$');
 
-        $register = (new User())->register($Name, $Surname, $Patronymic, $Status, $Class, $Hash);
+        $register = (new UserMapper())->register($Name, $Surname, $Patronymic, $Status, $Class, $Hash);
 echo '<script type="text/javascript">
        window.onload = function () { alert("Данные были успешно записаны"); } 
 </script>';

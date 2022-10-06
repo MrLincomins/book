@@ -1,5 +1,5 @@
 <?php
-use Application\Models\User;
+use Application\Entities\User;
 $Status = (new User())->CheckLogin();
 If($Status === null){
   header('Location: /login');

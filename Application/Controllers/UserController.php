@@ -3,9 +3,10 @@ declare(strict_types=1);
 
 namespace Application\Controllers;
 
-use Application\Models\User;
-use Application\Models\Book;
+use Application\Entities\User;
+use Application\Entities\BookRepository;
 
+use Application\Entities\UserMapper;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\{
     ResponseFactoryInterface as ResponseFactory,
@@ -47,7 +48,7 @@ class UserController extends BaseController
 
     public function show(): Response
     {
-      $user = (new User())->all();
+      $user = (new UserMapper())->all();
       $render = $this->view
          ->withName("users/list")
          ->withData(['user' => $user]);
@@ -59,7 +60,7 @@ class UserController extends BaseController
 
     public function login(): Response
     {
-     $user = (new User())->all();
+     $user = (new UserMapper())->all();
      $render = $this->view
         ->withName("users/login")
         ->withData(['user' => $user]);
@@ -71,7 +72,7 @@ class UserController extends BaseController
 
     public function main(): Response
     {
-      $onebook = (new Book())->one_books();
+      $onebook = (new BookRepository())->one_books();
       $render = $this->view
          ->withName("layout/header")
          ->withData(['onebook' => $onebook]);
@@ -133,7 +134,7 @@ class UserController extends BaseController
 
     public function allbooks(): Response
     {
-        $user = (new User())->allbooks();
+        $user = (new UserMapper())->allbooks();
         $render = $this->view
             ->withName("users/allbooks")
             ->withData(['user' => $user]);
@@ -145,7 +146,7 @@ class UserController extends BaseController
 
     public function toobook(): Response
     {
-        $books = (new Book())->all();
+        $books = (new BookRepository())->all();
         $render = $this->view
             ->withName("users/toobook")
             ->withData(['books' => $books]);
@@ -158,7 +159,7 @@ class UserController extends BaseController
     public function tobook(Request $request): Response
     {
         $attributes = $request->getAttributes();
-        $books = (new Book())->searchid($attributes['id']);
+        $books = (new BookRepository())->searchid($attributes['id']);
         $render = $this->view
             ->withName("users/tobook")
             ->withData(['books' => $books]);
@@ -170,7 +171,7 @@ class UserController extends BaseController
 
     public function alltoobook(): Response
     {
-        $user = (new User())->alltoobook();
+        $user = (new UserMapper())->alltoobook();
         $render = $this->view
             ->withName("users/alltoobook")
             ->withData(['user' => $user]);

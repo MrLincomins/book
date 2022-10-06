@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Models;
+namespace Infrastructure\Core\Repository;
 
 use PDO;
 
@@ -8,7 +8,7 @@ use PDO;
  * Базовая модель (entity), от нее будут наследоваться все модели.
  * Отвечает за создание соединия с базой данных и предоставления подключения моделям.
  */
-abstract class Model
+abstract class Repository
 {
     private string $host = 'book-mysql:3306';
     private string $user = 'root';

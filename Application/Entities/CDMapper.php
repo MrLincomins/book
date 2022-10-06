@@ -1,12 +1,10 @@
 <?php
 
-namespace Application\Models;
+namespace Application\Entities;
 
-/**
- * Класс дисков.
- * Все данные о дисках из базы берем через этот класс
- */
-class CD extends Model
+use Infrastructure\Core\Repository\Repository;
+
+class CDMapper extends Repository
 {
     private $table = "disks";
 
@@ -19,11 +17,11 @@ class CD extends Model
         return $stmt->fetchAll();
     }
 
-    public function add(string $Name,string $Author,int $Code,string     $Description): array
+    public function add($disk): array
     {
         $sql = "INSERT INTO {$this->table} (Name, Author, Code, Description) VALUES (:Name, :Author, :Code, :Description)";
         $stmt = $this->connection->prepare($sql);
-        $stmt->execute(['Name' => $Name, 'Author' => $Author, 'Code' => $Code, 'Description' => $Description]);
+        $stmt->execute(['Name' => $disk->name, 'Author' => $disk->author, 'Code' => $disk->code, 'Description' => $disk->description]);
         return $stmt->fetchAll();
     }
 }

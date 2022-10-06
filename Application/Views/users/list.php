@@ -1,6 +1,6 @@
 <?php
-use Application\Models\User;
-$Status = (new User())->CheckLogin();
+use Application\Entities\UserMapper;
+$Status = (new UserMapper())->CheckLogin();
 If($Status !== 'Админ'){
   header('Location: /login');
   die;
@@ -10,7 +10,7 @@ If($Status !== 'Админ'){
  <body>
      <h1>Пользователи</h1>
      <div>
-         <table>
+         <table border="1">
              <thead>
                  <tr>
                       <th>ID</th>

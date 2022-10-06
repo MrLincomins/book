@@ -1,5 +1,5 @@
 <?php
-use Application\Models\User;
+use Application\Entities\UserMapper;
 if (isset($_REQUEST['doGo'])) {
 
 
@@ -28,10 +28,10 @@ if (isset($_REQUEST['doGo'])) {
 
         $Status = $_REQUEST['Status'];
 
-        $register = (new User())->CheckAuth($Name, $Surname, $Patronymic, $Class, $Password, $Status);
+        $register = (new UserMapper())->CheckAuth($Name, $Surname, $Patronymic, $Class, $Password, $Status);
         if($register === true){
 
-            $id = (new User())->search_id($Name, $Surname, $Patronymic, $Class, $Password, $Status);
+            $id = (new UserMapper())->search_id($Name, $Surname, $Patronymic, $Class, $Password, $Status);
 
             foreach($id as $ids){
                 $ids['id'];
