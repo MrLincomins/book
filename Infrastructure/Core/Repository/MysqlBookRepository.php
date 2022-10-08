@@ -58,24 +58,43 @@ class MysqlBookRepository extends Repository implements BookRepository
 
     }
 
-        public function findOne(array $attributes): ?Book
-        {
-            // TODO: Implement findOne() method;
-        }
+    public function findOne(array $attributes): ?Book
+    {
+        // TODO: Implement findOne() method;
+    }
 
-        public
-        function findMany(array $attributes): array
-        {
-            // TODO: Implement findMany() method.
-        }
+    public
+    function findMany(array $attributes): array
+    {
+        // TODO: Implement findMany() method.
+    }
 
-        public function delete($id): array
-        {
-            $query = "DELETE FROM books WHERE newid = :id";
-            $stmt = $this->connection->prepare($query);
-            $stmt->execute(['id' => $id]);
-            return $stmt->fetchAll();
-        }
+    public function delete($id): array
+    {
+        $query = "DELETE FROM books WHERE newid = :id";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetchAll();
+    }
+
+    public function tooYear($too, $from): array
+    {
+        $query = "SELECT * FROM {$this->table} WHERE year >= :from and year <= :too";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute(['from' => $from, 'too' => $too]);
+        $result = $stmt->fetchAll();
+
+        return array_map(function (array $row) {
+            return new Book(
+                $row["newid"],
+                $row["Name"],
+                $row["Author"],
+                $row["ISBN"],
+                $row["Year"],
+                $row["count"]
+            );
+        }, $result);
+    }
 
 }
 

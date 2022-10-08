@@ -17,4 +17,6 @@ interface BookRepository
     public function findMany(array $attributes): array;
 
     public function delete(int $id): array;
+
+    public function tooYear($too, $from): array;
 }

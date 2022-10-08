@@ -23,9 +23,9 @@ class BookController extends BaseController
 
     public function __construct(ContainerInterface $container)
     {
-         $this->view = $container->get(View::class);
-         $this->htmlResponseFactory = $container->get(HtmlResponseFactory::class);
-         $this->bookRepository = new MysqlBookRepository();
+        $this->view = $container->get(View::class);
+        $this->htmlResponseFactory = $container->get(HtmlResponseFactory::class);
+        $this->bookRepository = new MysqlBookRepository();
     }
 
     /**
@@ -67,10 +67,10 @@ class BookController extends BaseController
 
     public function create(): Response
     {
-      $books = "123";
-      $render = $this->view
-        ->withName("books/create")
-        ->withData(['books' => $books]);
+        $books = "123";
+        $render = $this->view
+            ->withName("books/create")
+            ->withData(['books' => $books]);
 
         return $this->htmlResponseFactory
             ->createResponse(200)
@@ -79,11 +79,11 @@ class BookController extends BaseController
 
     public function store(): Response
     {
-      $book = $this->bookRepository->create($_POST['name'], $_POST['author'], $_POST['year'], $_POST['ISBN'], $_POST['count']);
-      //$weirdString = file_get_contents('php://input');
-      $render = $this->view
-        ->withName("books/store")
-        ->withData(['book' => $book]);
+        $book = $this->bookRepository->create($_POST['name'], $_POST['author'], $_POST['year'], $_POST['ISBN'], $_POST['count']);
+        //$weirdString = file_get_contents('php://input');
+        $render = $this->view
+            ->withName("books/store")
+            ->withData(['book' => $book]);
 
         return $this->htmlResponseFactory
             ->createResponse(200)
@@ -104,17 +104,36 @@ class BookController extends BaseController
             ->withContent($render);
     }
 
-//    public function ToYear(): Response
-//    {
-//      $P = "...";
-//      $render = $this->view
-//        ->withName("books/Year")
-//        ->withData(['P' => $P]);
-//
-//        return $this->htmlResponseFactory
-//            ->createResponse(200)
-//            ->withContent($render);
-//    }
+    public function toYear(Request $request): Response
+    {
+        $books = 'null';
+        $render = $this->view
+            ->withName("books/year")
+            ->withData(['books' => $books]);
+
+        return $this->htmlResponseFactory
+            ->createResponse(200)
+            ->withContent($render);
+    }
+
+    public function tooYear(): Response
+    {
+
+        if (empty($_POST['too'])) {
+            $_POST['too'] = 9999;
+        }
+        if (empty($_POST['from'])) {
+            $_POST['from'] = 0;
+        }
+        $books = $this->bookRepository->tooYear($_POST['too'], $_POST['from']);
+        $render = $this->view
+            ->withName("books/yearTable")
+            ->withData(['books' => $books]);
+
+        return $this->htmlResponseFactory
+            ->createResponse(200)
+            ->withContent($render);
+    }
 //
 //    public function top100(): Response
 //    {

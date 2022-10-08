@@ -5,37 +5,36 @@
         <div class="form-group">
             <label for="exampleInputEmail1">Название книги</label>
             <label>
-                <input type="text" name="name" class="form-control" placeholder="Введите название книги">
+                <input type="text" name="name" class="form-control" placeholder="Введите название книги" autocomplete="off">
             </label>
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">Автор</label>
             <label>
-                <input type="text" name="author" class="form-control" placeholder="Введите имя автора">
+                <input type="text" name="author" class="form-control" placeholder="Введите имя автора" autocomplete="off">
             </label>
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">ИСБН</label>
             <label>
-                <input type="text" name="ISBN" class="form-control" placeholder="Введите ISBN">
+                <input type="text" name="ISBN" class="form-control" placeholder="Введите ISBN" autocomplete="off">
             </label>
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">Год</label>
             <label>
-                <input type="text" name="year" class="form-control" placeholder="Введите год книги">
+                <input type="text" name="year" class="form-control" placeholder="Введите год книги" autocomplete="off">
             </label>
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">Кол-во книг</label>
             <label>
-                <input type="text" name="count" class="form-control" placeholder="Введите кол-во книг">
+                <input type="text" name="count" class="form-control" placeholder="Введите кол-во книг" autocomplete="off">
             </label>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Добавить</button>
+            <button class="btn btn-primary" name="submit" type="submit">Добавить</button>
         </div>
     </form>
 </div>
-
 <?php require "Application/Views/layout/footer.php"; ?>
