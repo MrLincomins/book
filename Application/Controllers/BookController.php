@@ -106,7 +106,7 @@ class BookController extends BaseController
 
     public function toYear(Request $request): Response
     {
-        $books = 'null';
+        $books = null;
         $render = $this->view
             ->withName("books/year")
             ->withData(['books' => $books]);

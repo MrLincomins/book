@@ -35,6 +35,12 @@
         <div class="form-group">
             <button class="btn btn-primary" name="submit" type="submit">Добавить</button>
         </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="autocomplete" id="flexCheckChecked" checked>
+            <label class="form-check-label" for="flexCheckChecked">
+                Автозаполнение
+            </label>
+        </div>
     </form>
 </div>
 <?php require "Application/Views/layout/footer.php"; ?>

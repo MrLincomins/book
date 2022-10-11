@@ -6,13 +6,13 @@
         <div class="form-group">
             <label for="exampleInputEmail1">Время (ОТ)</label>
             <label>
-                <input type="text" name="from" class="form-control" placeholder="0" autocomplete="off">
+                <input type="text" name="from" class="form-control" placeholder="0" autocomplete="off" value="<?php echo $_POST['from']; ?>">
             </label>
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">Время (ДО)</label>
             <label>
-                <input type="text" name="too" class="form-control" placeholder="9999" autocomplete="off">
+                <input type="text" name="too" class="form-control" placeholder="9999" autocomplete="off" value="<?php echo $_POST['too']; ?>">
             </label>
         </div>
         <div class="form-group">
