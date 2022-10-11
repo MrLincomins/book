@@ -55,19 +55,15 @@
         </div>
 
         <?php if(isset($_POST['autocomplete']) === true) { ?>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="autocomplete" id="flexCheckChecked" checked>
-            <label class="form-check-label" for="flexCheckChecked">
-                Автозаполнение
-            </label>
-        </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="autocomplete" checked>
+                <label class="form-check-label" for="flexSwitchCheckChecked">Автозаполнение</label>
+            </div>
         <?php } else{ ?>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-                Автозаполнение
-            </label>
-        </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="autocomplete">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Автозаполение</label>
+            </div>
         <?php } ?>
 
     </form>

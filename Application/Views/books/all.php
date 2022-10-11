@@ -1,6 +1,3 @@
-<?php
-use Application\Entities\Book;
-?>
 <?php require "Application/Views/layout/header.php"; ?>
 <div class="container">
     <h1>Книги</h1>

@@ -134,19 +134,19 @@ class BookController extends BaseController
             ->createResponse(200)
             ->withContent($render);
     }
-//
-//    public function top100(): Response
-//    {
-//      $books = (new Book())->top100();
-//      $render = $this->view
-//        ->withName("books/top100")
-//        ->withData(['books' => $books]);
-//
-//        return $this->htmlResponseFactory
-//            ->createResponse(200)
-//            ->withContent($render);
-//    }
-//
+
+    public function top100(Request $request): Response
+    {
+      $books = $this->bookRepository->top100();
+      $render = $this->view
+        ->withName("books/top100")
+        ->withData(['books' => $books]);
+
+        return $this->htmlResponseFactory
+            ->createResponse(200)
+            ->withContent($render);
+    }
+
 //
 //    public function searchbook(): Response
 //    {

@@ -19,4 +19,6 @@ interface BookRepository
     public function delete(int $id): array;
 
     public function tooYear($too, $from): array;
+
+    public function top100(): array;
 }

@@ -35,11 +35,9 @@
         <div class="form-group">
             <button class="btn btn-primary" name="submit" type="submit">Добавить</button>
         </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="autocomplete" id="flexCheckChecked" checked>
-            <label class="form-check-label" for="flexCheckChecked">
-                Автозаполнение
-            </label>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="autocomplete" checked>
+            <label class="form-check-label" for="flexSwitchCheckChecked">Автозаполнение</label>
         </div>
     </form>
 </div>

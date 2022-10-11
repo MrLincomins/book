@@ -7,7 +7,6 @@ use Application\Entities\BookRepository;
 
 class MysqlBookRepository extends Repository implements BookRepository
 {
-
     private string $table = "books";
 
 
@@ -83,7 +82,6 @@ class MysqlBookRepository extends Repository implements BookRepository
         $stmt = $this->connection->prepare($query);
         $stmt->execute(['from' => $from, 'too' => $too]);
         $result = $stmt->fetchAll();
-
         return array_map(function (array $row) {
             return new Book(
                 $row["newid"],
@@ -93,6 +91,18 @@ class MysqlBookRepository extends Repository implements BookRepository
                 $row["Year"],
                 $row["count"]
             );
+        }, $result);
+    }
+
+    public function top100(): array
+    {
+        $query = "SELECT Author, count(*) books_count FROM books GROUP BY Author ORDER BY books_count DESC LIMIT 100";
+        $stmt = $this->connection->query($query);
+        $result = $stmt->fetchAll();
+        return array_map(function (array $row) {
+            return (
+            new Book(1, "Не помню как вы говорили делать", $row["Author"], 123456789, 2000, $row["books_count"])
+        );
         }, $result);
     }
 

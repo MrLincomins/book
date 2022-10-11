@@ -438,6 +438,7 @@ Normalize is licensed MIT. https://github.com/necolas/normalize.css
                 <li class="nav-item"><a href="/books" class="nav-link">All Books</a></li>
                 <li class="nav-item"><a href="/books/create" class="nav-link">Add Book</a></li>
                 <li class="nav-item"><a href="/books/year" class="nav-link">Search For Year</a></li>
+                <li class="nav-item"><a href="/books/top" class="nav-link">Top 100 authors</a></li>
             </ul>
         </header>
     </div>

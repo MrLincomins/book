@@ -18,12 +18,12 @@ class Book
 
     public function __construct(int $newid, string $Name, string $Author, string $ISBN, int $Year, int $count)
     {
-        $this->id = $newid;
-        $this->name = $Name;
-        $this->author = $Author;
-        $this->ISBN = $ISBN;
-        $this->year = $Year;
-        $this->count = $count;
+        @$this->id = $newid;
+        @$this->name = $Name;
+        @$this->author = $Author;
+        @$this->ISBN = $ISBN;
+        @$this->year = $Year;
+        @$this->count = $count;
     }
 
 }
