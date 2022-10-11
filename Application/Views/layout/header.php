@@ -427,5 +427,19 @@ Normalize is licensed MIT. https://github.com/necolas/normalize.css
             display: none !important;
         }
     </style>
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="/books" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                <svg class="bi me-2" width="20" height="40"><use xlink:href="#bootstrap"/></svg>
+                <span class="fs-4">Меню</span>
+            </a>
+
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="/books" class="nav-link">All Books</a></li>
+                <li class="nav-item"><a href="/books/create" class="nav-link">Add Book</a></li>
+                <li class="nav-item"><a href="/books/year" class="nav-link">Search For Year</a></li>
+            </ul>
+        </header>
+    </div>
 </head>
 <body>

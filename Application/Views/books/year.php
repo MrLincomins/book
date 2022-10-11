@@ -1,6 +1,6 @@
 <?php require "Application/Views/layout/header.php"; ?>
 <div class="container">
-    <h1>Добавление книг</h1>
+    <h1>Поиск по году</h1>
     <form action="/books/year" method="POST">
         <div class="form-group">
             <label for="exampleInputEmail1">Время (ОТ)</label>

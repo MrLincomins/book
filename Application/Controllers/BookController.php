@@ -93,8 +93,8 @@ class BookController extends BaseController
     public function delete(Request $request): Response
     {
         $id = $request->getAttribute("id");
-        $books = $this->bookRepository->delete($id);
-
+        $book = $this->bookRepository->delete($id);
+        $books = $this->bookRepository->all();
         $render = (new View())
             ->withName("books/delete")
             ->withData(['books' => $books]);
