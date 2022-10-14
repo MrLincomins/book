@@ -1,43 +1,50 @@
-<?php
-use Application\Entities\Book;
-use Application\Entities\User;
-$Status = (new User())->CheckLogin();
-If($Status !== 'Админ'){
-  header('Location: /login');
-  die;
-}
-if (isset($_REQUEST['doGo2'])) {
-   {
-       $Name = $_REQUEST['Name'];
-       $Author = $_REQUEST['Author'];
-       $Year = $_REQUEST['Year'];
-       $ISBN = $_REQUEST['ISBN'];
-       foreach ($books as $book):
-       $id = $book["newid"];
-       endforeach;
-       echo "ID= ",$id, "ISBN = ", $ISBN, "NAME = ", $Name, "AUTHOR = ", $Author, "YEAR = ", $Year;
-       $books = (new Book())->edit($Name, $Author, $Year, $ISBN, $id);
-   }
-}
-
+<?php require "Application/Views/layout/header.php";
+/** @var Book[] $book */
 ?>
-
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-</head>
-<body>
-    <?php foreach ($books as $book): ?>
-    <form>
-        <p>Название книги: <input type="text" name="Name" size="15" maxlength="150" id="" placeholder="<?php echo $book["Name"]?> "><samp style="color:red">*</samp></p>
-        <p>Автор: <input type="text" name="Author" size="15" maxlength="150" id="" placeholder="<?php echo $book["Author"]?> "><samp style="color:red">*</samp></p>
-        <p>Год: <input type="text" name="Year" size="15" maxlength="20" id="" placeholder="<?php echo $book["Year"]?> "><samp style="color:red"></samp></p>
-        <p>Международный стандартный книжный номер(ISBN): <input type="text" name="ISBN" size="15" maxlength="150" id="" placeholder="<?php echo $book["ISBN"]?> "><samp style="color:red">*</samp></p>
-        <p><input type="submit" value="Изменить" name="doGo2"></p>
-    </form>
-  <?php endforeach;?>
-</body>
-</html>
+    <div class="container">
+        <button class="btn btn-success btn-sm" id="time">
+            <?php echo 'Вы успешно изменили: ', $book->name, ' написанная: ', $book->author; ?>
+        </button>
+        <script>
+            setTimeout(function () {
+                document.getElementById('time').style.display = 'none';
+            }, 5000);
+        </script>
+        <h1>Редактирование книги</h1>
+        <form action="/books/create/<?php echo $book->id; ?>" method="POST">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Название книги</label>
+                <label>
+                    <input type="text" name="name" class="form-control" placeholder="Введите название книги" autocomplete="off" value="<?php echo $book->name; ?>">
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Автор</label>
+                <label>
+                    <input type="text" name="author" class="form-control" placeholder="Введите имя автора" autocomplete="off" value="<?php echo $book->author; ?>">
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">ИСБН</label>
+                <label>
+                    <input type="text" name="ISBN" class="form-control" placeholder="Введите ISBN" autocomplete="off" value="<?php echo $book->ISBN; ?>">
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Год</label>
+                <label>
+                    <input type="text" name="year" class="form-control" placeholder="Введите год книги" autocomplete="off" value="<?php echo $book->year; ?>">
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Кол-во книг</label>
+                <label>
+                    <input type="text" name="count" class="form-control" placeholder="Введите кол-во книг" autocomplete="off" value="<?php echo $book->count; ?>">
+                </label>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" name="submit" type="submit">Изменить</button>
+            </div>
+        </form>
+    </div>
+<?php require "Application/Views/layout/footer.php"; ?>

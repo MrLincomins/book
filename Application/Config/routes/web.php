@@ -22,6 +22,8 @@ return [
     new Route("GET", "/books/year", "BookController@toYear"),
     new Route("POST", "/books/year", "BookController@tooYear"),
     new Route("GET", "/books/top", "BookController@top100"),
+    new Route("GET", "/books/edit/{id}", "BookController@editForm"),
+    new Route("POST", "/books/edit/{id}", "BookController@edit"),
     //new Route("GET", "/disk_add", "CDController@add"),
     //new Route("GET", "/disk", "CDController@show"),
     //new Route("GET", "/register", "UserController@register"),
@@ -37,7 +39,6 @@ return [
     //new Route("GET", "/tooBook", "UserController@toobook"),
     //new Route("GET", "/tooBook/{id}", "UserController@tobook"),
     //new Route("GET", "/allTooBook", "UserController@alltoobook")
-    new Route("GET", "/books", "BookController@all"),
 ];
 
 //"/books/{id}" == \/books\/(\d+)

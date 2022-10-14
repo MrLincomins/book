@@ -21,4 +21,6 @@ interface BookRepository
     public function tooYear($too, $from): array;
 
     public function top100(): array;
+
+    public function edit(string $id, string $name, string $author, string $year, string $ISBN, string $count): array;
 }

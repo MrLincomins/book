@@ -147,6 +147,33 @@ class BookController extends BaseController
             ->withContent($render);
     }
 
+    public function editForm(Request $request): Response
+    {
+        $id = $request->getAttribute("id");
+        $book = $this->bookRepository->getById($id);
+        $render = $this->view
+            ->withName("books/editForm")
+            ->withData(['book' => $book]);
+
+        return $this->htmlResponseFactory
+            ->createResponse(200)
+            ->withContent($render);
+    }
+
+    public function edit(Request $request): Response
+    {
+        $id = $request->getAttribute("id");
+        $bookEdit = $this->bookRepository->edit($id, $_POST['name'], $_POST['author'], $_POST['year'], $_POST['ISBN'], $_POST['count']);
+        $book = $this->bookRepository->getById($id);
+        $render = $this->view
+            ->withName("books/edit")
+            ->withData(['book' => $book]);
+
+        return $this->htmlResponseFactory
+            ->createResponse(200)
+            ->withContent($render);
+    }
+
 //
 //    public function searchbook(): Response
 //    {

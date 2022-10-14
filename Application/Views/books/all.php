@@ -22,9 +22,13 @@
                 <td><?php echo $book->year ?></td>
                 <td><?php echo $book->count ?></td>
                 <td>
-                    <button class="btn btn-primary btn-sm" onclick="document.location='books/<?php echo $book->id ?>'">Изменить</button>
+                    <button class="btn btn-primary btn-sm" onclick="document.location='books/edit/<?php echo $book->id ?>'">
+                        Изменить
+                    </button>
+                </td>
+                <td>
                     <form method="post" action="books/<?php echo $book->id ?>">
-                    <input class="btn btn-primary btn-sm btn-danger" type="submit" value="Удалить">
+                        <input class="btn btn-primary btn-sm btn-danger" type="submit" value="Удалить">
                     </form>
                 </td>
 

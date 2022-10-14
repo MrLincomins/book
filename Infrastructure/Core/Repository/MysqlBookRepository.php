@@ -106,6 +106,14 @@ class MysqlBookRepository extends Repository implements BookRepository
         }, $result);
     }
 
+    public function edit(string $id, string $name, string $author, string $year, string $ISBN, string $count): array
+    {
+        $query = "UPDATE books SET Name = :Name, Author = :Author, ISBN = :ISBN, Year = :Year, count = :count WHERE newid = :id";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute(['Name' => $name, 'Author' => $author, 'ISBN' => $ISBN, 'Year' => $year, 'count' => $count, 'id' => $id ]);
+        return $stmt->fetchAll();
+    }
+
 }
 
 //        if(empty($book)){
