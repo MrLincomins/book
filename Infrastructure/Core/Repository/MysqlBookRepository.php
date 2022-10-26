@@ -12,23 +12,25 @@ class MysqlBookRepository extends Repository implements BookRepository
 
     public function all(): array
     {
+
         $query = "SELECT * FROM {$this->table}";
 
         $stmt = $this->connection->query($query);
 
         $result = $stmt->fetchAll();
 
-        return array_map(function (array $row) {
-            return new Book(
-                $row["newid"],
-                $row["Name"],
-                $row["Author"],
-                $row["ISBN"],
-                $row["Year"],
-                $row["count"]
+            return array_map(function (array $row) {
+                return new Book(
+                    $row["newid"],
+                    $row["Name"],
+                    $row["Author"],
+                    $row["ISBN"],
+                    $row["Year"],
+                    $row["count"],
+                    $row["genre"]
             );
-        }, $result);
-    }
+            }, $result);
+        }
 
     public function getById($id): ?Book
     {
@@ -44,15 +46,16 @@ class MysqlBookRepository extends Repository implements BookRepository
             $row["Author"],
             $row["ISBN"],
             $row["Year"],
-            $row["count"]
+            $row["count"],
+            $row["genre"]
         );
     }
 
-    public function create(string $name, string $author, string $year, string $ISBN, string $count): array
+    public function create(string $name, string $author, string $year, string $ISBN, string $count, string $genre): array
     {
-        $query = "INSERT INTO {$this->table} (Name, Author, Year, ISBN, count) VALUES (:name, :author, :year, :ISBN, :count)";
+        $query = "INSERT INTO {$this->table} (Name, Author, Year, ISBN, count, genre) VALUES (:name, :author, :year, :ISBN, :count, :genre)";
         $stmt = $this->connection->prepare($query);
-        $stmt->execute(['name' => $name, 'author' => $author, 'year' => $year, 'ISBN' => $ISBN, 'count' => $count]);
+        $stmt->execute(['name' => $name, 'author' => $author, 'year' => $year, 'ISBN' => $ISBN, 'count' => $count, 'genre' => $genre]);
         return $stmt->fetchAll();
 
     }
@@ -78,6 +81,7 @@ class MysqlBookRepository extends Repository implements BookRepository
 
     public function tooYear($too, $from): array
     {
+
         $query = "SELECT * FROM {$this->table} WHERE year >= :from and year <= :too";
         $stmt = $this->connection->prepare($query);
         $stmt->execute(['from' => $from, 'too' => $too]);
@@ -89,7 +93,8 @@ class MysqlBookRepository extends Repository implements BookRepository
                 $row["Author"],
                 $row["ISBN"],
                 $row["Year"],
-                $row["count"]
+                $row["count"],
+                $row["genre"]
             );
         }, $result);
     }
@@ -101,16 +106,55 @@ class MysqlBookRepository extends Repository implements BookRepository
         $result = $stmt->fetchAll();
         return array_map(function (array $row) {
             return (
-            new Book(1, "Не помню как вы говорили делать", $row["Author"], 123456789, 2000, $row["books_count"])
-        );
+            new Book(1, "Не помню как вы говорили делать", $row["Author"], 123456789, 2000, $row["books_count"], 1)
+            );
         }, $result);
     }
 
-    public function edit(string $id, string $name, string $author, string $year, string $ISBN, string $count): array
+    public function edit(string $id, string $name, string $author, string $year, string $ISBN, string $count, string $genre): array
     {
-        $query = "UPDATE books SET Name = :Name, Author = :Author, ISBN = :ISBN, Year = :Year, count = :count WHERE newid = :id";
+        $query = "UPDATE books SET Name = :Name, Author = :Author, ISBN = :ISBN, Year = :Year, count = :count, genre = :genre WHERE newid = :id";
         $stmt = $this->connection->prepare($query);
-        $stmt->execute(['Name' => $name, 'Author' => $author, 'ISBN' => $ISBN, 'Year' => $year, 'count' => $count, 'id' => $id ]);
+        $stmt->execute(['Name' => $name, 'Author' => $author, 'ISBN' => $ISBN, 'Year' => $year, 'count' => $count, 'genre' => $genre, 'id' => $id]);
+        return $stmt->fetchAll();
+    }
+
+    public function findGenre(string $id): array
+    {
+        $query = "SELECT * FROM genre WHERE id = :id";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetchAll();
+    }
+
+    public function allGenres(): array
+    {
+        $query = "SELECT * FROM genre";
+        $stmt = $this->connection->query($query);
+        return $stmt->fetchAll();
+    }
+
+    public function addGenre(string $genre): array
+    {
+        $query = "INSERT INTO genre (genre) VALUES (:genre)";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute(['genre' => $genre]);
+        return $stmt->fetchAll();
+    }
+
+    public function deleteGenre(int $id): array
+    {
+        $query = "DELETE FROM genre WHERE id = :id";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetchAll();
+    }
+
+    public function editGenre(string $id, string $genre): array
+    {
+        $query = "UPDATE genre SET genre = :genre WHERE id = :id";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute(['genre' => $genre, 'id' => $id]);
         return $stmt->fetchAll();
     }
 

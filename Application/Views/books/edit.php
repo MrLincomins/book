@@ -2,44 +2,61 @@
 /** @var Book[] $book */
 ?>
     <div class="container">
-        <button class="btn btn-success btn-sm" id="time">
-            <?php echo 'Вы успешно изменили: ', $book->name, ' написанная: ', $book->author; ?>
-        </button>
-        <script>
-            setTimeout(function () {
-                document.getElementById('time').style.display = 'none';
-            }, 5000);
-        </script>
+<?php    if(empty($_POST)) { } else {?>
+    <button class="btn btn-success btn-sm" id="time">
+        <?php echo 'Вы успешно изменили: ', $book->name, ' написанная: ', $book->author; ?>
+    </button>
+    <script>
+        setTimeout(function () {
+            document.getElementById('time').style.display = 'none';
+        }, 5000);
+    </script>
+<?php } ?>
         <h1>Редактирование книги</h1>
-        <form action="/books/create/<?php echo $book->id; ?>" method="POST">
+        <form action="/books/edit/<?php echo $book->id; ?>" method="POST">
             <div class="form-group">
                 <label for="exampleInputEmail1">Название книги</label>
                 <label>
-                    <input type="text" name="name" class="form-control" placeholder="Введите название книги" autocomplete="off" value="<?php echo $book->name; ?>">
+                    <input type="text" name="name" class="form-control" placeholder="Введите название книги"
+                           autocomplete="off" value="<?php echo $book->name; ?>">
                 </label>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Автор</label>
                 <label>
-                    <input type="text" name="author" class="form-control" placeholder="Введите имя автора" autocomplete="off" value="<?php echo $book->author; ?>">
+                    <input type="text" name="author" class="form-control" placeholder="Введите имя автора"
+                           autocomplete="off" value="<?php echo $book->author; ?>">
                 </label>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">ИСБН</label>
                 <label>
-                    <input type="text" name="ISBN" class="form-control" placeholder="Введите ISBN" autocomplete="off" value="<?php echo $book->ISBN; ?>">
+                    <input type="text" name="ISBN" class="form-control" placeholder="Введите ISBN" autocomplete="off"
+                           value="<?php echo $book->ISBN; ?>">
                 </label>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Год</label>
                 <label>
-                    <input type="text" name="year" class="form-control" placeholder="Введите год книги" autocomplete="off" value="<?php echo $book->year; ?>">
+                    <input type="text" name="year" class="form-control" placeholder="Введите год книги"
+                           autocomplete="off" value="<?php echo $book->year; ?>">
+                </label>
+            </div>
+            <div class="form-group">
+                <label>Жанры</label>
+                <label>
+                    <select class="form-select" aria-label="Default select example" name="genre">
+                        <?php foreach ($genres as $genre):?>
+                            <option value="<?php echo $genre["genre"]; ?>"><?php echo $genre["genre"];?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </label>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Кол-во книг</label>
                 <label>
-                    <input type="text" name="count" class="form-control" placeholder="Введите кол-во книг" autocomplete="off" value="<?php echo $book->count; ?>">
+                    <input type="text" name="count" class="form-control" placeholder="Введите кол-во книг"
+                           autocomplete="off" value="<?php echo $book->count; ?>">
                 </label>
             </div>
             <div class="form-group">

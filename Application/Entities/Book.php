@@ -15,8 +15,9 @@ class Book
     public string $ISBN;
     public int $year;
     public int $count;
+    public string $genre;
 
-    public function __construct(int $newid, string $Name, string $Author, string $ISBN, int $Year, int $count)
+    public function __construct(int $newid, string $Name, string $Author, string $ISBN, int $Year, int $count, string $genre)
     {
         @$this->id = $newid;
         @$this->name = $Name;
@@ -24,6 +25,7 @@ class Book
         @$this->ISBN = $ISBN;
         @$this->year = $Year;
         @$this->count = $count;
+        @$this->genre = $genre;
     }
 
 }

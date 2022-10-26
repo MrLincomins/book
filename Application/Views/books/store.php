@@ -1,8 +1,8 @@
 <?php require "Application/Views/layout/header.php"; ?>
 <div class="container">
-    <button class="btn btn-success btn-sm" id="time">
-        <?php echo 'Вы успешно добавили книгу: ', $_POST['name'], ' написанная: ', $_POST['author']; ?>
-    </button>
+    <div class="alert alert-success" role="alert" id="time">
+        Книга была успешно добавлена!
+    </div>
     <script>
         setTimeout(function () {
             document.getElementById('time').style.display = 'none';
@@ -43,6 +43,16 @@
             </label>
         </div>
         <div class="form-group">
+            <label>Жанры</label>
+            <label>
+                <select class="form-select" aria-label="Default select example" name="genre">
+                    <?php foreach ($genres as $genre):?>
+                        <option value="<?php echo $genre["genre"]; ?>"><?php echo $genre["genre"];?></option>
+                    <?php endforeach; ?>
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
             <label for="exampleInputEmail1">Кол-во книг</label>
             <label>
                 <input type="text" name="count" class="form-control"
@@ -50,17 +60,17 @@
                        autocomplete="off">
             </label>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="display: inline-block">
             <button class="btn btn-primary" name="submit" type="submit">Добавить</button>
         </div>
 
         <?php if(isset($_POST['autocomplete']) === true) { ?>
-            <div class="form-check form-switch">
+            <div class="form-check form-switch" style="display: inline-block">
                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="autocomplete" checked>
                 <label class="form-check-label" for="flexSwitchCheckChecked">Автозаполнение</label>
             </div>
         <?php } else{ ?>
-            <div class="form-check form-switch">
+            <div class="form-check form-switch" style="display: inline-block">
                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="autocomplete">
                 <label class="form-check-label" for="flexSwitchCheckDefault">Автозаполение</label>
             </div>

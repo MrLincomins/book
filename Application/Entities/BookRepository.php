@@ -10,7 +10,7 @@ interface BookRepository
 
     public function getById(int $id): ?Book;
 
-    public function create(string $name, string $author, string $year, string $ISBN, string $count): array;
+    public function create(string $name, string $author, string $year, string $ISBN, string $count, string $genre): array;
 
     public function findOne(array $attributes): ?Book;
 
@@ -22,5 +22,16 @@ interface BookRepository
 
     public function top100(): array;
 
-    public function edit(string $id, string $name, string $author, string $year, string $ISBN, string $count): array;
+    public function edit(string $id, string $name, string $author, string $year, string $ISBN, string $count, string $genre): array;
+
+    public function findGenre(string $id): array;
+
+    public function allGenres(): array;
+
+    public function addGenre(string $genre): array;
+
+    public function deleteGenre(int $id): array;
+
+    public function editGenre(string $id, string $genre): array;
+
 }

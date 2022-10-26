@@ -34,7 +34,6 @@ class BookController extends BaseController
     public function all(Request $request): Response
     {
         $books = $this->bookRepository->all();
-
         $render = (new View())
             ->withName("books/all")
             ->withData(['books' => $books]);
@@ -67,10 +66,10 @@ class BookController extends BaseController
 
     public function create(): Response
     {
-        $books = "123";
+        $genres = $this->bookRepository->allGenres();
         $render = $this->view
             ->withName("books/create")
-            ->withData(['books' => $books]);
+            ->withData(['genres' => $genres]);
 
         return $this->htmlResponseFactory
             ->createResponse(200)
@@ -79,11 +78,12 @@ class BookController extends BaseController
 
     public function store(): Response
     {
-        $book = $this->bookRepository->create($_POST['name'], $_POST['author'], $_POST['year'], $_POST['ISBN'], $_POST['count']);
+        $genres = $this->bookRepository->allGenres();
+        $book = $this->bookRepository->create($_POST['name'], $_POST['author'], $_POST['year'], $_POST['ISBN'], $_POST['count'], $_POST['genre']);
         //$weirdString = file_get_contents('php://input');
         $render = $this->view
             ->withName("books/store")
-            ->withData(['book' => $book]);
+            ->withData(['genres' => $genres]);
 
         return $this->htmlResponseFactory
             ->createResponse(200)
@@ -96,7 +96,7 @@ class BookController extends BaseController
         $book = $this->bookRepository->delete($id);
         $books = $this->bookRepository->all();
         $render = (new View())
-            ->withName("books/delete")
+            ->withName("books/all")
             ->withData(['books' => $books]);
 
         return $this->htmlResponseFactory
@@ -137,10 +137,10 @@ class BookController extends BaseController
 
     public function top100(Request $request): Response
     {
-      $books = $this->bookRepository->top100();
-      $render = $this->view
-        ->withName("books/top100")
-        ->withData(['books' => $books]);
+        $books = $this->bookRepository->top100();
+        $render = $this->view
+            ->withName("books/top100")
+            ->withData(['books' => $books]);
 
         return $this->htmlResponseFactory
             ->createResponse(200)
@@ -149,11 +149,12 @@ class BookController extends BaseController
 
     public function editForm(Request $request): Response
     {
+        $genres = $this->bookRepository->allGenres();
         $id = $request->getAttribute("id");
         $book = $this->bookRepository->getById($id);
         $render = $this->view
-            ->withName("books/editForm")
-            ->withData(['book' => $book]);
+            ->withName("books/edit")
+            ->withData(['book' => $book, 'genres' => $genres]);
 
         return $this->htmlResponseFactory
             ->createResponse(200)
@@ -162,12 +163,81 @@ class BookController extends BaseController
 
     public function edit(Request $request): Response
     {
+        $genres = $this->bookRepository->allGenres();
         $id = $request->getAttribute("id");
-        $bookEdit = $this->bookRepository->edit($id, $_POST['name'], $_POST['author'], $_POST['year'], $_POST['ISBN'], $_POST['count']);
+        $bookEdit = $this->bookRepository->edit($id, $_POST['name'], $_POST['author'], $_POST['year'], $_POST['ISBN'], $_POST['count'], $_POST['genre']);
         $book = $this->bookRepository->getById($id);
         $render = $this->view
             ->withName("books/edit")
-            ->withData(['book' => $book]);
+            ->withData(['book' => $book, 'genres' => $genres]);
+
+        return $this->htmlResponseFactory
+            ->createResponse(200)
+            ->withContent($render);
+    }
+
+    public function allGenres(Request $request): Response
+    {
+        $genres = $this->bookRepository->allGenres();
+        $render = $this->view
+            ->withName("books/allGenre")
+            ->withData(['genres' => $genres]);
+
+        return $this->htmlResponseFactory
+            ->createResponse(200)
+            ->withContent($render);
+    }
+
+    public function addGenre(): Response
+    {
+        $genre = $this->bookRepository->addGenre($_POST['genre']);
+        $genres = $this->bookRepository->allGenres();
+        $render = $this->view
+            ->withName("books/allGenre")
+            ->withData(['genres' => $genres]);
+
+        return $this->htmlResponseFactory
+            ->createResponse(200)
+            ->withContent($render);
+    }
+
+    public function deleteGenre(Request $request): Response
+    {
+        $id = $request->getAttribute("id");
+        $deleteGenre = $this->bookRepository->deleteGenre($id);
+        $genres = $this->bookRepository->allGenres();
+        $render = $this->view
+            ->withName("books/allGenre")
+            ->withData(['genres' => $genres]);
+
+        return $this->htmlResponseFactory
+            ->createResponse(200)
+            ->withContent($render);
+    }
+
+    public function formEditGenre(Request $request): Response
+    {
+        $id = $request->getAttribute("id");
+        $genre = $this->bookRepository->findGenre($id);
+        $genres = $this->bookRepository->allGenres();
+        $render = $this->view
+            ->withName("books/editGenre")
+            ->withData(['genres' => $genres, 'genre' => $genre]);
+
+        return $this->htmlResponseFactory
+            ->createResponse(200)
+            ->withContent($render);
+    }
+
+    public function editGenre(Request $request): Response
+    {
+        $id = $request->getAttribute("id");
+        $deleteGenre = $this->bookRepository->editGenre($id, $_POST['genre']);
+        $genre = $this->bookRepository->findGenre($id);
+        $genres = $this->bookRepository->allGenres();
+        $render = $this->view
+            ->withName("books/editGenre")
+            ->withData(['genres' => $genres, 'genre' => $genre]);
 
         return $this->htmlResponseFactory
             ->createResponse(200)

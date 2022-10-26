@@ -23,6 +23,10 @@ require_once './vendor/autoload.php';
  */
 
 try {
+
+
+
+
     $container = new Container();
     $container->register(Router::class);
     $container->register(View::class);

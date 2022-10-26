@@ -1,21 +1,23 @@
 <?php require "Application/Views/layout/header.php"; ?>
     <div class="container">
-        <h1>Книги</h1>
-        <table border="2" class="table">
-            <thead>
+        <table class="table">
+            <thead class="">
             <tr>
-                <th>Автор</th>
+                <th>Авторы</th>
                 <th>Кол-во книг</th>
-
             </tr>
             </thead>
             <?php /** @var Book[] $books */
-            foreach ($books as $book):?>
-                <tr>
-                    <td><?php echo $book->author ?></td>
-                    <td><?php echo $book->count ?></td>
-                </tr>
-            <?php endforeach; ?>
+            foreach ($books
+
+            as $book): ?>
+            <tr>
+                <td><?php echo $book->author ?></td>
+                <td><?php echo $book->count ?></td>
+                <?php endforeach; ?>
+
+            </tr>
+
         </table>
     </div>
 <?php require "Application/Views/layout/footer.php"; ?>
