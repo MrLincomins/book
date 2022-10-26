@@ -49,9 +49,11 @@
                 </form>
             </td>
 
+
         </tr>
         <?php endforeach; ?>
     </table>
+
 </div>
 <?php require "Application/Views/layout/footer.php"; ?>
 
