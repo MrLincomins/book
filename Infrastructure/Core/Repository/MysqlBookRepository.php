@@ -142,7 +142,7 @@ class MysqlBookRepository extends Repository implements BookRepository
         return $stmt->fetchAll();
     }
 
-    public function deleteGenre(int $id): array
+    public function deleteGenre(string $id): array
     {
         $query = "DELETE FROM genre WHERE id = :id";
         $stmt = $this->connection->prepare($query);

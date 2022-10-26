@@ -30,7 +30,7 @@ interface BookRepository
 
     public function addGenre(string $genre): array;
 
-    public function deleteGenre(int $id): array;
+    public function deleteGenre(string $id): array;
 
     public function editGenre(string $id, string $genre): array;
 

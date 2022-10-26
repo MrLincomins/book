@@ -15,7 +15,7 @@
             <table class="table p-3 border bg-light">
                 <thead>
                 <tr>
-                    <th>ID Жанра</th>
+                    <th>ID</th>
                     <th>Название жанра</th>
                     <th>Управление</th>
                 </tr>

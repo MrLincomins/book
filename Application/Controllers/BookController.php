@@ -68,7 +68,7 @@ class BookController extends BaseController
     {
         $genres = $this->bookRepository->allGenres();
         $render = $this->view
-            ->withName("books/create")
+            ->withName("books/store")
             ->withData(['genres' => $genres]);
 
         return $this->htmlResponseFactory
@@ -127,7 +127,7 @@ class BookController extends BaseController
         }
         $books = $this->bookRepository->tooYear($_POST['too'], $_POST['from']);
         $render = $this->view
-            ->withName("books/yearTable")
+            ->withName("books/year")
             ->withData(['books' => $books]);
 
         return $this->htmlResponseFactory

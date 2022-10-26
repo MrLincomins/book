@@ -5,7 +5,7 @@
     <table class="table p-3 border bg-light">
         <thead>
         <tr>
-            <th>ID Жанра</th>
+            <th>ID</th>
             <th>Название жанра</th>
             <th>Управление</th>
         </tr>
@@ -44,11 +44,11 @@
     <div class="col-5">
         <h1 class="p-3 border bg-light">Добавить жанр</h1>
     <form action="/books/genre" method="POST">
-        <div class="form-group p-3 border bg-light">
+        <div class="form-group p-3 border bg-light ">
             <label for="exampleInputEmail1">Название жанра</label >
             <label>
                 <input type="text" name="genre" class="form-control"
-                       placeholder="Введите название жанра"
+
                        autocomplete="off">
             </label>
             <div class="form-group" style="display: inline-block">

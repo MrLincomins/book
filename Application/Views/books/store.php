@@ -1,16 +1,18 @@
 <?php require "Application/Views/layout/header.php"; ?>
 <div class="container">
-    <div class="alert alert-success" role="alert" id="time">
-        Книга была успешно добавлена!
-    </div>
-    <script>
-        setTimeout(function () {
-            document.getElementById('time').style.display = 'none';
-        }, 5000);
-    </script>
-    <h1>Добавление книг</h1>
-    <form action="/books" method="POST">
-        <div class="form-group">
+    <?php    if(empty($_POST)) { } else {?>
+        <button class="btn btn-success btn-sm mb-2" id="time">
+            <?php echo 'Книга: ', $_POST['name'], ' была успешно добавлена'; ?>
+        </button>
+        <script>
+            setTimeout(function () {
+                document.getElementById('time').style.display = 'none';
+            }, 5000);
+        </script>
+    <?php } ?>
+    <h1 class="mb-2">Добавление книг</h1>
+    <form action="/books" method="POST" class="form-group">
+        <div class="form-group mb-2">
             <label for="exampleInputEmail1">Название книги</label>
             <label>
                 <input type="text" name="name" class="form-control"
@@ -18,7 +20,7 @@
                        autocomplete="off">
             </label>
         </div>
-        <div class="form-group">
+        <div class="form-group mb-2">
             <label for="exampleInputEmail1">Автор</label>
             <label>
                 <input type="text" name="author" class="form-control"
@@ -26,7 +28,7 @@
                        autocomplete="off">
             </label>
         </div>
-        <div class="form-group">
+        <div class="form-group mb-2">
             <label for="exampleInputEmail1">ИСБН</label>
             <label>
                 <input type="text" name="ISBN" class="form-control"
@@ -34,7 +36,7 @@
                        autocomplete="off">
             </label>
         </div>
-        <div class="form-group">
+        <div class="form-group mb-2">
             <label for="exampleInputEmail1">Год</label>
             <label>
                 <input type="text" name="year" class="form-control"
@@ -42,7 +44,7 @@
                        autocomplete="off">
             </label>
         </div>
-        <div class="form-group">
+        <div class="form-group mb-2">
             <label>Жанры</label>
             <label>
                 <select class="form-select" aria-label="Default select example" name="genre">
@@ -52,7 +54,7 @@
                 </select>
             </label>
         </div>
-        <div class="form-group">
+        <div class="form-group mb-2">
             <label for="exampleInputEmail1">Кол-во книг</label>
             <label>
                 <input type="text" name="count" class="form-control"
@@ -60,7 +62,7 @@
                        autocomplete="off">
             </label>
         </div>
-        <div class="form-group" style="display: inline-block">
+        <div class="form-group mb-2" style="display: inline-block">
             <button class="btn btn-primary" name="submit" type="submit">Добавить</button>
         </div>
 
@@ -77,5 +79,7 @@
         <?php } ?>
 
     </form>
+
 </div>
+
 <?php require "Application/Views/layout/footer.php"; ?>
