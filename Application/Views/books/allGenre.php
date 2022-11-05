@@ -2,8 +2,8 @@
 <div class="container px-4">
     <div class="row gx-5">
     <div class="col-5">
-    <table class="table p-3 border bg-light">
-        <thead>
+    <table class="table p-3 table-bordered">
+        <thead class="table-light">
         <tr>
             <th>ID</th>
             <th>Название жанра</th>
@@ -42,9 +42,9 @@
 
     </div>
     <div class="col-5">
-        <h1 class="p-3 border bg-light">Добавить жанр</h1>
+        <h1 class="p-2 border">Добавить жанр</h1>
     <form action="/books/genre" method="POST">
-        <div class="form-group p-3 border bg-light ">
+        <div class="form-group p-3 border">
             <label for="exampleInputEmail1">Название жанра</label >
             <label>
                 <input type="text" name="genre" class="form-control"

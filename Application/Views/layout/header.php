@@ -1,3 +1,8 @@
+<?php
+use twbs\bootstrap;
+
+?>
+
 <html lang="ru_RU">
 <head>
     <!-- ========== All CSS files linkup ========= -->
@@ -5,7 +10,6 @@
     <link rel="stylesheet" href="/assets/css/lineicons.css" />
     <link rel="stylesheet" href="/assets/css/materialdesignicons.min.css" />
     <link rel="stylesheet" href="/assets/css/fullcalendar.css" />
-    <link rel="stylesheet" href="/assets/css/main.css" />
     <link rel="stylesheet" href="/assets/css/bootstrap.rtl.css" />
     <link rel="stylesheet" href="/assets/css/bootstrap-grid.css" />
     <link rel="stylesheet" href="/assets/css/bootstrap-grid.rtl.css" />

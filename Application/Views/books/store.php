@@ -10,8 +10,9 @@
             }, 5000);
         </script>
     <?php } ?>
-    <h1 class="mb-2">Добавление книг</h1>
-    <form action="/books" method="POST" class="form-group">
+    <h1 class="p-2 bordered">Добавление книг</h1>
+    <ul class="nav nav-list"><li class="divider"></li></ul>
+    <form action="/books" method="POST" class="form-group p-2">
         <div class="form-group mb-2">
             <label for="exampleInputEmail1">Название книги</label>
             <label>

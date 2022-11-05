@@ -1,9 +1,8 @@
 <?php require "Application/Views/layout/header.php";
 ?>
-
 <div class="container">
-    <table class="table">
-        <thead class="">
+    <table class="table table-bordered ">
+        <thead class="table-light" >
         <tr>
             <th>ID</th>
             <th>Название</th>
@@ -17,7 +16,6 @@
         </thead>
         <?php /** @var Book[] $books */
         foreach ($books as $book):?>
-
         <tr>
             <td><?php echo $book->id ?></td>
             <td><?php echo $book->name ?></td>
@@ -29,7 +27,7 @@
             <td>
                 <a
                     class="btn btn-primary btn-sm"
-                    href="books/edit/<?php echo $book->id ?>"
+                    href="books/edit/<?php echo $book->id?>"
                     style="display: inline-block"
                 >
                     Изменить
@@ -48,11 +46,10 @@
                     </button>
                 </form>
             </td>
-
-
         </tr>
         <?php endforeach; ?>
     </table>
+
 
 </div>
 <?php require "Application/Views/layout/footer.php"; ?>

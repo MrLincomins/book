@@ -2,24 +2,31 @@
     "packages": [
         {
             "name": "fpdf/fpdf",
-            "version": "1.84.1",
-            "version_normalized": "1.84.1.0",
+            "version": "1.84.2",
+            "version_normalized": "1.84.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/coreydoughty/Fpdf.git",
-                "reference": "cfafa307947f7c646b87045d0decc67bdc423209"
+                "reference": "c40f878297186eaa627a960f97218b1bd0953f64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/coreydoughty/Fpdf/zipball/cfafa307947f7c646b87045d0decc67bdc423209",
-                "reference": "cfafa307947f7c646b87045d0decc67bdc423209",
+                "url": "https://api.github.com/repos/coreydoughty/Fpdf/zipball/c40f878297186eaa627a960f97218b1bd0953f64",
+                "reference": "c40f878297186eaa627a960f97218b1bd0953f64",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.6.0"
             },
-            "time": "2022-09-02T14:13:29+00:00",
+            "time": "2022-11-02T18:05:51+00:00",
             "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "FPDF": "Fpdf\\Fpdf"
+                    }
+                }
+            },
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
@@ -45,7 +52,7 @@
             ],
             "support": {
                 "issues": "https://github.com/coreydoughty/Fpdf/issues",
-                "source": "https://github.com/coreydoughty/Fpdf/tree/1.84.1"
+                "source": "https://github.com/coreydoughty/Fpdf/tree/1.84.2"
             },
             "install-path": "../fpdf/fpdf"
         },
@@ -307,21 +314,21 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v6.0.13",
-            "version_normalized": "6.0.13.0",
+            "version": "v6.1.6",
+            "version_normalized": "6.1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "367522dc769072f2abe554013e073eb079593829"
+                "reference": "0f0adde127f24548e23cbde83bcaeadc491c551f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/367522dc769072f2abe554013e073eb079593829",
-                "reference": "367522dc769072f2abe554013e073eb079593829",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/0f0adde127f24548e23cbde83bcaeadc491c551f",
+                "reference": "0f0adde127f24548e23cbde83bcaeadc491c551f",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0.2",
+                "php": ">=8.1",
                 "symfony/polyfill-mbstring": "~1.0"
             },
             "conflict": {
@@ -340,7 +347,7 @@
                 "ext-intl": "To show region name in time zone dump",
                 "symfony/console": "To use the ServerDumpCommand and/or the bin/var-dump-server script"
             },
-            "time": "2022-09-08T09:32:44+00:00",
+            "time": "2022-10-07T08:04:03+00:00",
             "bin": [
                 "Resources/bin/var-dump-server"
             ],
@@ -378,7 +385,7 @@
                 "dump"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-dumper/tree/v6.0.13"
+                "source": "https://github.com/symfony/var-dumper/tree/v6.1.6"
             },
             "funding": [
                 {
