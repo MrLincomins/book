@@ -76,10 +76,19 @@ class BookController extends BaseController
             ->withContent($render);
     }
 
-    public function store(): Response
+    public function store(Request $request): Response
     {
+        $attributes = $request->getParsedBody();
         $genres = $this->bookRepository->allGenres();
-        $book = $this->bookRepository->create($_POST['name'], $_POST['author'], $_POST['year'], $_POST['ISBN'], $_POST['count'], $_POST['genre']);
+        $book = $this->bookRepository->create(
+            $attributes['name'],
+            $attributes['author'],
+            $attributes['year'],
+            $attributes['ISBN'],
+            $attributes['count'],
+            $attributes['genre'],
+        );
+
         //$weirdString = file_get_contents('php://input');
         $render = $this->view
             ->withName("books/store")
@@ -244,16 +253,17 @@ class BookController extends BaseController
             ->withContent($render);
     }
 
-//
-//    public function searchbook(): Response
-//    {
-//        $books = (new BookRepository())->all();
-//        $render = $this->view
-//            ->withName("books/search")
-//            ->withData(['books' => $books]);
-//
-//        return $this->htmlResponseFactory
-//            ->createResponse(200)
-//            ->withContent($render);
-//    }
+    public function search(Request $request): Response
+    {
+        //   /\/books\/search|(\?[\w]+\=(\w+))/mg
+        //$query = $request->getAttribute('q');
+        $query = null;
+        $render = $this->view
+            ->withName("books/search")
+            ->withData(['books' => $query]);
+
+        return $this->htmlResponseFactory
+            ->createResponse(200)
+            ->withContent($render);
+    }
 }

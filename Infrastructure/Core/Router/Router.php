@@ -49,9 +49,11 @@ final class Router
     {
 
         $requestFactory = new RequestFactory();
+
         $request = $requestFactory->createRequest(
             $_SERVER["REQUEST_METHOD"],
             $_SERVER["REQUEST_URI"],
+
         );
 
 
@@ -66,7 +68,7 @@ final class Router
         // извлекаем динамические параметры роута {id} - 12
         // и добавляем уже к существующему Request
         $this->appendRouteParametersToRequest($request, $route);
-
+        $this->httpGetParameters($request, $route);
         // Запускаем из найденного нами роута его контроллер и action, передавая туда наш Request
         return $this->runAction($request, $route, $container);
     }
@@ -85,8 +87,6 @@ final class Router
 
         $route = current(array_filter($this->routes, function (Route $route) use ($request) {
             $expression = (new Expression())->build($route->pattern);
-
-
             return $request->method === $route->method && preg_match($expression, $request->uri);
         }));
 
@@ -95,9 +95,17 @@ final class Router
             : null;
     }
 
+
+
     private function appendRouteParametersToRequest(Request $request, Route $route): void
     {
+
         (new RouteParametersExtractor())->extract($request, $route);
+    }
+
+    private function httpGetParameters(Request $request, Route $route): void
+    {
+        (new GetParametersExtractor())->extract($request, $route);
     }
 
 

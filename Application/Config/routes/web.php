@@ -13,11 +13,10 @@ return [
 
     // GET myapp.com/api/v1/entity -all ;
     // GET myapp.com/api/v1/entity/id - concrete ;
-
-    new Route("GET", "/books/{id}", "BookController@show"),
     new Route("GET", "/books", "BookController@all"),
+    new Route("GET", "/books/{id}", "BookController@show"),
     new Route("GET", "/books/create", "BookController@create"),
-    new Route("POST", "/books", "BookController@store"),
+    new Route("POST", "/books/create", "BookController@store"),
     new Route("POST", "/books/{id}", "BookController@delete"),
     new Route("GET", "/books/year", "BookController@toYear"),
     new Route("POST", "/books/year", "BookController@tooYear"),
@@ -29,6 +28,7 @@ return [
     new Route("POST", "/books/genre/{id}", "BookController@deleteGenre"),
     new Route("GET", "/books/genre/edit/{id}", "BookController@formEditGenre"),
     new Route("POST", "/books/genre/edit/{id}", "BookController@editGenre"),
+    new Route("GET", "/books/search?", "BookController@search"),
     //new Route("GET", "/disk_add", "CDController@add"),
     //new Route("GET", "/disk", "CDController@show"),
     //new Route("GET", "/register", "UserController@register"),

@@ -2,16 +2,17 @@
 /** @var Book[] $book */
 ?>
     <div class="container">
-<?php    if(empty($_POST)) { } else {?>
-    <button class="btn btn-success btn-sm" id="time">
-        <?php echo 'Вы успешно изменили: ', $book->name, ' написанная: ', $book->author; ?>
-    </button>
-    <script>
-        setTimeout(function () {
-            document.getElementById('time').style.display = 'none';
-        }, 5000);
-    </script>
-<?php } ?>
+        <?php if (empty($_POST)) {
+        } else { ?>
+            <div class="alert alert-success" role="alert" id="time">
+                <?php echo 'Вы успешно изменили: ', $book->name, ' написанная: ', $book->author; ?>
+            </div>
+            <script>
+                setTimeout(function () {
+                    document.getElementById('time').style.display = 'none';
+                }, 5000);
+            </script>
+        <?php } ?>
         <h1 class="mb-3">Редактирование книги</h1>
         <form action="/books/edit/<?php echo $book->id; ?>" method="POST">
             <div class="form-group mb-2">
@@ -46,8 +47,8 @@
                 <label>Жанры</label>
                 <label>
                     <select class="form-select" aria-label="Default select example" name="genre">
-                        <?php foreach ($genres as $genre):?>
-                            <option value="<?php echo $genre["genre"]; ?>"><?php echo $genre["genre"];?></option>
+                        <?php foreach ($genres as $genre): ?>
+                            <option value="<?php echo $genre["genre"]; ?>"><?php echo $genre["genre"]; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </label>

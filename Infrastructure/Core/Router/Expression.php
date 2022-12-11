@@ -11,7 +11,7 @@ class Expression
     {
         $placeholder = str_replace("/", "\/", $uri);
         $placeholder = preg_replace("/\{(\w+)\}/", "(\d+)", $placeholder);
-        return "/" . $placeholder . "$/";
+        return "/" . $placeholder . "$|" . $placeholder . "\?/";
 
     }
 }

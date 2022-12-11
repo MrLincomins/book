@@ -12,6 +12,7 @@ use Psr\Http\Message\UriInterface;
 class Request implements RequestInterface, ServerRequestInterface
 {
     public array $attributes = [];
+    public array $getAttributes = [];
 
     public function __construct(
         public string $method,
@@ -143,7 +144,9 @@ class Request implements RequestInterface, ServerRequestInterface
 
     public function getParsedBody()
     {
-        // TODO: Implement getParsedBody() method.
+        return is_array($_POST)
+            ? $_POST
+            : null;
     }
 
     public function withParsedBody($data)
@@ -158,6 +161,7 @@ class Request implements RequestInterface, ServerRequestInterface
 
     public function getAttribute($name, $default = null)
     {
+        //Должна уметь вернуть GET параметры, а не только route параматеры
         return $this->attributes[$name] ?? null;
     }
 
@@ -174,5 +178,10 @@ class Request implements RequestInterface, ServerRequestInterface
     public function setAttributes(array $attributes): void
     {
         $this->attributes = $attributes;
+    }
+
+    public function setGetAttributes(array $getAttributes): void
+    {
+        $this->getAttributes = $getAttributes;
     }
 }

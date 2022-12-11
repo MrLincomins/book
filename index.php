@@ -44,7 +44,6 @@ try {
         $response->getStatusCode(),
         $response->getReasonPhrase(),
     );
-
 // Step 2: переопределяем хеадер, даже если он был.
     header($statusLine, TRUE);
 

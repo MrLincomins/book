@@ -41,7 +41,7 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - ./book_admin:/var/www
+      - ./b:/var/www
       - .docker/nginx/templates:/etc/nginx/templates
     networks:
       - book

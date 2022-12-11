@@ -158,6 +158,24 @@ class MysqlBookRepository extends Repository implements BookRepository
         return $stmt->fetchAll();
     }
 
+    public function search(string $name): array
+    {
+        $query = "SELECT * FROM books WHERE name LIKE :name";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute(['name' => $name]);
+        return array_map(function (array $row) {
+            return new Book(
+                $row["newid"],
+                $row["Name"],
+                $row["Author"],
+                $row["ISBN"],
+                $row["Year"],
+                $row["count"],
+                $row["genre"]
+            );
+        }, $stmt->fetchAll());
+    }
+
 }
 
 //        if(empty($book)){

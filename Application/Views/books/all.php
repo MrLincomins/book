@@ -1,6 +1,17 @@
 <?php require "Application/Views/layout/header.php";
 ?>
 <div class="container">
+    <?php if (empty($_POST)) {
+    } else { ?>
+        <div class="alert alert-success" role="alert" id="time">
+            <?php echo 'Удалили: ', $_POST['name'], ' написанная: ', $_POST['author']; ?>
+        </div>
+        <script>
+            setTimeout(function () {
+                document.getElementById('time').style.display = 'none';
+            }, 5000);
+        </script>
+    <?php } ?>
     <table class="table table-bordered ">
         <thead class="table-light" >
         <tr>
@@ -49,8 +60,6 @@
         </tr>
         <?php endforeach; ?>
     </table>
-
-
 </div>
 <?php require "Application/Views/layout/footer.php"; ?>
 

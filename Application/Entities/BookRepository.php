@@ -34,4 +34,5 @@ interface BookRepository
 
     public function editGenre(string $id, string $genre): array;
 
+    public function search(string $name): array;
 }
