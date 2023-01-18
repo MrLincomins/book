@@ -163,6 +163,7 @@ class Request implements RequestInterface, ServerRequestInterface
     {
         //Должна уметь вернуть GET параметры, а не только route параматеры
         return $this->attributes[$name] ?? null;
+
     }
 
     public function withAttribute($name, $value)
@@ -175,7 +176,7 @@ class Request implements RequestInterface, ServerRequestInterface
         // TODO: Implement withoutAttribute() method.
     }
 
-    public function setAttributes(array $attributes): void
+    public function setAttributes(array $attributes):void
     {
         $this->attributes = $attributes;
     }

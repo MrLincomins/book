@@ -6,6 +6,8 @@ namespace Application\Controllers;
 
 use Application\Entities\Book;
 use Application\Entities\BookRepository;
+use Application\Requests\CreateBookRequest;
+use Exception;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\{
     ResponseFactoryInterface as ResponseFactory,
@@ -59,12 +61,8 @@ class BookController extends BaseController
             ->withContent($render);
     }
 
-    /**
-     * @throws \Exception
-     */
 
-
-    public function create(): Response
+    public function create(Request $request): Response
     {
         $genres = $this->bookRepository->allGenres();
         $render = $this->view
@@ -76,9 +74,12 @@ class BookController extends BaseController
             ->withContent($render);
     }
 
-    public function store(Request $request): Response
+    public function store(CreateBookRequest $request): Response
     {
+
         $attributes = $request->getParsedBody();
+        $picture = "https://pictures.abebooks.com/isbn/". $attributes['ISBN'] ."-us-300.jpg";
+        //$validation = $request->Validation();
         $genres = $this->bookRepository->allGenres();
         $book = $this->bookRepository->create(
             $attributes['name'],
@@ -87,6 +88,7 @@ class BookController extends BaseController
             $attributes['ISBN'],
             $attributes['count'],
             $attributes['genre'],
+            $picture
         );
 
         //$weirdString = file_get_contents('php://input');
@@ -125,7 +127,7 @@ class BookController extends BaseController
             ->withContent($render);
     }
 
-    public function tooYear(): Response
+    public function tooYear(Request $request): Response
     {
 
         if (empty($_POST['too'])) {
@@ -174,7 +176,10 @@ class BookController extends BaseController
     {
         $genres = $this->bookRepository->allGenres();
         $id = $request->getAttribute("id");
-        $bookEdit = $this->bookRepository->edit($id, $_POST['name'], $_POST['author'], $_POST['year'], $_POST['ISBN'], $_POST['count'], $_POST['genre']);
+
+        $attributes = $request->getAttributes();
+
+        $bookEdit = $this->bookRepository->edit(...$attributes);
         $book = $this->bookRepository->getById($id);
         $render = $this->view
             ->withName("books/edit")
@@ -197,7 +202,7 @@ class BookController extends BaseController
             ->withContent($render);
     }
 
-    public function addGenre(): Response
+    public function addGenre(Request $request): Response
     {
         $genre = $this->bookRepository->addGenre($_POST['genre']);
         $genres = $this->bookRepository->allGenres();
@@ -255,7 +260,7 @@ class BookController extends BaseController
 
     public function search(Request $request): Response
     {
-        //   /\/books\/search|(\?[\w]+\=(\w+))/mg
+        //   /\/books\/search|(\?[\ w]+\=(\w+))/mg
         //$query = $request->getAttribute('q');
         $query = null;
         $render = $this->view

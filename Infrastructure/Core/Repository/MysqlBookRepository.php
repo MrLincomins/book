@@ -27,7 +27,8 @@ class MysqlBookRepository extends Repository implements BookRepository
                     $row["ISBN"],
                     $row["Year"],
                     $row["count"],
-                    $row["genre"]
+                    $row["genre"],
+                    $row["picture"]
             );
             }, $result);
         }
@@ -47,17 +48,17 @@ class MysqlBookRepository extends Repository implements BookRepository
             $row["ISBN"],
             $row["Year"],
             $row["count"],
-            $row["genre"]
+            $row["genre"],
+            $row["picture"]
         );
     }
 
-    public function create(string $name, string $author, string $year, string $ISBN, string $count, string $genre): array
+    public function create(string $name, string $author, string $year, string $ISBN, string $count, string $genre, string $picture): array
     {
-        $query = "INSERT INTO {$this->table} (Name, Author, Year, ISBN, count, genre) VALUES (:name, :author, :year, :ISBN, :count, :genre)";
+        $query = "INSERT INTO {$this->table} (Name, Author, Year, ISBN, count, genre, picture) VALUES (:name, :author, :year, :ISBN, :count, :genre, :picture)";
         $stmt = $this->connection->prepare($query);
-        $stmt->execute(['name' => $name, 'author' => $author, 'year' => $year, 'ISBN' => $ISBN, 'count' => $count, 'genre' => $genre]);
+        $stmt->execute(['name' => $name, 'author' => $author, 'year' => $year, 'ISBN' => $ISBN, 'count' => $count, 'genre' => $genre, 'picture' => $picture]);
         return $stmt->fetchAll();
-
     }
 
     public function findOne(array $attributes): ?Book
@@ -94,7 +95,8 @@ class MysqlBookRepository extends Repository implements BookRepository
                 $row["ISBN"],
                 $row["Year"],
                 $row["count"],
-                $row["genre"]
+                $row["genre"],
+                $row["picture"]
             );
         }, $result);
     }

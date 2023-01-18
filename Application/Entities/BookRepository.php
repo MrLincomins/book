@@ -10,7 +10,7 @@ interface BookRepository
 
     public function getById(int $id): ?Book;
 
-    public function create(string $name, string $author, string $year, string $ISBN, string $count, string $genre): array;
+    public function create(string $name, string $author, string $year, string $ISBN, string $count, string $genre, string $picture): array;
 
     public function findOne(array $attributes): ?Book;
 

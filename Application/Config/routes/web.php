@@ -28,7 +28,7 @@ return [
     new Route("POST", "/books/genre/{id}", "BookController@deleteGenre"),
     new Route("GET", "/books/genre/edit/{id}", "BookController@formEditGenre"),
     new Route("POST", "/books/genre/edit/{id}", "BookController@editGenre"),
-    new Route("GET", "/books/search?", "BookController@search"),
+    new Route("GET", "/books/search?", "BookController@search"),    
     //new Route("GET", "/disk_add", "CDController@add"),
     //new Route("GET", "/disk", "CDController@show"),
     //new Route("GET", "/register", "UserController@register"),

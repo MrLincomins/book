@@ -18,4 +18,29 @@ class RequestFactory implements RequestFactoryInterface
             $_SERVER["QUERY_STRING"],
         );
     }
+
+
+    // BookController@store
+
+    /**
+     * @throws \ReflectionException
+     */
+    public function createSubRequest(string $fullAction, string $method, $uri): RequestInterface
+    {
+            $controllersPath  = "\\Application\\Controllers\\";
+            [$controller, $action] = explode( "@", $fullAction);
+
+            $actionParameters = (new \ReflectionMethod($controllersPath . $controller, $action))->getParameters();
+            $subRequestName = $actionParameters[0]->getType()->getName();
+            if($subRequestName === 'Psr\Http\Message\ServerRequestInterface')
+            {
+                $subRequestName = 'Infrastructure\Core\Http\Request';
+            }
+
+            return new $subRequestName(
+                $method,
+                $uri,
+                $_SERVER["QUERY_STRING"],
+            );
+    }
 }
