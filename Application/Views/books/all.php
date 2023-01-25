@@ -11,7 +11,8 @@
         }, 5000);
     </script>
 <?php } ?>
-<?php  /** @var Book[] $books */ ?>
+<?php  /** @var Book[] $books */
+?>
 
 <body>
 <section class="table-components">
@@ -33,7 +34,7 @@
                                     Тут находятся все книги, которые не взяли и могут быть взяты в будущем
                                 </p>
                                 <div class="table-wrapper table-responsive">
-                                    <table class="table">
+                                    <table class="table ">
                                         <thead>
                                         <tr>
                                             <th><h6>Название</h6></th>
@@ -46,7 +47,7 @@
                                         <!-- end table row-->
                                         </thead>
                                         <tbody>
-                                        <?php foreach ($books as $book):?>
+                                        <?php foreach ($books[0] as $book):?>
                                         <tr>
                                             <td class="min-width">
                                                 <div class="lead">
@@ -87,6 +88,28 @@
                                         <?php endforeach; ?>
                                         </tbody>
                                     </table>
+                                        <div class="btn-group me-2" role="group" aria-label="First group">
+                                            <a
+                                               href="<?php echo "?page=" . ($books[1]['pagination']['currentPage'] - 1)?>"
+                                               type="button"
+                                               class="btn primary-btn <?php if($books[1]['pagination']['currentPage'] == 1){ echo 'disabled'; }?> ">
+                                                <-
+                                            </a>
+
+                                            <a
+                                               type="button"
+                                               class="btn primary-btn">
+                                               <?php echo $books[1]['pagination']['currentPage'] ?>
+                                            </a>
+
+                                            <a
+                                               href="<?php echo "?page=" . ($books[1]['pagination']['currentPage'] + 1)?>"
+                                               type="button"
+                                               class="btn primary-btn <?php if($books[1]['pagination']['currentPage'] == $books[1]['pagination']['lastPage']){ echo 'disabled'; }?> ">
+                                                ->
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

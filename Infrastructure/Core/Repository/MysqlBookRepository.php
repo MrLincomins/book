@@ -18,7 +18,10 @@ class MysqlBookRepository extends Repository implements BookRepository
             $countItems
         );
         $setPaginator = $this->setPaginator($paginator, $items);
-        return $this->getPaginator($setPaginator);
+        return [
+            $this->getPaginator($setPaginator),
+            $setPaginator
+        ];
     }
 
     public function all(): array

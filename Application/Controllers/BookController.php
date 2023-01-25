@@ -35,8 +35,12 @@ class BookController extends BaseController
      */
     public function all(Request $request): Response
     {
+        $page = $request->getGetAttributes('page');
+        if(empty($page)){
+            $page = 1;
+        }
         $items = $this->bookRepository->all();
-        $books = $this->bookRepository->paginate(10, 1, $items);
+        $books = $this->bookRepository->paginate(10, $page, $items);
 
         $render = (new View())
             ->withName("books/all")
