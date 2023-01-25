@@ -7,6 +7,7 @@ namespace Infrastructure\Core\Router;
 use Application\Controllers\BookController;
 use Application\Requests\CreateBookRequest;
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Infrastructure\Core\Http\{Request, RequestFactory};
 
@@ -16,6 +17,7 @@ final class Router
 
     /** @var Route[] */
     private array $routes = [];
+
     public function withRoutes(array $routes): self
 
     {
@@ -62,8 +64,6 @@ final class Router
 
         );
 
-
-
         // ищем по регуляке нужный роут из списка
         // /authors/{id} = /authors/12
         $route = $this->getRoute($request);
@@ -77,27 +77,18 @@ final class Router
         );
         // /books/{id} = /books/12
         // извлекаем динамические параметры роута {id} - 12
-        // и добавляем уже к существующему Request
-        $this->appendRouteParametersToRequest($request, $route);
-        $this->appendRouteParametersToRequest($subRequest, $route);
-        
-        $this->httpGetParameters($request, $route);
+        // добавляем параметры к уже существующему Request
+
+
+        // append parameters to existing request
+        $this->appendParametersToExistingRequest($route, $request, $subRequest);
+
         // Запускаем из найденного нами роута его контроллер и action, передавая туда наш Request
         return $this->runAction($request, $route, $container, $subRequest);
     }
 
     private function getRoute(Request $request)
     {
-
-/*        $routeWithOutExpression = current(array_filter($this->routes, function (Route $route) use ($request) {
-            return $request->method === $route->method && $request->uri == $route->pattern;
-        }));
-
-        if ($routeWithOutExpression) {
-            return $routeWithOutExpression;
-        }*/
-
-
         $route = current(array_filter($this->routes, function (Route $route) use ($request) {
             $expression = (new Expression())->build($route->pattern);
             return $request->method === $route->method && preg_match($expression, $request->uri);
@@ -109,14 +100,12 @@ final class Router
     }
 
 
-
     private function appendRouteParametersToRequest(Request $request, Route $route): void
     {
-
         (new RouteParametersExtractor())->extract($request, $route);
     }
 
-    private function httpGetParameters(Request $request, Route $route): void
+    private function appendHttpParametersToRequest(Request $request, Route $route): void
     {
         (new GetParametersExtractor())->extract($request, $route);
     }
@@ -137,5 +126,16 @@ final class Router
     {
         http_response_code($code);
         die;
+    }
+
+    public function appendParametersToExistingRequest(
+        mixed $route,
+        RequestInterface $request,
+        RequestInterface $subRequest
+    ): void {
+        $this->appendHttpParametersToRequest($request, $route);
+        $this->appendHttpParametersToRequest($subRequest, $route);
+        $this->appendRouteParametersToRequest($request, $route);
+        $this->appendRouteParametersToRequest($subRequest, $route);
     }
 }

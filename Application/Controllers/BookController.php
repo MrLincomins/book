@@ -15,7 +15,7 @@ use Psr\Http\Message\{
     ResponseInterface as Response,
 };
 
-use Infrastructure\Core\{Repository\MysqlBookRepository, View\View, Http\HtmlResponseFactory};
+use Infrastructure\Core\{Repository\MysqlBookRepository, Repository\Paginator, View\View, Http\HtmlResponseFactory};
 
 class BookController extends BaseController
 {
@@ -35,7 +35,9 @@ class BookController extends BaseController
      */
     public function all(Request $request): Response
     {
-        $books = $this->bookRepository->all();
+        $items = $this->bookRepository->all();
+        $books = $this->bookRepository->paginate(10, 1, $items);
+
         $render = (new View())
             ->withName("books/all")
             ->withData(['books' => $books]);
@@ -260,12 +262,11 @@ class BookController extends BaseController
 
     public function search(Request $request): Response
     {
-        //   /\/books\/search|(\?[\ w]+\=(\w+))/mg
-        //$query = $request->getAttribute('q');
-        $query = null;
+        $name = $request->getGetAttributes("name");
+        $books = $this->bookRepository->search($name);
         $render = $this->view
             ->withName("books/search")
-            ->withData(['books' => $query]);
+            ->withData(['books' => $books]);
 
         return $this->htmlResponseFactory
             ->createResponse(200)

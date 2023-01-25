@@ -154,7 +154,7 @@ class Request implements RequestInterface, ServerRequestInterface
         // TODO: Implement withParsedBody() method.
     }
 
-    public function getAttributes(): array
+    public function getAttributes($name, $default = null): array
     {
         return $this->attributes;
     }
@@ -163,7 +163,16 @@ class Request implements RequestInterface, ServerRequestInterface
     {
         //Должна уметь вернуть GET параметры, а не только route параматеры
         return $this->attributes[$name] ?? null;
+    }
 
+    public function setGetAttributes(array $getAttributes): void
+    {
+        $this->getAttributes = $getAttributes;
+    }
+
+    public function getGetAttributes($name)
+    {
+        return $this->getAttributes[$name] ?? null;
     }
 
     public function withAttribute($name, $value)
@@ -181,8 +190,6 @@ class Request implements RequestInterface, ServerRequestInterface
         $this->attributes = $attributes;
     }
 
-    public function setGetAttributes(array $getAttributes): void
-    {
-        $this->getAttributes = $getAttributes;
-    }
+
+
 }

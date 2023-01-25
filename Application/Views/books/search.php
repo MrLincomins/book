@@ -1,63 +1,84 @@
 <?php require "Application/Views/layout/header.php"; ?>
-<div class="container">
-    <?php if (empty($_POST)) {
-    } else { ?>
-        <div class="alert alert-success" role="alert" id="time">
-            <?php echo 'Удалили: ', $_POST['name'], ' написанная: ', $_POST['author']; ?>
+    <body>
+    <section class="table-components">
+        <div class="container-fluid">
+            <div class="title-wrapper pt-30">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="title mb-30">
+                            <h2>Поиск книг</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tables-wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card-style mb-30">
+                            <p class="text-sm mb-20">
+                                Тут находятся все найденные книги
+                            </p>
+                            <div class="table-wrapper table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th><h6>Название</h6></th>
+                                        <th><h6>Автор</h6></th>
+                                        <th><h6>Год</h6></th>
+                                        <th><h6>Жанр</h6></th>
+                                        <th><h6>ISBN</h6></th>
+                                        <th><h6>Action</h6></th>
+                                    </tr>
+                                    <!-- end table row-->
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach ($books as $book):?>
+                                        <tr>
+                                            <td class="min-width">
+                                                <div class="lead">
+                                                    <div class="lead-image">
+                                                        <img
+                                                                src="<?php echo $book->picture ?>"
+                                                                alt=""
+                                                        />
+
+                                                    </div>
+                                                    <div class="lead-text">
+                                                        <p><?php echo $book->name  ?></p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="min-width">
+                                                <p><a><?php echo $book->author ?></a></p>
+                                            </td>
+                                            <td class="min-width">
+                                                <p><?php echo $book->year ?></p>
+                                            </td>
+                                            <td class="min-width">
+                                                <p><?php echo $book->genre ?></p>
+                                            </td>
+                                            <td class="min-width">
+                                                <p><?php echo $book->ISBN ?></p>
+                                            </td>
+                                            <td>
+                                                <div class="action">
+                                                    <form method="post" action="books/<?php echo $book->id ?>">
+                                                        <button class="text-danger" type="submit">
+                                                            <i class="lni lni-trash-can"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <script>
-            setTimeout(function () {
-                document.getElementById('time').style.display = 'none';
-            }, 5000);
-        </script>
-    <?php } ?>
-    <table class="table table-bordered ">
-        <thead class="table-light" >
-        <tr>
-            <th>ID</th>
-            <th>Название</th>
-            <th>Автор</th>
-            <th>ISBN</th>
-            <th>Год</th>
-            <th>Жанр</th>
-            <th>Кол-во на складе</th>
-            <th>Управление</th>
-        </tr>
-        </thead>
-        <?php ///** @var Book[] $books */
-        //foreach ($books as $book):?>
-            <tr>
-                <td><?php //echo $book->id ?></td>
-                <td><?php //echo $book->name ?></td>
-                <td><?php //echo $book->author ?></td>
-                <td><?php //echo $book->ISBN ?></td>
-                <td><?php //echo $book->year ?></td>
-                <td><?php //echo $book->genre?></td>
-                <td><?php //echo $book->count ?></td>
-                <td>
-                    <a
-                            class="btn btn-primary btn-sm"
-                            href="books/edit/<?php //echo $book->id?>"
-                            style="display: inline-block"
-                    >
-                        Изменить
-                    </a>
-                    <form
-                            style="display: inline-block"
-                            method="post"
-                            action="books/<?php //echo $book->id ?>"
-                    >
-                        <input type="hidden" value="">
-                        <button
-                                class="btn btn-danger btn-sm"
-                                type="submit"
-                        >
-                            Удалить
-                        </button>
-                    </form>
-                </td>
-            </tr>
-        <?php //endforeach; ?>
-    </table>
-</div>
+    </section>
+    </body>
 <?php require "Application/Views/layout/footer.php"; ?>

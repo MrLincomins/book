@@ -6,10 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link
             rel="shortcut icon"
-            href="/images/favicon.svg"
             type="image/x-icon"
     />
-    <title>PlainAdmin Demo | Bootstrap 5 Admin Template</title>
+    <title>библиотека</title>
 
     <!-- ========== All CSS files linkup ========= -->
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
@@ -23,7 +22,7 @@
 <!-- ======== sidebar-nav start =========== -->
 <aside class="sidebar-nav-wrapper">
     <div class="navbar-logo">
-        <a href="index.html">
+        <a href="/books">
             <img src="/images/logo/booklub.png" alt="logo" width="200" height="45"/>
         </a>
     </div>
@@ -103,10 +102,10 @@
                 </a>
                 <ul id="ddmenu_3" class="collapse dropdown-nav">
                     <li>
-                        <a href="signin.html"> Войти </a>
+                        <a href="#"> Войти </a>
                     </li>
                     <li>
-                        <a href="signup.html"> Зарегистрироваться </a>
+                        <a href="#"> Зарегистрироваться </a>
                     </li>
                 </ul>
             </li>
@@ -154,8 +153,8 @@
                             </button>
                         </div>
                         <div class="header-search d-none d-md-flex">
-                            <form action="#">
-                                <input type="text" placeholder="Поиск..."/>
+                            <form method="GET" action="http://localhost:8080/books/search">
+                                <input name="name" type="text" placeholder="Поиск..."/>
                                 <button><i class="lni lni-search-alt"></i></button>
                             </form>
                         </div>
@@ -219,7 +218,7 @@
                             >
                                 <div class="profile-info">
                                     <div class="info">
-                                        <h6>Имя фамилия xd</h6>
+                                        <h6>...</h6>
                                         <div class="image">
                                             <img
                                                     src="/images/profile/149452.png"
@@ -237,22 +236,14 @@
                             >
                                 <li>
                                     <a href="#0">
-                                        <i class="lni lni-user"></i> View Profile
+                                        <i class="lni lni-user"></i> Профиль
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#0">
-                                        <i class="lni lni-alarm"></i> Notifications
-                                    </a>
+                                    <a href="#0"> <i class="lni lni-cog"></i> Настройки </a>
                                 </li>
                                 <li>
-                                    <a href="#0"> <i class="lni lni-inbox"></i> Messages </a>
-                                </li>
-                                <li>
-                                    <a href="#0"> <i class="lni lni-cog"></i> Settings </a>
-                                </li>
-                                <li>
-                                    <a href="#0"> <i class="lni lni-exit"></i> Sign Out </a>
+                                    <a href="#0"> <i class="lni lni-exit"></i> Выход </a>
                                 </li>
                             </ul>
                         </div>

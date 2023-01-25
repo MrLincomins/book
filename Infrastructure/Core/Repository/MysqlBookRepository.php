@@ -9,6 +9,17 @@ class MysqlBookRepository extends Repository implements BookRepository
 {
     private string $table = "books";
 
+    public function paginate($perPage, $withPage, $items): array
+    {
+        $countItems = count($items);
+        $paginator = new Paginator(
+            $perPage,
+            $withPage,
+            $countItems
+        );
+        $setPaginator = $this->setPaginator($paginator, $items);
+        return $this->getPaginator($setPaginator);
+    }
 
     public function all(): array
     {
@@ -19,19 +30,19 @@ class MysqlBookRepository extends Repository implements BookRepository
 
         $result = $stmt->fetchAll();
 
-            return array_map(function (array $row) {
-                return new Book(
-                    $row["newid"],
-                    $row["Name"],
-                    $row["Author"],
-                    $row["ISBN"],
-                    $row["Year"],
-                    $row["count"],
-                    $row["genre"],
-                    $row["picture"]
+        return array_map(function (array $row) {
+            return new Book(
+                $row["newid"],
+                $row["Name"],
+                $row["Author"],
+                $row["ISBN"],
+                $row["Year"],
+                $row["count"],
+                $row["genre"],
+                $row["picture"]
             );
-            }, $result);
-        }
+        }, $result);
+    }
 
     public function getById($id): ?Book
     {
@@ -108,7 +119,7 @@ class MysqlBookRepository extends Repository implements BookRepository
         $result = $stmt->fetchAll();
         return array_map(function (array $row) {
             return (
-            new Book(1, "Не помню как вы говорили делать", $row["Author"], 123456789, 2000, $row["books_count"], 1)
+            new Book(1, "Не помню как вы говорили делать", $row["Author"], 123456789, 2000, $row["books_count"], 1, 1)
             );
         }, $result);
     }
@@ -162,9 +173,10 @@ class MysqlBookRepository extends Repository implements BookRepository
 
     public function search(string $name): array
     {
-        $query = "SELECT * FROM books WHERE name LIKE :name";
+        $pattern = '%' . $name . '%';
+        $query = "SELECT * FROM books WHERE name LIKE :name;";
         $stmt = $this->connection->prepare($query);
-        $stmt->execute(['name' => $name]);
+        $stmt->execute(['name' => $pattern]);
         return array_map(function (array $row) {
             return new Book(
                 $row["newid"],
@@ -173,12 +185,40 @@ class MysqlBookRepository extends Repository implements BookRepository
                 $row["ISBN"],
                 $row["Year"],
                 $row["count"],
-                $row["genre"]
+                $row["genre"],
+                $row["picture"]
             );
         }, $stmt->fetchAll());
     }
 
+    public function hasPaginator(): bool
+    {
+        // TODO: Implement hasPaginator() method.
+    }
+
+    public function setPaginator(PaginatorInterface $paginator, $allItems): array
+    {
+        return [
+            "items" => $allItems,
+            "pagination" => [
+                "currentPage" => $paginator->withPage,
+                "lastPage" => $paginator->getLimit(),
+                "perPage" => $paginator->perPage,
+                "countItems" => $paginator->countItems,
+                "offset" => $paginator->getOffset()
+            ]
+        ];
+        // TODO: Implement setPaginator() method.
+    }
+
+    public function getPaginator($setPaginator): array
+    {
+        $offset = $setPaginator['pagination']['offset'];
+        $perPage = $setPaginator['pagination']['perPage'];
+        return array_slice($setPaginator['items'], $offset, $perPage);
+    }
 }
+
 
 //        if(empty($book)){
 //            $sql1 = "INSERT INTO {$this->table} (Name, Author, Year, ISBN, count) VALUES (:Name, :Author, :Year, :ISBN, :count)";

@@ -63,7 +63,7 @@
                                                 </div>
                                             </td>
                                             <td class="min-width">
-                                                <p><a href="#0"><?php echo $book->author ?></a></p>
+                                                <p><a><?php echo $book->author ?></a></p>
                                             </td>
                                             <td class="min-width">
                                                 <p><?php echo $book->year ?></p>
@@ -76,9 +76,11 @@
                                             </td>
                                             <td>
                                                 <div class="action">
-                                                    <button class="text-danger">
+                                                <form method="post" action="books/<?php echo $book->id ?>">
+                                                    <button class="text-danger" type="submit">
                                                         <i class="lni lni-trash-can"></i>
                                                     </button>
+                                                </form>
                                                 </div>
                                             </td>
                                         </tr>
