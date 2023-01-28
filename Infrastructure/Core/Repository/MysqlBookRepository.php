@@ -4,6 +4,7 @@ namespace Infrastructure\Core\Repository;
 
 use Application\Entities\Book;
 use Application\Entities\BookRepository;
+use JetBrains\PhpStorm\ArrayShape;
 
 class MysqlBookRepository extends Repository implements BookRepository
 {
@@ -199,7 +200,7 @@ class MysqlBookRepository extends Repository implements BookRepository
         // TODO: Implement hasPaginator() method.
     }
 
-    public function setPaginator(PaginatorInterface $paginator, $allItems): array
+    #[ArrayShape(["items" => "", "pagination" => "array"])] public function setPaginator(PaginatorInterface $paginator, $allItems): array
     {
         return [
             "items" => $allItems,

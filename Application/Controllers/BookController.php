@@ -36,11 +36,11 @@ class BookController extends BaseController
     public function all(Request $request): Response
     {
         $page = $request->getGetAttributes('page');
-        if(empty($page)){
+        if(empty($page)) {
             $page = 1;
         }
         $items = $this->bookRepository->all();
-        $books = $this->bookRepository->paginate(10, $page, $items);
+        $books = $this->bookRepository->paginate(1, $page, $items);
 
         $render = (new View())
             ->withName("books/all")
@@ -82,10 +82,15 @@ class BookController extends BaseController
 
     public function store(CreateBookRequest $request): Response
     {
-
         $attributes = $request->getParsedBody();
+        $validation = $request->Validation($attributes);
+        if(!empty($validation)){
+            session_start();
+            $_SESSION['errorValidation'] = $validation;
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
         $picture = "https://pictures.abebooks.com/isbn/". $attributes['ISBN'] ."-us-300.jpg";
-        //$validation = $request->Validation();
         $genres = $this->bookRepository->allGenres();
         $book = $this->bookRepository->create(
             $attributes['name'],

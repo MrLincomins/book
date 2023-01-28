@@ -1,9 +1,14 @@
-<?php require "Application/Views/layout/header.php"; ?>
+<?php require "Application/Views/layout/header.php";
+?>
 <body>
-<?php if (empty($_POST)) {
-} else { ?>
-    <div class="alert alert-success" role="alert" id="time">
-        <?php echo 'Книга: ', $_POST['name'], ' была успешно добавлена'; ?>
+<?php if (!empty($_POST)) { ?>
+    <div class="alert-box success-alert pl-75" role="alert" id="time">
+        <div class="alert">
+            <h4 class="alert-heading">Success!</h4>
+            <p class="text-medium">
+                Книга была успешно добавлена в бд
+            </p>
+        </div>
     </div>
     <script>
         setTimeout(function () {
@@ -11,6 +16,28 @@
         }, 5000);
     </script>
 <?php } ?>
+<?php
+session_start();
+if (!empty($_SESSION['errorValidation'])) {
+    foreach ($_SESSION['errorValidation'] as $error):
+    ?>
+    <div class="alert-box danger-alert pl-75" role="alert" id="time">
+        <div class="alert">
+            <h4 class="alert-heading">Ошибка</h4>
+            <p class="text-medium">
+                <?php echo implode($error); ?>
+            </p>
+        </div>
+    </div>
+    <script>
+        setTimeout(function () {
+            document.getElementById('time').style.display = 'none';
+        }, 15000);
+    </script>
+<?php
+    endforeach;
+    unset($_SESSION['errorValidation']);
+} ?>
 
 <section class="tab-components">
     <div class="container-fluid">
