@@ -9,7 +9,7 @@ services:
     restart: unless-stopped
     working_dir: /var/www/
     volumes:
-      - ./:/var/www
+      - ./www:/var/www
     networks:
       - book
     depends_on:
@@ -17,7 +17,7 @@ services:
       - book-nginx
   book-mysql:
     image: mysql:8
-    container_name: book-db
+    container_name: book-mysql
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: 'book'
@@ -37,9 +37,9 @@ services:
     container_name: book-nginx
     restart: unless-stopped
     ports:
-      - 8080:8080
+      - 80:8080
     volumes:
-      - ./assets:/var/www
+      - ./www:/var/www
       - .docker/nginx/templates:/etc/nginx/templates
     networks:
       - book
