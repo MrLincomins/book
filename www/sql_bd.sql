@@ -54,7 +54,7 @@ CREATE TABLE `books` (
   `genre` varchar(45) DEFAULT NULL,
   `picture` varchar(100) NOT NULL,
   PRIMARY KEY (`newid`)
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,7 +62,7 @@ CREATE TABLE `books` (
 --
 
 LOCK TABLES `books` WRITE;
-INSERT INTO `books` (`newid`, `Name`, `Author`, `Year`, `ISBN`, `count`, `genre`, `picture`) VALUES (106,'Биология','В. В. Пасечник',2019,'9785090721400',1,'etc','https://pictures.abebooks.com/isbn/9785090721400-us-300.jpg'),(107,'ггг','ггг',2000,'9785090717335',1,'etc','https://pictures.abebooks.com/isbn/9785090717335-us-300.jpg'),(108,'Обществознание 9 ','Л. Н. Боголюбов',2018,'9785090704274',1,'etc','https://pictures.abebooks.com/isbn/9785090704274-us-300.jpg'),(109,'451 градус по Фаренгейту','Рэй Брэдбери',2019,'9785041045272',1,'Роман','https://pictures.abebooks.com/isbn/9785041045272-us-300.jpg');
+INSERT INTO `books` (`newid`, `Name`, `Author`, `Year`, `ISBN`, `count`, `genre`, `picture`) VALUES (1,'Биология','В. В. Пасечник',2019,'9785090721400',1,'etc','https://pictures.abebooks.com/isbn/9785090721400-us-300.jpg'),(2,'География','ггг',2000,'9785090717335',1,'etc','https://pictures.abebooks.com/isbn/9785090717335-us-300.jpg'),(3,'Обществознание 9 ','Л. Н. Боголюбов',2018,'9785090704274',1,'etc','https://pictures.abebooks.com/isbn/9785090704274-us-300.jpg'),(4,'451 градус по Фаренгейту','Рэй Брэдбери',2019,'9785041045272',1,'Роман','https://pictures.abebooks.com/isbn/9785041045272-us-300.jpg');
 UNLOCK TABLES;
 
 --
