@@ -142,7 +142,7 @@ class Request implements RequestInterface, ServerRequestInterface
         // TODO: Implement withUploadedFiles() method.
     }
 
-    public function getAttributes($name, $defult = null): array
+    public function getAttributes(): array
     {
         return $this->attributes;
     }
