@@ -1,5 +1,6 @@
 <?php require "Application/Views/layout/header.php";
 ?>
+
 <?php if (!empty($_POST)) { ?>
     <div class="alert alert-success" role="alert" id="time">
         <?php echo 'Удалили: ', $_POST['name'], ' написанная: ', $_POST['author']; ?>
@@ -14,12 +15,10 @@
 session_start();
 if (!empty($_SESSION['login'])) {
 if ($_SESSION['login'] == 'Вы успешно вышли из аккаунта'){ ?>
-
-    <div class="alert-box alert-danger pl-75" role="alert" id="time">
+<div class="alert-box alert-danger pl-75" role="alert" id="time">
     <?php } else { ?>
     <div class="alert-box alert-success pl-75" role="alert" id="time">
         <?php } ?>
-
         <div class="alert">
             <h4 class="alert-heading">Успех</h4>
             <p class="text-medium">
@@ -30,14 +29,49 @@ if ($_SESSION['login'] == 'Вы успешно вышли из аккаунта'
     <script>
         setTimeout(function () {
             document.getElementById('time').style.display = 'none';
-        }, 3000);
+        }, 15000);
     </script>
     <?php
     unset($_SESSION['login']);
     } ?>
+    <?php
+    if (!empty($_SESSION['auth'])) { ?>
+    <div class="alert-box alert-danger pl-75" role="alert" id="time">
+            <div class="alert">
+                <h4 class="alert-heading">Ошибка</h4>
+                <p class="text-medium">
+                    <?php echo $_SESSION['auth']; ?>
+                </p>
+            </div>
+        </div>
+        <script>
+            setTimeout(function () {
+                document.getElementById('time').style.display = 'none';
+            }, 15000);
+        </script>
+        <?php
+        unset($_SESSION['auth']);
+        } ?>
+    <?php
+    if (!empty($_SESSION['error'])) { ?>
+        <div class="alert-box alert-danger pl-75" role="alert" id="time">
+            <div class="alert">
+                <h4 class="alert-heading">Ошибка</h4>
+                <p class="text-medium">
+                    <?php echo $_SESSION['error']; ?>
+                </p>
+            </div>
+        </div>
+        <script>
+            setTimeout(function () {
+                document.getElementById('time').style.display = 'none';
+            }, 15000);
+        </script>
+        <?php
+        unset($_SESSION['error']);
+    } ?>
     <?php /** @var Book[] $books */
     ?>
-
     <body>
     <section class="table-components">
         <div class="container-fluid">
@@ -63,22 +97,29 @@ if ($_SESSION['login'] == 'Вы успешно вышли из аккаунта'
                                     <tr>
                                         <th><h6>Название</h6></th>
                                         <th><h6>Автор</h6></th>
+                                        <th><h6>Кол-во</h6></th>
                                         <th><h6>Год</h6></th>
                                         <th><h6>Жанр</h6></th>
                                         <th><h6>ISBN</h6></th>
-                                        <th><h6>Action</h6></th>
+                                        <th>
+                                            <h6 class="text-sm text-medium text-end">
+                                                Управление <i class="lni lni-arrows-vertical"></i>
+                                            </h6>
+                                        </th>
                                     </tr>
                                     <!-- end table row-->
                                     </thead>
                                     <tbody>
-                                    <?php foreach ($books[0] as $book): ?>
+                                    <?php foreach ($books[0] as $book):
+                                        ?>
                                         <tr>
                                             <td class="min-width">
                                                 <div class="lead">
-                                                    <div class="lead-image">
+                                                    <div class="lead-image bgc-img">
                                                         <img
                                                                 src="<?php echo $book->picture ?>"
                                                                 alt=""
+                                                                class="lup"
                                                         />
 
                                                     </div>
@@ -91,6 +132,9 @@ if ($_SESSION['login'] == 'Вы успешно вышли из аккаунта'
                                                 <p><a><?php echo $book->author ?></a></p>
                                             </td>
                                             <td class="min-width">
+                                                <p><a><?php echo $book->count ?></a></p>
+                                            </td>
+                                            <td class="min-width">
                                                 <p><?php echo $book->year ?></p>
                                             </td>
                                             <td class="min-width">
@@ -100,12 +144,47 @@ if ($_SESSION['login'] == 'Вы успешно вышли из аккаунта'
                                                 <p><?php echo $book->ISBN ?></p>
                                             </td>
                                             <td>
-                                                <div class="action">
+                                                <div class="action justify-content-end">
+                                                    <?php if (@$_COOKIE['status'] == 1){ ?>
+                                                    <form method="get" action="books/edit/<?php echo $book->id; ?>">
+                                                        <button class="text-secondary" type="submit">
+                                                            <i class="mdi mdi-tools"></i>
+                                                        </button>
+                                                    </form>
                                                     <form method="post" action="books/<?php echo $book->id ?>">
                                                         <button class="text-danger" type="submit">
                                                             <i class="lni lni-trash-can"></i>
                                                         </button>
                                                     </form>
+                                                    <?php } ?>
+                                                    <button
+                                                            class="more-btn ml-10 dropdown-toggle"
+                                                            id="moreAction1"
+                                                            data-bs-toggle="dropdown"
+                                                            aria-expanded="false"
+                                                    >
+                                                        <i class="lni lni-more-alt"></i>
+                                                    </button>
+                                                    <ul
+                                                            class="dropdown-menu dropdown-menu-end"
+                                                            aria-labelledby="moreAction1"
+                                                    >
+                                                        <li class="dropdown-item">
+                                                            <form method="post"
+                                                                  action="books/reserve/<?php echo $book->id ?>">
+                                                                <a href="books/reserve/<?php echo $book->id ?>" class="text-gray">Резервация</a>
+                                                            </form>
+                                                        </li>
+                                                        <?php if (@$_COOKIE['status'] == 1) { ?>
+                                                            <li class="dropdown-item">
+                                                                <form method="post"
+                                                                      action="books/borrow/<?php echo $book->id ?>">
+                                                                    <a href="books/borrow/<?php echo $book->id ?>" class="text-gray">Дать книгу
+                                                                        ученику</a>
+                                                                </form>
+                                                            </li>
+                                                        <?php } ?>
+                                                    </ul>
                                                 </div>
                                             </td>
                                         </tr>

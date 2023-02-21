@@ -13,6 +13,7 @@ return [
 
     // GET myapp.com/api/v1/entity -all ;
     // GET myapp.com/api/v1/entity/id - concrete ;
+    new Route("GET", "/", "UserController@main"),
     new Route("GET", "/books", "BookController@all"),
     new Route("GET", "/books/{id}", "BookController@show"),
     new Route("GET", "/books/create", "BookController@create"),
@@ -34,6 +35,19 @@ return [
     new Route("GET", "/login", "UserController@preLogin"),
     new Route("POST", "/login", "UserController@login"),
     new Route("GET", "/logout", "UserController@logout"),
+    new Route("GET", "/books/reserve/{id}", "BookController@preReserveTheBook"),
+    new Route("POST", "/books/reserve/{id}", "BookController@reserveTheBook"),
+    new Route("GET", "/books/reserve/show", "BookController@showReserve"),
+    new Route("GET", "/books/borrow/{id}", "BookController@preBorrowBook"),
+    new Route("POST", "/books/borrow/{id}", "BookController@borrowBook"),
+    new Route("GET", "/books/borrow/show", "BookController@showBorrowBook"),
+    new Route("GET", "/books/borrow/return", "BookController@checkUserBorrow"),
+    new Route("GET", "/books/borrow/return/{id}", "BookController@preReturnBorrow"),
+    new Route("POST", "/books/borrow/return/{id}", "BookController@returnBook"),
+    new Route("POST", "/books/reserve/show/{id}", "BookController@deleteReserve"),
+    new Route("GET", "/user", "UserController@profile"),
+    //new Route("GET", "/books/borrow/return/{id}", "BookController@showBorrowBook"),
+
     //new Route("GET", "/show", "UserController@show"),
     //new Route("GET", "/main", "UserController@main"),
     //new Route("GET", "/logout", "UserController@logout"),

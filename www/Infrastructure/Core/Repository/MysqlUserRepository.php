@@ -63,4 +63,12 @@ class MysqlUserRepository extends Repository implements UserRepository
         $stmt->execute(['name' => $name, 'class' => $class,'password' => $password]);
         return $stmt->fetchAll();
     }
+
+    public function checkAuth($id): array
+    {
+        $sql = "SELECT * FROM {$this->table} WHERE id = :id";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetchAll();
+    }
 }

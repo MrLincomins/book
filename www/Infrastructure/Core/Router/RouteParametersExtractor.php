@@ -17,11 +17,11 @@ class RouteParametersExtractor
 
         $matchedParams = $routeParams[0];
         array_shift($matchedParams);
+        $matchedParams = array_diff($matchedParams, array(''));
 
         $request->setAttributes(array_combine($routeWildCards, $matchedParams));
     }
 }
-
 
 //class RouteParametersExtractor
 //{

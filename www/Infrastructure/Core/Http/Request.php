@@ -142,14 +142,13 @@ class Request implements RequestInterface, ServerRequestInterface
         // TODO: Implement withUploadedFiles() method.
     }
 
-    public function getAttributes($name, $default = null): array
+    public function getAttributes(): array
     {
         return $this->attributes;
-        //Изменить
     }
 
 
-    public function getParsedBody()
+    public function getParsedBody(): object|array|null
     {
         return is_array($_POST)
             ? $_POST

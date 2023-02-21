@@ -31,6 +31,7 @@ class UserController extends BaseController
 
     public function preRegister(Request $request): Response
     {
+        $this->checkout();
         $user = null;
         $render = $this->view
             ->withName("users/register")
@@ -43,6 +44,7 @@ class UserController extends BaseController
 
     public function register(CreateUserRequest $request): Response
     {
+        $this->checkout();
         $attributes = $request->getParsedBody();
         $validation = $request->Validation($attributes, 'register');
         if (!empty($validation)) {
@@ -113,10 +115,10 @@ class UserController extends BaseController
     public function logout(Request $request)
     {
         $user = $this->unsetCookie();
-        if($user){
+        if ($user) {
             session_start();
             $_SESSION['login'] = 'Вы успешно вышли из аккаунта';
-            header('Location: /books');
+            header('Location: ' . '/books');
             exit;
         }
         $user = null;
@@ -142,14 +144,49 @@ class UserController extends BaseController
 
     private function unsetCookie(): bool
     {
-        setcookie('id', '', time()-3600,"/");
-        setcookie('name', '', time()-3600,"/");
-        setcookie('class', '', time()-3600,"/");
-        setcookie('password', '', time()-3600,"/");
-        setcookie('status', '', time()-3600,"/");
+        setcookie('id', '', time() - 3600, "/");
+        setcookie('name', '', time() - 3600, "/");
+        setcookie('class', '', time() - 3600, "/");
+        setcookie('password', '', time() - 3600, "/");
+        setcookie('status', '', time() - 3600, "/");
         return true;
     }
 
+
+    public function checkAuth(Request $request): bool
+    {
+        if (!empty($_COOKIE['id']))
+        {
+            $user = $this->checkAuth($_COOKIE['id']);
+            if(!empty($user)) { return true; }
+            else { return false; }
+        }
+        else { return false; }
+    }
+
+    public function main(Request $request): Response
+    {
+        $user = null;
+        $render = $this->view
+            ->withName("users/main")
+            ->withData(['user' => $user]);
+
+        return $this->htmlResponseFactory
+            ->createResponse(200)
+            ->withContent($render);
+    }
+
+    public function checkout(): bool
+    {
+        if (@$_COOKIE['status'] == 1) {
+            return true;
+        } else {
+            session_start();
+            $_SESSION['auth'] = 'У вас недостаточно прав';
+            header('Location: ' . '/books');
+            exit;
+        }
+    }
 }
 //
 //

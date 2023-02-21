@@ -83,7 +83,6 @@ final class Router
 
         // append parameters to existing request
         $this->appendParametersToExistingRequest($route, $request, $subRequest);
-
         // Запускаем из найденного нами роута его контроллер и action, передавая туда наш Request
         return $this->runAction($request, $route, $container, $subRequest);
     }

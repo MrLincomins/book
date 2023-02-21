@@ -1,21 +1,25 @@
 <?php require "Application/Views/layout/header.php"; ?>
 <?php
-//
-//$id = (new UserMapper())->search_id($Name, $Surname, $Patronymic, $Class, $Password, $Status);
-//
-//setcookie('id', $ids['id'], time() + 86400 * 30);
-//
-//setcookie('Nick', $Name, time() + 86400 * 30);
-//setcookie('Surname', $Surname, time() + 86400 * 30);
-//setcookie('Patronymic', $Patronymic, time() + 86400 * 30);
-//setcookie('Class', $Class, time() + 86400 * 30);
-//setcookie('Password', $Password, time() + 86400 * 30);
-//setcookie('Status', $Status, time() + 86400 * 30);
-//header('Location: /main');
-?>
+session_start();
+if (!empty($_SESSION['auth'])) { ?>
+    <div class="alert-box alert-danger pl-75" role="alert" id="time">
+        <div class="alert">
+            <h4 class="alert-heading">Ошибка</h4>
+            <p class="text-medium">
+                <?php echo $_SESSION['auth']; ?>
+            </p>
+        </div>
+    </div>
+    <script>
+        setTimeout(function () {
+            document.getElementById('time').style.display = 'none';
+        }, 15000);
+    </script>
+    <?php
+    unset($_SESSION['auth']);
+} ?>
     <body>
     <?php
-    session_start();
     if (!empty($_SESSION['errorValidation'])) {
         foreach ($_SESSION['errorValidation'] as $error):
             ?>

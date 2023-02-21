@@ -17,7 +17,6 @@ class HtmlResponse extends Response
     {
         $stream = (new HTMLStream());
         $stream->write($render());
-
         $this->withBody($stream);
 
         return $this;

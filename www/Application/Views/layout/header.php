@@ -22,8 +22,8 @@
 <!-- ======== sidebar-nav start =========== -->
 <aside class="sidebar-nav-wrapper">
     <div class="navbar-logo">
-        <a href="/books">
-            <img src="/assets/images/logo/booklub.png" alt="logo" width="200" height="45"/>
+        <a href="/">
+            <img class="logo" src="/assets/images/logo/logo.png" width="180" height="40"/>
         </a>
     </div>
     <nav class="sidebar-nav">
@@ -44,7 +44,7 @@
                 </a>
                 <ul id="ddmenu_1" class="collapse show dropdown-nav">
                     <li>
-                        <a href="index.html" class="active"> Ссылка на гит </a>
+                        <a href="https://github.com/MrLincomins/Book" target="_blank" class="active"> Ссылка на гит </a>
                     </li>
                 </ul>
             </li>
@@ -59,7 +59,7 @@
                         aria-label="Toggle navigation"
                 >
               <span class="icon">
-                  <i class="lni lni-book"></i>
+                  <i class="mdi mdi-book"></i>
               </span>
                     <span class="text">Книги</span>
                 </a>
@@ -73,8 +73,94 @@
                     <li>
                         <a href="/books/top"> Топ 100 авторов </a>
                     </li>
+                    <?php if (@$_COOKIE['status'] == 1) { ?>
+                        <li>
+                            <a href="/books/create"> Добавить книгу </a>
+                        </li>
+                        <li>
+                            <a href="/books/genre"> Добавить жанр </a>
+                        </li>
+                    <?php } ?>
                 </ul>
             </li>
+
+            <li class="nav-item nav-item-has-children">
+                <a
+                        href="#0"
+                        class="collapsed"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#ddmenu_4"
+                        aria-controls="ddmenu_4"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                >
+              <span class="icon">
+                  <i class="mdi mdi-book-clock"></i>
+              </span>
+                    <span class="text">Резервация</span>
+                </a>
+                <ul id="ddmenu_4" class="collapse dropdown-nav">
+                    <?php if (@$_COOKIE['status'] == 1) { ?>
+                        <li>
+                            <a href="/books/reserve/show"> Все резервированные книги </a>
+                        </li>
+                    <?php } ?>
+                    <li>
+                        <a href="/books"> Резервация (Все книги) </a>
+                    </li>
+                </ul>
+            </li>
+            <?php if (@$_COOKIE['status'] == 1) { ?>
+                <li class="nav-item nav-item-has-children">
+                    <a
+                            href="#0"
+                            class="collapsed"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#ddmenu_5"
+                            aria-controls="ddmenu_5"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation"
+                    >
+              <span class="icon">
+                  <i class="mdi mdi-book-arrow-up"></i>
+              </span>
+                        <span class="text">Книги у учеников</span>
+                    </a>
+                    <ul id="ddmenu_5" class="collapse dropdown-nav">
+                        <li>
+                            <a href="/books/borrow/show"> Все книги у учеников </a>
+                        </li>
+                        <li>
+                            <a href="/books"> Дать книгу ученику(все книги) </a>
+                        </li>
+                        <li>
+                            <a href="/books/borrow/return"> Вернуть книгу в библиотеку </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item nav-item-has-children">
+                    <a
+                            href="#0"
+                            class="collapsed"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#ddmenu_6"
+                            aria-controls="ddmenu_6"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation"
+                    >
+              <span class="icon">
+                  <i class="mdi mdi-account-circle"></i>
+              </span>
+                        <span class="text">Пользователи</span>
+                    </a>
+                    <ul id="ddmenu_6" class="collapse dropdown-nav">
+                        <li>
+                            <a href="/user"> Все пользователи </a>
+                        </li>
+
+                    </ul>
+                </li>
+            <?php } ?>
             <li class="nav-item nav-item-has-children">
                 <a
                         href="#0"
@@ -101,14 +187,24 @@
                     <span class="text">Авторизация</span>
                 </a>
                 <ul id="ddmenu_3" class="collapse dropdown-nav">
-                    <li>
-                        <a href="/login"> Войти </a>
-                    </li>
-                    <li>
-                        <a href="/register"> Зарегистрироваться </a>
-                    </li>
+                    <?php if (empty(@$_COOKIE['status'])) { ?>
+                        <li>
+                            <a href="/login"> Войти </a>
+                        </li>
+                    <?php } ?>
+                    <?php if (@$_COOKIE['status'] == 1) { ?>
+                        <li>
+                            <a href="/register"> Зарегистрировать пользователя </a>
+                        </li>
+                    <?php } ?>
+                    <?php if (!empty($_COOKIE['status'])) { ?>
+                        <li>
+                            <a href="/logout"> Выход из аккаунта </a>
+                        </li>
+                    <?php } ?>
                 </ul>
             </li>
+
             <span class="divider"><hr/></span>
 
 
@@ -125,15 +221,12 @@
         </ul>
     </nav>
     <div class="promo-box">
-        <h3>...</h3>
-        <p>...</p>
         <a
                 href=""
                 target="_blank"
                 rel="nofollow"
                 class="main-btn primary-btn btn-hover"
         >
-            ...
         </a>
     </div>
 </aside>
@@ -182,31 +275,6 @@
                             </ul>
                         </div>
                         <!-- notification end -->
-                        <!-- message start -->
-                        <div class="header-message-box ml-15 d-none d-md-flex">
-                            <button
-                                    class="dropdown-toggle"
-                                    type="button"
-                                    id="message"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                            >
-                                <i class="lni lni-envelope"></i>
-                            </button>
-                            <ul
-                                    class="dropdown-menu dropdown-menu-end"
-                                    aria-labelledby="message"
-                            >
-                            </ul>
-                        </div>
-                        <!-- message end -->
-                        <!-- filter start -->
-                        <div class="filter-box ml-15 d-none d-md-flex">
-                            <button class="" type="button" id="filter">
-                                <i class="lni lni-funnel"></i>
-                            </button>
-                        </div>
-                        <!-- filter end -->
                         <!-- profile start -->
                         <div class="profile-box ml-15">
                             <button
@@ -219,17 +287,22 @@
                                 <div class="profile-info">
                                     <div class="info">
                                         <h6><?php
-                                            if(!empty($_COOKIE['name'])){
+                                            if (!empty($_COOKIE['name'])) {
                                                 echo $_COOKIE['name'];
                                             } else {
                                                 echo 'Пользователь';
                                             }
 
-                                        ?></h6>
+                                            ?></h6>
                                         <div class="image">
                                             <img
-                                                    src="/images/profile/149452.png"
+                                                <?php if (@$_COOKIE['id'] == 1) { ?>
+                                                    src="assets/images/profile/anonimus.jpg"
                                                     alt=""
+                                                <?php } else { ?>
+                                                    src="assets/images/profile/149452.png"
+                                                    alt=""
+                                                <?php } ?>
                                             />
                                             <span class="status"></span>
                                         </div>
@@ -245,9 +318,6 @@
                                     <a href="#0">
                                         <i class="lni lni-user"></i> Профиль
                                     </a>
-                                </li>
-                                <li>
-                                    <a href="#0"> <i class="lni lni-cog"></i> Настройки </a>
                                 </li>
                                 <li>
                                     <a href="/logout"> <i class="lni lni-exit"></i> Выход </a>

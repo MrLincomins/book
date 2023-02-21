@@ -20,21 +20,21 @@
 session_start();
 if (!empty($_SESSION['errorValidation'])) {
     foreach ($_SESSION['errorValidation'] as $error):
-    ?>
-    <div class="alert-box danger-alert pl-75" role="alert" id="time">
-        <div class="alert">
-            <h4 class="alert-heading">Ошибка</h4>
-            <p class="text-medium">
-                <?php echo implode($error); ?>
-            </p>
+        ?>
+        <div class="alert-box danger-alert pl-75" role="alert" id="time">
+            <div class="alert">
+                <h4 class="alert-heading">Ошибка</h4>
+                <p class="text-medium">
+                    <?php echo implode($error); ?>
+                </p>
+            </div>
         </div>
-    </div>
-    <script>
-        setTimeout(function () {
-            document.getElementById('time').style.display = 'none';
-        }, 3000);
-    </script>
-<?php
+        <script>
+            setTimeout(function () {
+                document.getElementById('time').style.display = 'none';
+            }, 3000);
+        </script>
+    <?php
     endforeach;
     unset($_SESSION['errorValidation']);
 } ?>

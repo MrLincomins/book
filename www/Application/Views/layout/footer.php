@@ -1,3 +1,4 @@
+
 <script src="/assets/js/bootstrap.bundle.min.js"></script>
 <script src="/assets/js/Chart.min.js"></script>
 <script src="/assets/js/dynamic-pie-chart.js"></script>
@@ -9,6 +10,27 @@
 <script src="/assets/js/main.js"></script>
 <script src="/assets/js/loading-bar.min.js"></script>
 
+<style>
+    .bgc-img img{
+        max-width: 150px;
+        max-height: 150px;
+        -webkit-transform:scale(1); /*Webkit: Scale down image to 0.8x original size*/
+        -moz-transform:scale(1); /*Mozilla scale version*/
+        -o-transform:scale(1); /*Opera scale version*/
+        -webkit-transition-duration: 0.5s; /*Webkit: Animation duration*/
+        -moz-transition-duration: 0.5s; /*Mozilla duration version*/
+        -o-transition-duration: 0.5s; /*Opera duration version*/
+    }
+    .bgc-img img:hover{
+        -webkit-transform:scale(1); /*Webkit: Scale up image to 1.2x original size*/
+        -moz-transform:scale(1); /*Mozilla scale version*/
+        -o-transform:scale(1); /*Opera scale version*/
+        -webkit-box-shadow:0px 0px 10px gray; /*Safari shadow version*/
+        -moz-box-shadow:0px 0px 10px gray; /*Mozilla shadow version*/
+        padding: 1px; background: white;
+        z-index:1000; position: absolute;
+    }
+</style>
 <script>
     // ======== jvectormap activation
     var markers = [

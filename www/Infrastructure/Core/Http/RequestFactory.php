@@ -29,7 +29,6 @@ class RequestFactory implements RequestFactoryInterface
     {
             $controllersPath  = "\\Application\\Controllers\\";
             [$controller, $action] = explode( "@", $fullAction);
-
             $actionParameters = (new \ReflectionMethod($controllersPath . $controller, $action))->getParameters();
             $subRequestName = $actionParameters[0]->getType()->getName();
             if($subRequestName === 'Psr\Http\Message\ServerRequestInterface')

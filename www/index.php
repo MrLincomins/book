@@ -10,22 +10,16 @@ use Infrastructure\Core\View\View;
 // включаем автозагрузку классов. Нам не нужно указывать require в классах
 require_once './vendor/autoload.php';
 
-
-try {
-
-
-
-
     $container = new Container();
     $container->register(Router::class);
     $container->register(View::class);
     $container->register(HtmlResponseFactory::class);
 
+
 // Step 0:  Создаем роутер
     $response = $container->get(Router::class)
         ->withRoutes(include 'Application/Config/routes/web.php')
         ->route($container);
-
 
 // Step 1: Генерируем строку статуса.
     $statusLine = sprintf('HTTP/%s %s %s',
@@ -49,6 +43,5 @@ try {
         }
     }
 // Step 4: Возвращаем ответ
-    echo $response->getBody();
-} catch (Exception) {}
+        echo $response->getBody();
 exit();

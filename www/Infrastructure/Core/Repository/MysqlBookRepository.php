@@ -55,7 +55,6 @@ class MysqlBookRepository extends Repository implements BookRepository
         $stmt = $this->connection->prepare($query);
         $stmt->execute(['id' => $id]);
         $row = $stmt->fetch();
-
         return new Book(
             $row["newid"],
             $row["Name"],
@@ -68,11 +67,26 @@ class MysqlBookRepository extends Repository implements BookRepository
         );
     }
 
+    public function searchISBN($ISBN): array
+    {
+        $sql = "SELECT * FROM {$this->table} WHERE ISBN = :ISBN";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute(['ISBN' => $ISBN]);
+        return $stmt->fetchAll();
+    }
+
     public function create(string $name, string $author, string $year, string $ISBN, string $count, string $genre, string $picture): array
     {
-        $query = "INSERT INTO {$this->table} (Name, Author, Year, ISBN, count, genre, picture) VALUES (:name, :author, :year, :ISBN, :count, :genre, :picture)";
-        $stmt = $this->connection->prepare($query);
-        $stmt->execute(['name' => $name, 'author' => $author, 'year' => $year, 'ISBN' => $ISBN, 'count' => $count, 'genre' => $genre, 'picture' => $picture]);
+        $book = $this->searchISBN($ISBN);
+        if (empty($book)) {
+            $query = "INSERT INTO {$this->table} (Name, Author, Year, ISBN, count, genre, picture) VALUES (:name, :author, :year, :ISBN, :count, :genre, :picture)";
+            $stmt = $this->connection->prepare($query);
+            $stmt->execute(['name' => $name, 'author' => $author, 'year' => $year, 'ISBN' => $ISBN, 'count' => $count, 'genre' => $genre, 'picture' => $picture]);
+        } else {
+            $sql = "UPDATE {$this->table} SET count = count + :count WHERE ISBN = :ISBN";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute(['count' => $count, 'ISBN' => $ISBN]);
+        }
         return $stmt->fetchAll();
     }
 
@@ -86,7 +100,6 @@ class MysqlBookRepository extends Repository implements BookRepository
 
     public function tooYear($too, $from): array
     {
-
         $query = "SELECT * FROM {$this->table} WHERE year >= :from and year <= :too";
         $stmt = $this->connection->prepare($query);
         $stmt->execute(['from' => $from, 'too' => $too]);
@@ -170,6 +183,7 @@ class MysqlBookRepository extends Repository implements BookRepository
         $query = "SELECT * FROM books WHERE name LIKE :name;";
         $stmt = $this->connection->prepare($query);
         $stmt->execute(['name' => $pattern]);
+
         return array_map(function (array $row) {
             return new Book(
                 $row["newid"],
@@ -205,6 +219,147 @@ class MysqlBookRepository extends Repository implements BookRepository
         $offset = $setPaginator['pagination']['offset'];
         $perPage = $setPaginator['pagination']['perPage'];
         return array_slice($setPaginator['items'], $offset, $perPage);
+    }
+
+    public function checkForReserve($id): bool|array
+    {
+        $query = "SELECT EXISTS(SELECT * FROM BGTS WHERE iduser = :id)";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetchAll();
+    }
+
+    public function checkForBorrow($id): bool|array
+    {
+        $query = "SELECT EXISTS(SELECT * FROM toobook WHERE iduser = :id)";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetchAll();
+    }
+
+    public function reserveBook($iduser, $idbook, string $DATE): array
+    {
+        $query = "INSERT INTO BGTS (iduser, idbook, DATE) VALUES (:iduser, :idbook, :DATE)";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute(['iduser' => $iduser, 'idbook' => $idbook, 'DATE' => $DATE]);
+        return $stmt->fetchAll();
+    }
+
+    public function showReserve(): array
+    {
+        $query = "SELECT * FROM BGTS";
+        $stmt = $this->connection->query($query);
+        $result = $stmt->fetchAll();
+        $query1 = "SELECT * FROM books WHERE newid IN (";
+        foreach ($result as $items) {
+            $query1 .= "'" . $items['idbook'] . "',";
+        }
+        $query1 = rtrim($query1, ',') . ")";
+        $stmt1 = $this->connection->query($query1);
+        $resultBook = $stmt1->fetchAll();
+
+        $query2 = "SELECT * FROM users WHERE id IN (";
+        foreach ($result as $items) {
+            $query2 .= "'" . $items['iduser'] . "',";
+        }
+        $query2 = rtrim($query2, ',') . ")";
+        $stmt2 = $this->connection->query($query2);
+        $resultUser = $stmt2->fetchAll();
+        return [$resultBook, $resultUser, $result];
+    }
+
+    public function borrowBook($iduser, $idbook, string $DATE): array
+    {
+        $query = "INSERT INTO toobook (iduser, idbook, DATE) VALUES (:iduser, :idbook, :DATE)";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute(['iduser' => $iduser, 'idbook' => $idbook, 'DATE' => $DATE]);
+        $this->reduceAmountBooks($idbook);
+        return $stmt->fetchAll();
+    }
+
+    public function showBorrrow(): array
+    {
+        $query = "SELECT * FROM toobook";
+        $stmt = $this->connection->query($query);
+        $result = $stmt->fetchAll();
+        $query1 = "SELECT * FROM books WHERE newid IN (";
+        foreach ($result as $items) {
+            $query1 .= "'" . $items['idbook'] . "',";
+        }
+        $query1 = rtrim($query1, ',') . ")";
+        $stmt1 = $this->connection->query($query1);
+        $resultBook = $stmt1->fetchAll();
+
+        $query2 = "SELECT * FROM users WHERE id IN (";
+        foreach ($result as $items) {
+            $query2 .= "'" . $items['iduser'] . "',";
+        }
+        $query2 = rtrim($query2, ',') . ")";
+        $stmt2 = $this->connection->query($query2);
+        $resultUser = $stmt2->fetchAll();
+        return [$resultBook, $resultUser, $result];
+    }
+
+    public function selectBorrow($iduser): array
+    {
+        $query = "SELECT idbook FROM toobook WHERE iduser = :iduser";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute(['iduser' => $iduser]);
+        return $stmt->fetchAll();
+    }
+
+
+    public function preReturnBook($iduser): bool|Book
+    {
+        $items = $this->checkForBorrow($iduser);
+        function potomYberu($items): bool
+        {
+            if (current($items[0]) == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        if(!potomYberu($items)){
+            $idbook = $this->selectBorrow($iduser);
+            return $this->getById((int)$idbook[0]['idbook']);
+        } else {
+            return false;
+        }
+    }
+
+    public function returnBook($iduser, $idbook): array
+    {
+        $query = "DELETE FROM toobook WHERE iduser = :iduser";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute(['iduser' => $iduser]);
+        $this->addAmountBooks($idbook);
+
+        return $stmt->fetchAll();
+    }
+
+    public function selectUser($iduser): array
+    {
+        $query = "SELECT * FROM users WHERE id = :iduser";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute(['iduser' => $iduser]);
+        return $stmt->fetchAll();
+    }
+
+
+    public function reduceAmountBooks($newid): array
+    {
+        $query = "UPDATE books SET count = count - 1 WHERE newid = :newid";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute(['newid' => $newid]);
+        return $stmt->fetchAll();
+    }
+    public function addAmountBooks($newid): array
+    {
+        $query = "UPDATE books SET count = count + 1 WHERE newid = :newid";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute(['newid' => $newid]);
+        return $stmt->fetchAll();
     }
 }
 

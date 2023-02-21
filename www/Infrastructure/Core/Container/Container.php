@@ -15,34 +15,23 @@ final class Container implements ContainerInterface
 
     public function get(string $id)
     {
-        try {
-            $reflection = new ReflectionClass($id);
+        $reflection = new ReflectionClass($id);
 
-            return $this->instances[$reflection->getName()];
-        } catch (\Throwable $e) {
-//            throw new ContainerRegistrationException();
-        }
+        return $this->instances[$reflection->getName()];
+
     }
 
     public function has(string $id): bool
     {
-        try {
-            $reflection = new ReflectionClass($id);
+        $reflection = new ReflectionClass($id);
 
-            return ! empty($this->instances[$reflection->getName()]);
-        } catch (\Throwable $e) {
-            throw new ContainerRegistrationException();
-        }
+        return !empty($this->instances[$reflection->getName()]);
     }
 
     public function register(string $class)
     {
-        try {
-            $reflection = new ReflectionClass($class);
-            $this->instances[$reflection->getName()] =  $reflection->newInstance();
+        $reflection = new ReflectionClass($class);
+        $this->instances[$reflection->getName()] = $reflection->newInstance();
 
-        } catch (\Throwable $e) {
-            throw new ContainerRegistrationException();
-        }
     }
 }

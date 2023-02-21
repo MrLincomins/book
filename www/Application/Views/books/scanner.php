@@ -1,7 +1,10 @@
 <?php
+
 use Application\Entities\Book;
+
 //Надо отсканировать aplication/json что бы вписать данные
-function repairUnqotedJsonValues(string $json) : string {
+function repairUnqotedJsonValues(string $json): string
+{
     $json = str_replace(": ", ":", $json);
     $json = str_replace("{ ", "{", $json);
     $json = str_replace(" }", "}", $json);
@@ -40,6 +43,7 @@ function repairUnqotedJsonValues(string $json) : string {
 
     return implode("", $repaired);
 }
+
 /** @var $weirdString */
 
 //$weirdString =  = file_get_contents('php://input');
@@ -50,17 +54,19 @@ $author = $user->{'полное имя автора'};
 $nick = $user->{'название'};
 $year = $user->{'год'};
 $chr_ru_en = "A-Za-zА-Яа-яЁё0-9\s`~!@#$%^&*()_+-={}|:;<>?,.\/\"\'\\\[\]";
-function emptysearch($UK) {
-  if (empty($UK) == true){
-    $log = "ISBN: $isbn, Имя автора: $author, Название книги: $nick, Год: $year не было допущено из-за: Данные были пропущены сканером";
-    //file_put_contents(__DIR__ . '/log.txt', $log . PHP_EOL, FILE_APPEND);
-      echo '<script type="text/javascript">
+function emptysearch($UK)
+{
+    if (empty($UK) == true) {
+        $log = "ISBN: $isbn, Имя автора: $author, Название книги: $nick, Год: $year не было допущено из-за: Данные были пропущены сканером";
+        //file_put_contents(__DIR__ . '/log.txt', $log . PHP_EOL, FILE_APPEND);
+        echo '<script type="text/javascript">
        window.onload = function () { alert("Число было пропущено сканнером"); } 
 </script>';
-      echo '<meta http-equiv="refresh" content="0; url=http://localhost:8080/add">';
-      die();
-  }
+        echo '<meta http-equiv="refresh" content="0; url=http://localhost:8080/add">';
+        die();
+    }
 }
+
 emptysearch($year);
 emptysearch($isbn);
 emptysearch($author);
@@ -68,8 +74,8 @@ emptysearch($nick);
 
 if (preg_match("/^[$chr_ru_en]+$/u", $author)) {
 } else {
-  $log = "ISBN: $isbn, Имя автора: $author, Название книги: $nick, Год: $year не было допущено из-за: Неизвестные символы в имени автора";
-  //file_put_contents(__DIR__ . '/log.txt', $log . PHP_EOL, FILE_APPEND);
+    $log = "ISBN: $isbn, Имя автора: $author, Название книги: $nick, Год: $year не было допущено из-за: Неизвестные символы в имени автора";
+    //file_put_contents(__DIR__ . '/log.txt', $log . PHP_EOL, FILE_APPEND);
     echo '<script type="text/javascript">
        window.onload = function () { alert("Неизвестные символы в имени автора"); } 
 </script>';
@@ -78,8 +84,8 @@ if (preg_match("/^[$chr_ru_en]+$/u", $author)) {
 }
 if (preg_match("/^[$chr_ru_en]+$/u", $nick)) {
 } else {
-  $log = "ISBN: $isbn, Имя автора: $author, Название книги: $nick, Год: $year не было допущено из-за: Неизвестные символы в имени книги";
-  //file_put_contents(__DIR__ . '/log.txt', $log . PHP_EOL, FILE_APPEND);
+    $log = "ISBN: $isbn, Имя автора: $author, Название книги: $nick, Год: $year не было допущено из-за: Неизвестные символы в имени книги";
+    //file_put_contents(__DIR__ . '/log.txt', $log . PHP_EOL, FILE_APPEND);
     echo '<script type="text/javascript">
        window.onload = function () { alert("Неизвестные символы в имени книги"); } 
 </script>';
@@ -98,9 +104,9 @@ if ($ukraine == true){
 */
 $numb1 = strlen($year);
 $belarus = $numb1 != 4;
-if ($belarus == true){
-  $log = "ISBN: $isbn, Имя автора: $author, Название книги: $nick, Год: $year не было допущено из-за: Год был отсканирован не правильно";
-  //file_put_contents(__DIR__ . '/log.txt', $log . PHP_EOL, FILE_APPEND);
+if ($belarus == true) {
+    $log = "ISBN: $isbn, Имя автора: $author, Название книги: $nick, Год: $year не было допущено из-за: Год был отсканирован не правильно";
+    //file_put_contents(__DIR__ . '/log.txt', $log . PHP_EOL, FILE_APPEND);
     echo '<script type="text/javascript">
        window.onload = function () { alert("Год был отсканирован не правильно"); } 
 </script>';
@@ -109,9 +115,9 @@ if ($belarus == true){
 }
 
 $belarus = 1900 > $year;
-if ($belarus == true){
-  $log = "ISBN: $isbn, Имя автора: $author, Название книги: $nick, Год: $year не было допущено из-за: Год был отсканирован не правильно";
-  //file_put_contents(__DIR__ . '/log.txt', $log . PHP_EOL, FILE_APPEND);
+if ($belarus == true) {
+    $log = "ISBN: $isbn, Имя автора: $author, Название книги: $nick, Год: $year не было допущено из-за: Год был отсканирован не правильно";
+    //file_put_contents(__DIR__ . '/log.txt', $log . PHP_EOL, FILE_APPEND);
     echo '<script type="text/javascript">
        window.onload = function () { alert("Год был отсканирован не правильно"); } 
 </script>';
@@ -119,9 +125,9 @@ if ($belarus == true){
     die();
 }
 $belarus = 2030 < $year;
-if ($belarus == true){
-  $log = "ISBN: $isbn, Имя автора: $author, Название книги: $nick, Год: $year не было допущено из-за: Год был отсканирован не правильно";
-  //file_put_contents(__DIR__ . '/log.txt', $log . PHP_EOL, FILE_APPEND);
+if ($belarus == true) {
+    $log = "ISBN: $isbn, Имя автора: $author, Название книги: $nick, Год: $year не было допущено из-за: Год был отсканирован не правильно";
+    //file_put_contents(__DIR__ . '/log.txt', $log . PHP_EOL, FILE_APPEND);
     echo '<script type="text/javascript">
        window.onload = function () { alert("Год был отсканирован не правильно"); } 
 </script>';

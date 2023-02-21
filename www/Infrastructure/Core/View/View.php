@@ -13,11 +13,9 @@ final class View
     public function __invoke(): string
     {
         $template = $_SERVER['DOCUMENT_ROOT'] ."/Application/Views/" . $this->name . ".php";
-
         if (!is_file($template)) {
             throw new \RuntimeException('Template not found: ' . $template);
         }
-
         // define a closure with a scope for the variable extraction
         $result = function($file, array $data = array()) {
             ob_start();

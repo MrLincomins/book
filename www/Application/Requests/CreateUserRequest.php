@@ -16,6 +16,7 @@ class CreateUserRequest extends Request
         //2. Создадим валидаторы: string, integer, required, min
         //3. Создать интерфейс Validator и метод validate
         return new Rules([
+            'id' => 'required',
             'name' => 'required|string|max:50',
             'status' => 'required|string|max:12',
             'class' => 'required|string|max:3',
