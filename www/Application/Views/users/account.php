@@ -1,123 +1,61 @@
-<?php
-use Application\Entities\User;
-$Status = (new User())->CheckLogin();
-If($Status === null){
-  header('Location: /login');
-  die;
-}
-$iduser = $_COOKIE['idus'];
-$Name = $_COOKIE['Nick'];
-$Surname = $_COOKIE['Surname'];
-$Patronymic = $_COOKIE['Patronymic'];
-$Class = $_COOKIE['Class'];
-$Status = $_COOKIE['Status'];
-
-$should = (new User())->checkforbook($iduser);
-if(empty($should)){}
-else {
-    foreach ($should as $id) {
-        $books = (new User())->checkbook($id['idbook']);
-
-    }
-}
-$toobook = (new User())->checktoobook($iduser);
-if(empty($toobook)){}
-else {
-    foreach ($toobook as $id1) {
-        $books1 = (new User())->checkbook($id1['idbook']);
-    }
-}
-
-
-?>
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Личный кабинет</title>
-</head>
-<body>
-<h1>Личный кабинет</h1>
-<div>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Имя</th>
-                <th>Фамилия</th>
-                <th>Отчество</th>
-                <th>Статус</th>
-                <th>Класс</th>
-            </tr>
-        </thead>
-        <tr>
-            <td><?php echo $Name?></td>
-            <td><?php echo $Surname?></td>
-            <td><?php echo $Patronymic?></td>
-            <td><?php echo $Status?></td>
-            <td><?php echo $Class?></td>
-        </tr>
-      </table>
-  </div>
-<?php if(empty($should)){
-}
-else{ ?>
-    <h2>_________________________________</h2>
-    <h3>Книга взятая из библиотеки</h3>
-  <div>
-    <table border="1">
-        <thead>
-        <tr>
-            <th>Название</th>
-            <th>Автор</th>
-            <th>ISBN</th>
-            <th>Год</th>
-            <th>Дата возврата</th>
-        </tr>
-        </thead>
-        <?php foreach($books as $book):?>
-        <?php foreach($should as $Date):?>
-            <td><?php echo $book["Name"]?></td>
-            <td><?php echo $book["Author"]?></td>
-            <td><?php echo $book["ISBN"]?></td>
-            <td><?php echo $book["Year"]?></td>
-            <td><?php echo $Date['DATE']?></td>
-
-        <?php endforeach; ?>
-        <?php endforeach; ?>
-    </table>
-  </div>
-
-<?php }?>
-
-<?php if(empty($toobook)){}
-else{ ?>
-<h2>_________________________________</h2>
-<h3>Забронированая книга</h3>
-<div>
-    <table border="1">
-        <thead>
-        <tr>
-            <th>Название</th>
-            <th>Автор</th>
-            <th>ISBN</th>
-            <th>Год</th>
-            <th>Дата данная пользователю, чтобы забрать книгу</th>
-        </tr>
-        </thead>
-        <?php foreach($books1 as $book1):?>
-            <?php foreach($toobook as $DATA):?>
-                <td><?php echo $book1["Name"]?></td>
-                <td><?php echo $book1["Author"]?></td>
-                <td><?php echo $book1["ISBN"]?></td>
-                <td><?php echo $book1["Year"]?></td>
-                <td><?php echo $DATA['DATE']?></td>
-
-            <?php endforeach; ?>
-        <?php endforeach; ?>
-    </table>
-</div>
-<?php } ?>
-</body>
-</html>
+<?php require "Application/Views/layout/header.php"; ?>
+    <div class="container-fluid">
+        <div class="row gx-5">
+            <div class="col">
+                <div class="card-style settings-card-1 mb-30">
+                    <div
+                            class="
+                    title
+                    mb-30
+                    d-flex
+                    justify-content-between
+                    align-items-center
+                  "
+                    >
+                        <h6>Профиль</h6>
+                        <button class="border-0 bg-transparent">
+                            <span class="mdi mdi-account"></span>
+                        </button>
+                    </div>
+                    <div class="profile-info ">
+                        <div class="d-flex align-items-center mb-30">
+                            <div class="image">
+                                <img src="assets/images/profile/anonimus.jpg" alt="" height="250" width="250"/>
+                            </div>
+                            <div class="profile-meta">
+                                <h5 class="text-bold text-dark mb-10"><?php echo $user[0]['name']; ?></h5>
+                                <p class="text-sm text-gray">Крутышка</p>
+                            </div>
+                        </div>
+                        <div class="input-style-1">
+                            <label>Класс: <big> <?php echo $user[0]['class'] ?> </big></label>
+                        </div>
+                        <div class="input-style-1">
+                            <label>Классный руководитель: <big> Бикинина Венера Ильдусовна </big></label>
+                        </div>
+                        <div class="input-style-1">
+                            <label>Пароль</label>
+                            <input type="password" value="<?php echo $user[0]['password'] ?>"/>
+                        </div>
+                        <div class="input-style-1">
+                            <label>О себе</label>
+                            <textarea placeholder="Write your bio here" rows="4">Долго делал этот сайт потратив 999 лет. Нейросети тогда были не такие раскаченные, когда я делал этот проект, так что от них помощи я не получал. По git-у видно, что я начал делать этот проект полностью с нуля. Я не дизайнер xd
+                    </textarea>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button class="main-btn primary-btn btn-hover">
+                            Update Profile
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card-style settings-card-1 mb-10">
+                    <img src="assets/images/profile/stick.jpg" alt="" width="600" height="818"/>
+                    <span class="position-absolute top-0 start-2 translate-middle badge rounded-pill bg-danger">Kandinsky 2.1</span>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php require "Application/Views/layout/footer.php"; ?>

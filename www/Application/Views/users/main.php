@@ -53,7 +53,7 @@
                             <div class="card-content">
                                 <h4><a href="#0">Книги</a></h4>
                                 <p>
-                                    Здесь находяться все книги библиотеки, вы можете наблюдать их количество, автора и соответственно название.
+                                    Здесь находятся все книги библиотеки, вы можете наблюдать их количество, автора и соответственно название.
                                 </p>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                             <div class="card-image">
                                 <a href="#0">
                                     <img
-                                            src="assets/images/cards/card-style-2/card-2.jpg"
+                                            src="assets/images/modals/search.jpeg"
                                             alt=""
                                             width="350"
                                             height="350"
@@ -85,7 +85,7 @@
                             <div class="card-image">
                                 <a href="#0">
                                     <img
-                                            src="assets/images/cards/card-style-2/card-3.jpg"
+                                            src="assets/images/modals/register.jpeg"
                                             alt=""
                                             width="350"
                                             height="350"

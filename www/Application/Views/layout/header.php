@@ -155,7 +155,7 @@
                     </a>
                     <ul id="ddmenu_6" class="collapse dropdown-nav">
                         <li>
-                            <a href="/user"> Все пользователи </a>
+                            <a href="/user"> Аккаунт </a>
                         </li>
 
                     </ul>
@@ -220,15 +220,6 @@
             </li>
         </ul>
     </nav>
-    <div class="promo-box">
-        <a
-                href=""
-                target="_blank"
-                rel="nofollow"
-                class="main-btn primary-btn btn-hover"
-        >
-        </a>
-    </div>
 </aside>
 <main class="main-wrapper">
     <!-- ========== header start ========== -->
@@ -315,7 +306,7 @@
                                     aria-labelledby="profile"
                             >
                                 <li>
-                                    <a href="#0">
+                                    <a href="\user">
                                         <i class="lni lni-user"></i> Профиль
                                     </a>
                                 </li>

@@ -187,6 +187,23 @@ class UserController extends BaseController
             exit;
         }
     }
+
+    public function profile(Request $request): Response
+    {
+        $user = @$_COOKIE['id'];
+        if(!empty($user)){
+            $user = $this->userRepository->checkAuth($user);
+        } else {
+            header("Location: /login");
+        }
+        $render = $this->view
+            ->withName("users/account")
+            ->withData(['user' => $user]);
+
+        return $this->htmlResponseFactory
+            ->createResponse(200)
+            ->withContent($render);
+    }
 }
 //
 //

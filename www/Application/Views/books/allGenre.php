@@ -2,22 +2,22 @@
 <div class="container px-4">
     <div class="row gx-5">
 
-    <div class="col-5">
-        <h1 class="p-2 border">Добавить жанр</h1>
-    <form action="/books/genre" method="POST">
-        <div class="form-group p-3 border">
-            <label for="exampleInputEmail1">Название жанра</label >
-            <label>
-                <input type="text" name="genre" class="form-control"
+        <div class="col-5">
+            <h1 class="p-2 border">Добавить жанр</h1>
+            <form action="/books/genre" method="POST">
+                <div class="form-group p-3 border">
+                    <label for="exampleInputEmail1">Название жанра</label>
+                    <label>
+                        <input type="text" name="genre" class="form-control"
 
-                       autocomplete="off">
-            </label>
-            <div class="form-group" style="display: inline-block">
-                <button class="btn btn-primary" name="submit" type="submit">Добавить</button>
-            </div>
+                               autocomplete="off">
+                    </label>
+                    <div class="form-group" style="display: inline-block">
+                        <button class="btn btn-primary" name="submit" type="submit">Добавить</button>
+                    </div>
+                </div>
+            </form>
         </div>
-    </form>
-    </div>
         <div class="col-5">
             <table class="table p-3 table-bordered">
                 <thead class="table-light">
@@ -27,7 +27,7 @@
                     <th>Управление</th>
                 </tr>
                 </thead>
-                <?php foreach ($genres as $genre):?>
+                <?php foreach ($genres as $genre): ?>
                     <tr>
                         <td><?php echo $genre['id'] ?></td>
                         <td><?php echo $genre['genre'] ?></td>

@@ -6,10 +6,8 @@ use Infrastructure\Core\Container\Container;
 use Infrastructure\Core\Http\HtmlResponseFactory;
 use Infrastructure\Core\Router\Router;
 use Infrastructure\Core\View\View;
-
 // включаем автозагрузку классов. Нам не нужно указывать require в классах
 require_once './vendor/autoload.php';
-
     $container = new Container();
     $container->register(Router::class);
     $container->register(View::class);
