@@ -118,10 +118,15 @@ class BookController extends BaseController
 
     public function delete(Request $request): Response
     {
+        $page = $request->getGetAttributes('page');
+        if (empty($page)) {
+            $page = 1;
+        }
         $this->checkAuth();
         $id = $request->getAttribute("id");
         $book = $this->bookRepository->delete($id);
-        $books = $this->bookRepository->all();
+        $items = $this->bookRepository->all();
+        $books = $this->bookRepository->paginate(6, $page, $items);
         $render = (new View())
             ->withName("books/all")
             ->withData(['books' => $books]);
